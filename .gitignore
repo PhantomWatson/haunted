@@ -1,0 +1,8 @@
+# CakePHP
+/vendor/*
+/config/app.php
+/tmp/*
+/logs/*
+
+# PhpStorm
+/.idea/*
