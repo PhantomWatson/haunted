@@ -14,6 +14,7 @@
  */
 namespace App\Controller;
 
+use App\Model\Entity\Player;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
@@ -43,6 +44,10 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Cookie', [
+            'expiry' => '1 year',
+            'encryption' => false
+        ]);
     }
 
     /**
@@ -58,5 +63,27 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+
+    /**
+     * Returns a Player entity or null if none has been saved
+     *
+     * @return null|Player
+     */
+    public function getPlayer()
+    {
+        $this->loadModel('Players');
+        $player = $this->Cookie->read('player');
+        return $player ? $this->Players->newEntity($player) : null;
+    }
+
+    /**
+     * Saves player data
+     *
+     * @param Player $player
+     */
+    public function savePlayer($player)
+    {
+        $this->Cookie->write('player', $player->toArray());
     }
 }

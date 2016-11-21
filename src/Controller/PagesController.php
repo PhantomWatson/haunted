@@ -14,6 +14,7 @@
  */
 namespace App\Controller;
 
+use App\Model\Entity\Player;
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
@@ -27,6 +28,30 @@ use Cake\View\Exception\MissingTemplateException;
  */
 class PagesController extends AppController
 {
+
+    public function home()
+    {
+        $player = $this->getPlayer();
+        $this->loadModel('Players');
+        if ($this->request->is('post')) {
+            $player = $this->Players->newEntity($this->request->data());
+            if (false) {
+                $this->Flash->error('Please correct the indicated errors');
+            } else {
+                $this->savePlayer($player);
+                return $this->redirect([
+                    'controller' => 'floors',
+                    'action' => 'first'
+                ]);
+            }
+        } elseif (! $player) {
+            $player = $this->Players->newEntity([]);
+        }
+
+        $this->set([
+            'player' => $player
+        ]);
+    }
 
     /**
      * Displays a view
