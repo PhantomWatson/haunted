@@ -1,6 +1,6 @@
 <?php
     use App\Map\Map;
-    $map = new Map();
+    $map = new Map(1);
     $map->addTarget('567,247,582,260', 'girlsrr', 'Girl\'s Restroom');
     $map->addTarget('0,153,63,252', 'pool', 'Swimming Pool');
     $map->addTarget('61,109,187,272', 'gym', 'Gymnasium');

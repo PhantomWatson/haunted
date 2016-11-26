@@ -1,6 +1,6 @@
 <?php
     use App\Map\Map;
-    $map = new Map();
+    $map = new Map(2);
     $map->addTarget('465,160,487,181', null, 'Darkroom (inside Publications Room)');
     $map->addTarget('464,216,478,236', null, 'Nelson\'s Office (inside Publications Room)');
     $map->addTarget('213,161,385,236', 'library', 'Library');

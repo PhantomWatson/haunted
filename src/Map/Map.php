@@ -11,12 +11,19 @@ class Map
     public $targets;
 
     /**
+     * @var int 1 or 2
+     */
+    public $floor;
+
+    /**
      * Constructor
      *
+     * @param int $floor Floor
      * @return void
      */
-    public function __construct() {
+    public function __construct($floor) {
         $this->targets = [];
+        $this->floor = $floor;
     }
 
     /**
@@ -50,7 +57,9 @@ class Map
             if ($target->shortName) {
                 $url = [
                     'controller' => 'Rooms',
-                    'action' => $target->shortName
+                    'action' => 'room',
+                    $this->floor,
+                    $target->shortName
                 ];
                 if ($target->action) {
                     $url[] = $target->action;
