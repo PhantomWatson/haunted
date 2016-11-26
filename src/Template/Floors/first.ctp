@@ -98,4 +98,4 @@
 <map name="first-floor">
     <?= $map->getAreaTags() ?>
 </map>
-<img src="/img/MCHS1st.gif" border="0" width="673" height="371" alt="" usemap="#first-floor">
+<img src="/img/MCHS1st.gif" border="0" width="673" height="371" alt="" usemap="#first-floor" />

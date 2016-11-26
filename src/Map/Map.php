@@ -60,7 +60,7 @@ class Map
                 $area .= 'nohref ';
             }
 
-            $area .= 'title="' . $target->longName . '">';
+            $area .= 'title="' . $target->longName . '" />';
             $retval[] = $area;
         }
         return implode("\n", $retval);
