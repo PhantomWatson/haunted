@@ -63,10 +63,15 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
 
+    public function beforeFilter(Event $event)
+    {
         $this->set([
             'quests' => $this->Cookie->read('quests')
         ]);
+
+        return parent::beforeFilter($event);
     }
 
     /**
