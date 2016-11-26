@@ -68,7 +68,10 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         $this->set([
-            'quests' => $this->Cookie->read('quests')
+            'quests' => $this->Cookie->read('quests'),
+            'name' => $this->Cookie->read('Player.name'),
+            'sex' => $this->Cookie->read('Player.sex'),
+            'gpa' => $this->Cookie->read('Player.gpa')
         ]);
 
         return parent::beforeFilter($event);
