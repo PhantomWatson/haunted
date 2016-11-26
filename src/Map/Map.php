@@ -15,7 +15,7 @@ class Map
      *
      * @return void
      */
-    public function construct() {
+    public function __construct() {
         $this->targets = [];
     }
 

@@ -17,7 +17,7 @@ class Target
      * @param null|string $action Optional, if a non-default action is being conducted in a room
      * @return void
      */
-    public function construct($coords, $shortName, $longName, $action = null)
+    public function __construct($coords, $shortName, $longName, $action = null)
     {
         $this->coords = $coords;
         $this->shortName = $shortName;
