@@ -63,6 +63,10 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+
+        $this->set([
+            'quests' => $this->Cookie->read('quests')
+        ]);
     }
 
     /**
