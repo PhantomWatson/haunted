@@ -90,4 +90,4 @@
 <map name="second-floor">
     <?= $map->getAreaTags() ?>
 </map>
-<img src="MCHS2nd.gif" border="0" width="613" height="396" alt="" usemap="#second-floor" />
+<img src="/img/MCHS2nd.gif" border="0" width="613" height="396" alt="" usemap="#second-floor" />
