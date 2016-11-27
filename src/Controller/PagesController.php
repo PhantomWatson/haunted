@@ -97,4 +97,20 @@ class PagesController extends AppController
     {
 
     }
+
+    /**
+     * Clears out stored data and sends player back to home page
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function restart()
+    {
+        $vars = $this->Cookie->read();
+        foreach ($vars as $key => $value) {
+            $this->Cookie->delete($key);
+        }
+        return $this->redirect([
+            'action' => 'home'
+        ]);
+    }
 }
