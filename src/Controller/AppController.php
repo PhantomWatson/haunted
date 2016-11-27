@@ -174,7 +174,7 @@ class AppController extends Controller
         $period1 = $this->Cookie->read('time.period1');
         $period2 = $this->Cookie->read('time.period2');
         if ($period2) {
-            $percentTimeRemaining = ($period1 / $period2) * 100;
+            $timeRemainingPercent = ($period1 / $period2) * 100;
             $colors = [
                 10 => '#24FF19',
                 20 => '#65FF19',
@@ -188,7 +188,7 @@ class AppController extends Controller
                 100 => '#D451FF'
             ];
             foreach ($colors as $percent => $color) {
-                if ($percentTimeRemaining < $percent) {
+                if ($timeRemainingPercent < $percent) {
                     $timeRemainingColor = $color;
                     break;
                 }
@@ -207,7 +207,10 @@ class AppController extends Controller
             'playerTitle' => $title,
             'quests' => $quests,
             'sex' => $sex,
-            'timeRemainingColor' => $timeRemainingColor
+            'timeRemaining' => [
+                'color' => $timeRemainingColor,
+                'percent' => $timeRemainingPercent
+            ]
         ]);
     }
 
