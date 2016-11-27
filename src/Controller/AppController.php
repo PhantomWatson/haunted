@@ -63,6 +63,10 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+
+        $this->setLayoutVariables();
+
+        return parent::beforeRender($event);
     }
 
     public function beforeFilter(Event $event)
@@ -73,8 +77,6 @@ class AppController extends Controller
                 'action' => 'lose'
             ]);
         }
-
-        $this->setLayoutVariables();
 
         return parent::beforeFilter($event);
     }
@@ -118,6 +120,8 @@ class AppController extends Controller
 
     public function setLayoutVariables()
     {
+        $this->loadComponent('Cookie');
+
         // GPA
         $gpa = $this->Cookie->read('Player.gpa');
         if ($gpa == "5") {
