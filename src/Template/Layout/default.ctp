@@ -25,6 +25,7 @@
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+        <?= $this->element('footer') ?>
     </footer>
 </body>
 </html>
