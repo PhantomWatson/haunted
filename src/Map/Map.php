@@ -32,12 +32,12 @@ class Map
      * @param string $coords The coordinates in the imagemap
      * @param string|null $shortName The short name, matching a method name in RoomsController
      * @param string $longName A longer name, used in HTML 'title' attributes
-     * @param null|string $action Optional, if a non-default action is being conducted in a room
+     * @param null|string $move Optional, if a non-default move (action) is being conducted in a room
      * @return void
      */
-    public function addTarget($coords, $shortName, $longName, $action = null)
+    public function addTarget($coords, $shortName, $longName, $move = null)
     {
-        $this->targets[] = new Target($coords, $shortName, $longName, $action);
+        $this->targets[] = new Target($coords, $shortName, $longName, $move);
     }
 
     /**
@@ -58,11 +58,11 @@ class Map
                 $url = [
                     'controller' => 'Rooms',
                     'action' => 'room',
-                    $this->floor,
-                    $target->shortName
+                    'floor' => $this->floor,
+                    'room' => $target->shortName
                 ];
-                if ($target->action) {
-                    $url[] = $target->action;
+                if ($target->move) {
+                    $url['move'] = $target->move;
                 }
                 $area .= 'href="' . Router::url($url) . '" ';
             } else {

@@ -20,7 +20,7 @@ class RoomsController extends AppController
         $args = func_get_args();
         $floor = isset($args[0]) ? $args[0] : null;
         $room = isset($args[1]) ? $args[1] : null;
-        $action = isset($args[2]) ? $args[2] : null;
+        $move = isset($args[2]) ? $args[2] : null;
 
         if (! $room) {
             return $this->redirect([
@@ -40,7 +40,7 @@ class RoomsController extends AppController
             $room = 'generic' . $floor . '_' . rand(1, 5);
         }
 
-        $this->set('action', $action);
+        $this->set('move', $move);
         return $this->render($room);
     }
 }
