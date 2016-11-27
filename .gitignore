@@ -6,3 +6,6 @@
 
 # PhpStorm
 /.idea/*
+
+# Node
+/node_modules/*
