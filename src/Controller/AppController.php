@@ -118,11 +118,95 @@ class AppController extends Controller
 
     public function setLayoutVariables()
     {
+        // GPA
+        $gpa = $this->Cookie->read('Player.gpa');
+        if ($gpa == "5") {
+            $gpaDisplayed = "4.0";
+        } elseif ($gpa == "4") {
+            $gpaDisplayed = "3.9-3.0";
+        } elseif ($gpa == "3") {
+            $gpaDisplayed = "2.9-2.0";
+        } elseif ($gpa == "2") {
+            $gpaDisplayed = "1.9-1.0";
+        } elseif ($gpa == "1") {
+            $gpaDisplayed = "0.9-0.1";
+        } elseif ($gpa == "0") {
+            $gpaDisplayed = "0.0";
+        }
+
+        // Player title
+        $sex = $this->Cookie->read('Player.sex');
+        $name = $this->Cookie->read('Player.name');
+        $quests = $this->Cookie->read('quests');
+        $title = "";
+        foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
+            if (strstr($quests, $quest)) {
+                $title .= "The";
+                break;
+            }
+        }
+        if (strstr($quests, "c") ) {
+            $title .= " Shameful";
+        }
+        if (strstr($quests, "2") || strstr($quests, "d") ) {
+            $title .= " Heroic";
+        }
+        if (strstr($quests, "7") ) {
+            $title .= " Patriot";
+        }
+        if (strstr($quests, "0") ) {
+            $title .= " Savior";
+        }
+        if (strstr($quests, "6") ) {
+            $title .= " Pirate";
+        }
+        if (strstr($quests, "5")) {
+            $title .= ($sex == "f") ? " Empress" : " Emperor";
+        }
+        foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
+            if (strstr($quests, $quest)) {
+                $title .= ", ";
+                break;
+            }
+        }
+
+        // Time remaining
+        $period1 = $this->Cookie->read('period1');
+        $period2 = $this->Cookie->read('period2');
+        $percentTimeRemaining = ($period1 / $period2) * 100;
+        if ($percentTimeRemaining < 10) {
+            $timeRemainingColor = "#24FF19";
+        } elseif ($percentTimeRemaining < 20) {
+            $timeRemainingColor = "#65FF19";
+        } elseif ($percentTimeRemaining < 30) {
+            $timeRemainingColor = "#ABFF19";
+        } elseif ($percentTimeRemaining < 40) {
+            $timeRemainingColor = "#E7FF19";
+        } elseif ($percentTimeRemaining < 50) {
+            $timeRemainingColor = "#FFD619";
+        } elseif ($percentTimeRemaining < 60) {
+            $timeRemainingColor = "#FFA619";
+        } elseif ($percentTimeRemaining < 70) {
+            $timeRemainingColor = "#FF5F19";
+        } elseif ($percentTimeRemaining < 80) {
+            $timeRemainingColor = "#FF1919";
+        } elseif ($percentTimeRemaining < 90) {
+            $timeRemainingColor = "#D4003C";
+        } elseif ($percentTimeRemaining < 100) {
+            $timeRemainingColor = "#D451FF";
+        }
+
         $this->set([
-            'quests' => $this->Cookie->read('quests'),
-            'name' => $this->Cookie->read('Player.name'),
-            'sex' => $this->Cookie->read('Player.sex'),
-            'gpa' => $this->Cookie->read('Player.gpa')
+            'debugMode' => ($name == 'Mr. Cauliflower' || strstr($quests, 'z')),
+            'gpa' => $gpa,
+            'gpaDisplayed' => $gpaDisplayed,
+            'name' => $name,
+            'period1' => $period1,
+            'period2' => $period2,
+            'playerTitle' => $title,
+            'quests' => $quests,
+            'sex' => $sex,
+            'timeRemainingColor' => $timeRemainingColor
         ]);
     }
 }
