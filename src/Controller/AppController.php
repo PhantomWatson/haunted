@@ -124,19 +124,15 @@ class AppController extends Controller
 
         // GPA
         $gpa = $this->Cookie->read('Player.gpa');
-        if ($gpa == "5") {
-            $gpaDisplayed = "4.0";
-        } elseif ($gpa == "4") {
-            $gpaDisplayed = "3.9-3.0";
-        } elseif ($gpa == "3") {
-            $gpaDisplayed = "2.9-2.0";
-        } elseif ($gpa == "2") {
-            $gpaDisplayed = "1.9-1.0";
-        } elseif ($gpa == "1") {
-            $gpaDisplayed = "0.9-0.1";
-        } elseif ($gpa == "0") {
-            $gpaDisplayed = "0.0";
-        }
+        $displayedGpas = [
+            5 => "4.0",
+            4 => "3.9-3.0",
+            3 => "2.9-2.0",
+            2 => "1.9-1.0",
+            1 => "0.9-0.1",
+            0 => "0.0"
+        ];
+        $gpaDisplayed = $gpa ? $displayedGpas[$gpa] : null;
 
         // Player title
         $sex = $this->Cookie->read('Player.sex');
@@ -177,27 +173,28 @@ class AppController extends Controller
         // Time remaining
         $period1 = $this->Cookie->read('period1');
         $period2 = $this->Cookie->read('period2');
-        $percentTimeRemaining = ($period1 / $period2) * 100;
-        if ($percentTimeRemaining < 10) {
-            $timeRemainingColor = "#24FF19";
-        } elseif ($percentTimeRemaining < 20) {
-            $timeRemainingColor = "#65FF19";
-        } elseif ($percentTimeRemaining < 30) {
-            $timeRemainingColor = "#ABFF19";
-        } elseif ($percentTimeRemaining < 40) {
-            $timeRemainingColor = "#E7FF19";
-        } elseif ($percentTimeRemaining < 50) {
-            $timeRemainingColor = "#FFD619";
-        } elseif ($percentTimeRemaining < 60) {
-            $timeRemainingColor = "#FFA619";
-        } elseif ($percentTimeRemaining < 70) {
-            $timeRemainingColor = "#FF5F19";
-        } elseif ($percentTimeRemaining < 80) {
-            $timeRemainingColor = "#FF1919";
-        } elseif ($percentTimeRemaining < 90) {
-            $timeRemainingColor = "#D4003C";
-        } elseif ($percentTimeRemaining < 100) {
-            $timeRemainingColor = "#D451FF";
+        if ($period2) {
+            $percentTimeRemaining = ($period1 / $period2) * 100;
+            $colors = [
+                10 => '#24FF19',
+                20 => '#65FF19',
+                30 => '#ABFF19',
+                40 => '#E7FF19',
+                50 => '#FFD619',
+                60 => '#FFA619',
+                70 => '#FF5F19',
+                80 => '#FF1919',
+                90 => '#D4003C',
+                100 => '#D451FF'
+            ];
+            foreach ($colors as $percent => $color) {
+                if ($percentTimeRemaining < $percent) {
+                    $timeRemainingColor = $color;
+                    break;
+                }
+            }
+        } else {
+            $timeRemainingColor = null;
         }
 
         $this->set([
