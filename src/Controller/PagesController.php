@@ -109,4 +109,14 @@ class PagesController extends AppController
             'action' => 'home'
         ]);
     }
+
+    /**
+     * FAQ
+     *
+     * @return void
+     */
+    public function faq()
+    {
+
+    }
 }
