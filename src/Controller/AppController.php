@@ -64,6 +64,7 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
 
+        $this->loadComponent('Game');
         $this->Game->setLayoutVariables();
 
         return parent::beforeRender($event);
