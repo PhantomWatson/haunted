@@ -110,8 +110,8 @@ class AppController extends Controller
      */
     public function checkLose()
     {
-        $period1 = $this->Cookie->read('period1');
-        $period2 = $this->Cookie->read('period2');
+        $period1 = $this->Cookie->read('time.period1');
+        $period2 = $this->Cookie->read('time.period2');
         if ($period1 && $period2 && ($period1 / $period2) >= 1) {
             return true;
         }
@@ -123,7 +123,7 @@ class AppController extends Controller
         $this->loadComponent('Cookie');
 
         // GPA
-        $gpa = $this->Cookie->read('Player.gpa');
+        $gpa = $this->Cookie->read('player.gpa');
         $displayedGpas = [
             5 => "4.0",
             4 => "3.9-3.0",
@@ -135,8 +135,8 @@ class AppController extends Controller
         $gpaDisplayed = $gpa ? $displayedGpas[$gpa] : null;
 
         // Player title
-        $sex = $this->Cookie->read('Player.sex');
-        $name = $this->Cookie->read('Player.name');
+        $sex = $this->Cookie->read('player.sex');
+        $name = $this->Cookie->read('player.name');
         $quests = $this->Cookie->read('quests');
         $title = "";
         foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
@@ -171,8 +171,8 @@ class AppController extends Controller
         }
 
         // Time remaining
-        $period1 = $this->Cookie->read('period1');
-        $period2 = $this->Cookie->read('period2');
+        $period1 = $this->Cookie->read('time.period1');
+        $period2 = $this->Cookie->read('time.period2');
         if ($period2) {
             $percentTimeRemaining = ($period1 / $period2) * 100;
             $colors = [
@@ -209,5 +209,20 @@ class AppController extends Controller
             'sex' => $sex,
             'timeRemainingColor' => $timeRemainingColor
         ]);
+    }
+
+    public function initializeGame($player)
+    {
+        $this->clearGameData();
+        $this->savePlayer($player);
+        $this->Cookie->write('time.period1', 1);
+        $this->Cookie->write('time.period2', 13);
+    }
+
+    public function clearGameData()
+    {
+        $this->Cookie->delete('player');
+        $this->Cookie->delete('time');
+        $this->Cookie->delete('quests');
     }
 }

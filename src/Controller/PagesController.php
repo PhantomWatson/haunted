@@ -28,17 +28,16 @@ use Cake\View\Exception\MissingTemplateException;
  */
 class PagesController extends AppController
 {
-
     public function home()
     {
         $player = $this->getPlayer();
         $this->loadModel('Players');
         if ($this->request->is('post')) {
             $player = $this->Players->newEntity($this->request->data());
-            if (false) {
+            if ($player->errors()) {
                 $this->Flash->error('Please correct the indicated errors');
             } else {
-                $this->savePlayer($player);
+                $this->initializeGame($player);
                 return $this->redirect([
                     'controller' => 'floors',
                     'action' => 'first'
@@ -105,10 +104,7 @@ class PagesController extends AppController
      */
     public function restart()
     {
-        $vars = $this->Cookie->read();
-        foreach ($vars as $key => $value) {
-            $this->Cookie->delete($key);
-        }
+        $this->clearGameData();
         return $this->redirect([
             'action' => 'home'
         ]);
