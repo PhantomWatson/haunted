@@ -67,19 +67,14 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->set([
-            'quests' => $this->Cookie->read('quests'),
-            'name' => $this->Cookie->read('Player.name'),
-            'sex' => $this->Cookie->read('Player.sex'),
-            'gpa' => $this->Cookie->read('Player.gpa')
-        ]);
-
         if ($this->checkLose()) {
             $this->redirect([
                 'controller' => 'Pages',
                 'action' => 'lose'
             ]);
         }
+
+        $this->setLayoutVariables();
 
         return parent::beforeFilter($event);
     }
@@ -119,5 +114,15 @@ class AppController extends Controller
             return true;
         }
         return false;
+    }
+
+    public function setLayoutVariables()
+    {
+        $this->set([
+            'quests' => $this->Cookie->read('quests'),
+            'name' => $this->Cookie->read('Player.name'),
+            'sex' => $this->Cookie->read('Player.sex'),
+            'gpa' => $this->Cookie->read('Player.gpa')
+        ]);
     }
 }
