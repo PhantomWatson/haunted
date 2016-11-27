@@ -74,6 +74,13 @@ class AppController extends Controller
             'gpa' => $this->Cookie->read('Player.gpa')
         ]);
 
+        if ($this->checkLose()) {
+            $this->redirect([
+                'controller' => 'Pages',
+                'action' => 'lose'
+            ]);
+        }
+
         return parent::beforeFilter($event);
     }
 
@@ -97,5 +104,20 @@ class AppController extends Controller
     public function savePlayer($player)
     {
         $this->Cookie->write('player', $player->toArray());
+    }
+
+    /**
+     * Returns a boolean indicating whether the player has lost the game
+     *
+     * @return bool
+     */
+    public function checkLose()
+    {
+        $period1 = $this->Cookie->read('period1');
+        $period2 = $this->Cookie->read('period2');
+        if ($period1 && $period2 && ($period1 / $period2) >= 1) {
+            return true;
+        }
+        return false;
     }
 }

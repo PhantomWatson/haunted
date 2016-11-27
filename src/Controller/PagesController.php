@@ -87,4 +87,14 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    /**
+     * Method for lose condition
+     *
+     * @return void
+     */
+    public function lose()
+    {
+
+    }
 }
