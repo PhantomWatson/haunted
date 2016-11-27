@@ -34,17 +34,13 @@ class RoomsController extends AppController
             $room = substr($room, 4);
         }
 
-        // Special rooms
+        // Default to a random generic room if a specific room template isn't available
         $dir = new Folder(APP . 'Template' . DS . 'Rooms');
-        if ($dir->find("$room.ctp")) {
-            if (!empty($action)) {
-                $this->set('action', $action);
-            }
-            return $this->render($room);
+        if (! $dir->find("$room.ctp")) {
+            $room = 'generic' . $floor . '_' . rand(1, 5);
         }
 
-        // Generic rooms
-        $room = 'generic' . $floor . '_' . rand(1, 5);
+        $this->set('action', $action);
         return $this->render($room);
     }
 }
