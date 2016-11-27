@@ -51,6 +51,15 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'home']);
 
+    $routes->connect(
+        '/:floor/:room/:move',
+        ['controller' => 'Rooms', 'action' => 'room'],
+        [
+            'pass' => ['floor', 'room', 'move'],
+            'floor' => '[1-2]'
+        ]
+    );
+
     /**
      * Connect catchall routes for all controllers.
      *
