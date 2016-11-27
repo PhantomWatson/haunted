@@ -132,6 +132,7 @@ class GameComponent extends Component
             }
         } else {
             $timeRemainingColor = null;
+            $timeRemainingPercent = null;
         }
 
         $this->_registry->getController()->set([
