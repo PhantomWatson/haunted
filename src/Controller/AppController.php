@@ -66,6 +66,7 @@ class AppController extends Controller
 
         $this->loadComponent('Game');
         $this->Game->setLayoutVariables();
+        $this->set('cookie', $this->Cookie);
         $this->viewBuilder()->helpers(['Game']);
 
         return parent::beforeRender($event);

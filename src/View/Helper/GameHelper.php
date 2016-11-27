@@ -7,6 +7,7 @@ use Cake\View\Helper;
 class GameHelper extends Helper
 {
     public $helpers = ['Html'];
+    public $cookie;
 
     /**
      * Initialize function
@@ -15,6 +16,7 @@ class GameHelper extends Helper
      */
     public function initialize(array $config)
     {
+        $this->cookie = $this->_View->get('cookie');
         parent::initialize($config);
     }
 
@@ -25,9 +27,9 @@ class GameHelper extends Helper
      */
     public function spendTime($periods = 1)
     {
-        $period1 = $this->request->cookies->read('time.period1');
+        $period1 = $this->cookie->read('time.period1');
         $period1 += $periods;
-        $this->request->cookies->write('time.period1', $period1);
+        $this->cookie->write('time.period1', $period1);
     }
 
     /**
@@ -37,9 +39,9 @@ class GameHelper extends Helper
      */
     public function addPasses($count = 1)
     {
-        $period2 = $this->request->cookies->read('time.period2');
+        $period2 = $this->cookie->read('time.period2');
         $period2 += $count;
-        $this->request->cookies->write('time.period2', $period2);
+        $this->cookie->write('time.period2', $period2);
     }
 
     /**
@@ -49,9 +51,9 @@ class GameHelper extends Helper
      */
     public function removePasses($count = 1)
     {
-        $period2 = $this->request->cookies->read('time.period2');
+        $period2 = $this->cookie->read('time.period2');
         $period2 -= $count;
-        $this->request->cookies->write('time.period2', $period2);
+        $this->cookie->write('time.period2', $period2);
     }
 
     /**
