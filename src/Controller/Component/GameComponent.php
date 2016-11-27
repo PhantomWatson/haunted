@@ -135,8 +135,28 @@ class GameComponent extends Component
             $timeRemainingPercent = null;
         }
 
+        // Floor
+        if ($this->request->controller == 'Floors') {
+            if ($this->request->action == 'first') {
+                $floor = 1;
+            } elseif ($this->request->action == 'second') {
+                $floor = 2;
+            } else {
+                $floor = 99;
+            }
+        } elseif ($this->request->controller == 'Rooms') {
+            if (isset($this->request->params['pass'][0])) {
+                $floor = $this->request->params['pass'][0];
+            } else {
+                $floor = 88;
+            }
+        } else {
+            $floor = 77;
+        }
+
         $this->_registry->getController()->set([
             'debugMode' => ($name == 'Mr. Cauliflower' || strstr($quests, 'z')),
+            'floor' => $floor,
             'gpa' => $gpa,
             'gpaDisplayed' => $gpaDisplayed,
             'name' => $name,

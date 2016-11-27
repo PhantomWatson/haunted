@@ -1,6 +1,7 @@
 <?php
 namespace App\View\Helper;
 
+use Cake\Network\Exception\InternalErrorException;
 use Cake\View\Helper;
 
 class GameHelper extends Helper
@@ -56,11 +57,15 @@ class GameHelper extends Helper
     /**
      * Returns a link to go back out into the hallway
      *
-     * @param int $floor Floor
      * @return string
      */
-    public function hallwayLink($floor)
+    public function hallwayLink()
     {
+        //pr($this->_View); exit();
+        $floor = $this->_View->get('floor');
+        if (! $floor) {
+            throw new InternalErrorException('Floor unknown');
+        }
         if ($floor == 1) {
             $action = 'first';
         } elseif ($floor == 2) {
