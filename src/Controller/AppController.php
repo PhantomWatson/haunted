@@ -75,6 +75,7 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         if ($this->Game->checkLose()) {
+            $this->Game->clearGameData();
             $this->redirect([
                 'controller' => 'Pages',
                 'action' => 'lose'
