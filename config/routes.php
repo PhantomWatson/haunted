@@ -59,6 +59,14 @@ Router::scope('/', function (RouteBuilder $routes) {
             'floor' => '[1-2]'
         ]
     );
+    $routes->connect(
+        '/:floor/:room',
+        ['controller' => 'Rooms', 'action' => 'room'],
+        [
+            'pass' => ['floor', 'room'],
+            'floor' => '[1-2]'
+        ]
+    );
 
     /**
      * Connect catchall routes for all controllers.
