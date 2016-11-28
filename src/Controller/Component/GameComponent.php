@@ -76,37 +76,8 @@ class GameComponent extends Component
         $sex = $this->Cookie->read('player.sex');
         $name = $this->Cookie->read('player.name');
         $quests = $this->Cookie->read('quests');
-        $title = "";
-        foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
-            if (strstr($quests, $quest)) {
-                $title .= "The";
-                break;
-            }
-        }
-        if (strstr($quests, "c") ) {
-            $title .= " Shameful";
-        }
-        if (strstr($quests, "2") || strstr($quests, "d") ) {
-            $title .= " Heroic";
-        }
-        if (strstr($quests, "7") ) {
-            $title .= " Patriot";
-        }
-        if (strstr($quests, "0") ) {
-            $title .= " Savior";
-        }
-        if (strstr($quests, "6") ) {
-            $title .= " Pirate";
-        }
-        if (strstr($quests, "5")) {
-            $title .= ($sex == "f") ? " Empress" : " Emperor";
-        }
-        foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
-            if (strstr($quests, $quest)) {
-                $title .= ", ";
-                break;
-            }
-        }
+        $playersTable = TableRegistry::get('Players');
+        $title = $playersTable->getTitle($quests);
 
         // Time remaining
         $period1 = $this->Cookie->read('time.period1');
