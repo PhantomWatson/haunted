@@ -59,10 +59,11 @@ class GameHelper extends Helper
     /**
      * Returns a link to go back out into the hallway
      *
+     * @param string $label Button label
      * @param int $spendTime How much "time spent" should be incremented
      * @return string
      */
-    public function hallwayLink($spendTime = 0)
+    public function hallwayLink($label = null, $spendTime = 0)
     {
         $floor = $this->_View->get('floor');
         if (! $floor) {
@@ -76,6 +77,9 @@ class GameHelper extends Helper
             throw new \InvalidArgumentException('Unrecognized floor: ' . $floor);
         }
 
+        if (! $label) {
+            $label = 'Go back out into the hallway';
+        }
         $url = [
             'controller' => 'Floors',
             'action' => $action
@@ -84,7 +88,7 @@ class GameHelper extends Helper
             $url['?'] = ['ts' => $spendTime];
         }
         return $this->link(
-            'Go back out into the hallway',
+            $label,
             $url
         );
     }
