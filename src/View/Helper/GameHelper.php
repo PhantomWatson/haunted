@@ -88,11 +88,18 @@ class GameHelper extends Helper
      * Returns a game action link with special formatting
      *
      * @param string $label Label
-     * @param array|string $url URL
+     * @param array $url URL array
      * @return string
      */
     public function link($label, $url)
     {
+        if (! isset($url['floor'])) {
+            $url['floor'] = $this->_View->get('floor');
+        }
+        if (! isset($url['room'])) {
+            $url['room'] = $this->_View->get('room');
+        }
+
         return
             '<div class="btn-container">' .
             $this->Html->link(

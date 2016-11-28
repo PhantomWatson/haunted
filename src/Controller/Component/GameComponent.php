@@ -154,6 +154,8 @@ class GameComponent extends Component
             $floor = 77;
         }
 
+        $room = $this->request->params['pass'][1];
+
         $this->_registry->getController()->set([
             'debugMode' => ($name == 'Mr. Cauliflower' || strstr($quests, 'z')),
             'floor' => $floor,
@@ -164,6 +166,7 @@ class GameComponent extends Component
             'period2' => $period2,
             'playerTitle' => $title,
             'quests' => $quests,
+            'room' => $room,
             'sex' => $sex,
             'timeRemaining' => [
                 'color' => $timeRemainingColor,
