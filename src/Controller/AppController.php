@@ -74,6 +74,13 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
+        $timeSpent = $this->request->query('ts');
+        if ($timeSpent) {
+            $period1 = $this->Cookie->read('time.period1');
+            $period1 += $timeSpent;
+            $this->Cookie->write('time.period1', $period1);
+        }
+
         if ($this->Game->checkLose()) {
             $this->Game->clearGameData();
             $this->redirect([

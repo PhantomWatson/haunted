@@ -59,9 +59,10 @@ class GameHelper extends Helper
     /**
      * Returns a link to go back out into the hallway
      *
+     * @param int $spendTime How much "time spent" should be incremented
      * @return string
      */
-    public function hallwayLink()
+    public function hallwayLink($spendTime = 0)
     {
         $floor = $this->_View->get('floor');
         if (! $floor) {
@@ -75,12 +76,16 @@ class GameHelper extends Helper
             throw new \InvalidArgumentException('Unrecognized floor: ' . $floor);
         }
 
+        $url = [
+            'controller' => 'Floors',
+            'action' => $action
+        ];
+        if ($spendTime) {
+            $url['?'] = ['ts' => $spendTime];
+        }
         return $this->link(
             'Go back out into the hallway',
-            [
-                'controller' => 'Floors',
-                'action' => $action
-            ]
+            $url
         );
     }
 
@@ -108,5 +113,17 @@ class GameHelper extends Helper
                 ['class' => 'btn btn-lg btn-default']
             ) .
             '</div>';
+    }
+
+    /**
+     * Records a quest as having been completed
+     *
+     * @param string $quest Quest identifier
+     */
+    public function completeQuest($quest)
+    {
+        $quests = $this->cookie->read('quests');
+        $quests .= $quest;
+        $this->cookie->write('quests', $quests);
     }
 }
