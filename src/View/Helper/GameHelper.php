@@ -76,13 +76,31 @@ class GameHelper extends Helper
             throw new \InvalidArgumentException('Unrecognized floor: ' . $floor);
         }
 
-        return $this->Html->link(
+        return $this->link(
             'Go back out into the hallway',
             [
                 'controller' => 'Floors',
                 'action' => $action
-            ],
-            ['class' => 'btn btn-default']
+            ]
         );
+    }
+
+    /**
+     * Returns a game action link with special formatting
+     *
+     * @param string $label Label
+     * @param array|string $url URL
+     * @return string
+     */
+    public function link($label, $url)
+    {
+        return
+            '<div class="btn-container">' .
+            $this->Html->link(
+                $label,
+                $url,
+                ['class' => 'btn btn-lg btn-default']
+            ) .
+            '</div>';
     }
 }

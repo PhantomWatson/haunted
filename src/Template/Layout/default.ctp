@@ -22,7 +22,13 @@
         <?= $this->element('header') ?>
     </header>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <?php
+        $class = 'container clearfix';
+        if ($this->request->controller == 'Rooms') {
+            $class .= ' room';
+        }
+    ?>
+    <div class="<?= $class ?>">
         <?= $this->fetch('content') ?>
     </div>
     <footer>
