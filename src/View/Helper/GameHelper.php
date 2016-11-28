@@ -155,4 +155,16 @@ class GameHelper extends Helper
         $playersTable = TableRegistry::get('Players');
         return $playersTable->getTitle($quests);
     }
+
+    /**
+     * Returns whether or not the user has completed the indicated quest
+     *
+     * @param string $quest Quest identifier
+     * @return bool
+     */
+    public function questCompleted($quest)
+    {
+        $quests = $this->cookie->read('quests');
+        return strpos($quests, $quest) !== false;
+    }
 }
