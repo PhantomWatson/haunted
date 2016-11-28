@@ -63,7 +63,6 @@ class GameHelper extends Helper
      */
     public function hallwayLink()
     {
-        //pr($this->_View); exit();
         $floor = $this->_View->get('floor');
         if (! $floor) {
             throw new InternalErrorException('Floor unknown');
