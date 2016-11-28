@@ -2,6 +2,7 @@
 namespace App\View\Helper;
 
 use Cake\Network\Exception\InternalErrorException;
+use Cake\ORM\TableRegistry;
 use Cake\View\Helper;
 
 class GameHelper extends Helper
@@ -41,6 +42,18 @@ class GameHelper extends Helper
     {
         $period2 = $this->cookie->read('time.period2');
         $period2 += $count;
+        $this->cookie->write('time.period2', $period2);
+    }
+
+    /**
+     * Doubles the player's amount of passes
+     *
+     * @return void
+     */
+    public function doublePasses()
+    {
+        $period2 = $this->cookie->read('time.period2');
+        $period2 *= 2;
         $this->cookie->write('time.period2', $period2);
     }
 
@@ -129,5 +142,17 @@ class GameHelper extends Helper
         $quests = $this->cookie->read('quests');
         $quests .= $quest;
         $this->cookie->write('quests', $quests);
+    }
+
+    /**
+     * Returns the player's current title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        $quests = $this->cookie->read('quests');
+        $playersTable = TableRegistry::get('Players');
+        return $playersTable->getTitle($quests);
     }
 }
