@@ -2,6 +2,7 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
+use Cake\ORM\TableRegistry;
 
 class GameComponent extends Component
 {
@@ -154,7 +155,7 @@ class GameComponent extends Component
             $floor = 77;
         }
 
-        $room = $this->request->params['pass'][1];
+        $room = isset($this->request->params['pass'][1]) ? $this->request->params['pass'][1] : null;
 
         $this->_registry->getController()->set([
             'debugMode' => ($name == 'Mr. Cauliflower' || strstr($quests, 'z')),
@@ -182,8 +183,8 @@ class GameComponent extends Component
      */
     public function getPlayer()
     {
-        $this->loadModel('Players');
+        $playersTable = TableRegistry::get('Players');
         $player = $this->Cookie->read('player');
-        return $player ? $this->Players->newEntity($player) : null;
+        return $player ? $playersTable->newEntity($player) : null;
     }
 }
