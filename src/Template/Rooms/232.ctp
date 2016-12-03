@@ -27,7 +27,7 @@
         can be alone to enjoy my purple."
     </p>
     <?= $this->Game->hallwayLink() ?>
-<?php elseif($move > 1): ?>
+<?php elseif ($move > 1): ?>
     <?php $this->Game->spendTime(); ?>
     <p>
         Mr. Wolter throws you out into the hallway for your blasphemy with a force of 250 Newtons.

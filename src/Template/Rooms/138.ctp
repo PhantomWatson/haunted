@@ -16,7 +16,7 @@
         <strong>You spend the next hour nursing your wounds.</strong>
     </p>
     <?= $this->Game->hallwayLink() ?>
-<?php elseif($move == "no"): ?>
+<?php elseif ($move == "no"): ?>
     <?php $this->Game->spendTime(); ?>
 	<p>
         You try to slip out the door from whence you came, but the sergeant notices you and screams "Drop and give me
