@@ -147,13 +147,20 @@ class GameHelper extends Helper
     /**
      * Returns the player's current title
      *
+     * @param null|string $questJustCompleted Identifier for quest that has just been completed
      * @return string
      */
-    public function getTitle()
+    public function getTitle($questJustCompleted = null)
     {
         $quests = $this->cookie->read('quests');
         $playersTable = TableRegistry::get('Players');
-        return $playersTable->getTitle($quests);
+        $sex = $this->cookie->read('player.sex');
+        $title = $playersTable->getTitle($quests, $sex);
+        if ($questJustCompleted) {
+            $titleComponent = $playersTable->getTitleComponent($questJustCompleted, $sex);
+            $title = str_replace($titleComponent, '<strong>' . $titleComponent . '</strong>', $title);
+        }
+        return $title;
     }
 
     /**

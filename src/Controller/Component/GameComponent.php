@@ -77,7 +77,7 @@ class GameComponent extends Component
         $name = $this->Cookie->read('player.name');
         $quests = $this->Cookie->read('quests');
         $playersTable = TableRegistry::get('Players');
-        $title = $playersTable->getTitle($quests);
+        $title = $playersTable->getTitle($quests, $sex);
 
         // Time remaining
         $period1 = $this->Cookie->read('time.period1');

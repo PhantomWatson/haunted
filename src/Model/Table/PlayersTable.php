@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\Player;
+use Cake\Network\Exception\InternalErrorException;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -39,39 +40,59 @@ class PlayersTable extends Table
      * @param string $quests Quests
      * @return string
      */
-    public function getTitle($quests)
+    public function getTitle($quests, $sex)
     {
-        $title = '';
-        foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
-            if (strstr($quests, $quest)) {
-                $title .= 'The';
-                break;
-            }
-        }
+        $titleComponents = [];
         if (strstr($quests, 'c') ) {
-            $title .= ' Shameful';
+            $titleComponents[] = $this->getTitleComponent('c');
         }
         if (strstr($quests, '2') || strstr($quests, 'd') ) {
-            $title .= ' Heroic';
+            $titleComponents[] = $this->getTitleComponent('2');
         }
         if (strstr($quests, '7') ) {
-            $title .= ' Patriot';
+            $titleComponents[] = $this->getTitleComponent('7');
         }
         if (strstr($quests, '0') ) {
-            $title .= ' Savior';
+            $titleComponents[] = $this->getTitleComponent('0');
         }
         if (strstr($quests, '6') ) {
-            $title .= ' Pirate';
+            $titleComponents[] = $this->getTitleComponent('6');
         }
         if (strstr($quests, '5')) {
-            $title .= ($sex == 'f') ? ' Empress' : ' Emperor';
+            $titleComponents[] = $this->getTitleComponent('5', $sex);
         }
-        foreach (['c', '2', 'd', '5', '6', '7', '8'] as $quest) {
-            if (strstr($quests, $quest)) {
-                $title .= ', ';
-                break;
-            }
+
+        if ($titleComponents) {
+            return 'The '.implode(' ', $titleComponents);
         }
-        return $title;
+        return '';
+    }
+
+    /**
+     * Returns the part of the player's title associated with quest $q
+     *
+     * @param string $quest Quest identifier
+     * @param null|string $sex
+     * @return string
+     * @throws InternalErrorException
+     */
+    public function getTitleComponent($quest, $sex = null)
+    {
+        switch ($quest) {
+            case 'c':
+                return 'Shameful';
+            case '2':
+            case 'd':
+                return 'Heroic';
+            case '7':
+                return 'Patriot';
+            case '0':
+                return 'Savior';
+            case '6':
+                return 'Pirate';
+            case '5':
+                return ($sex == 'f') ? 'Empress' : 'Emperor';
+        }
+        throw new InternalErrorException('Cannot get title component for quest ' . $quest);
     }
 }
