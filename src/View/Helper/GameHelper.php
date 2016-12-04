@@ -3,6 +3,7 @@ namespace App\View\Helper;
 
 use Cake\Network\Exception\InternalErrorException;
 use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 use Cake\View\Helper;
 
 class GameHelper extends Helper
@@ -130,6 +131,57 @@ class GameHelper extends Helper
                 ['class' => 'btn btn-lg btn-default']
             ) .
             '</div>';
+    }
+
+    /**
+     * Form opening tag
+     *
+     * @param string $method Post or get
+     * @param array $url URL array for router
+     * @return string
+     */
+    public function formStart($method, $url)
+    {
+        if (! isset($url['floor'])) {
+            $url['floor'] = $this->_View->get('floor');
+        }
+        if (! isset($url['room'])) {
+            $url['room'] = $this->_View->get('room');
+        }
+
+        return '<form method="' . $method . '" action="' . Router::url($url) . '">';
+    }
+
+    /**
+     * Form input
+     *
+     * @param
+     * @return string
+     */
+    public function formInput($name, $placeholder)
+    {
+        return '<input type="text" name="' . $name . '" placeholder="' . $placeholder . '" />';
+    }
+
+    /**
+     * Submit button
+     *
+     * @param string $label Button label
+     * @return string
+     */
+    public function formSubmit($label)
+    {
+        return '<input type="submit" value="' . $label . '" class="btn btn-lg btn-default" />';
+    }
+
+    /**
+     * Form close tag
+     *
+     * @return string
+     */
+    public function formEnd()
+    {
+        return '</form>';
     }
 
     /**
