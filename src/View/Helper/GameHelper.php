@@ -236,4 +236,26 @@ class GameHelper extends Helper
     {
         $this->cookie->write('player.gpa', $value);
     }
+
+    /**
+     * Remembers giving Ms. Bly an answer
+     *
+     * @param string $answer Answer value
+     * @return void
+     */
+    public function setBlyAnswer($answer)
+    {
+        $this->cookie->write("game.blyanswers.$answer", true);
+    }
+
+    /**
+     * Returns whether or not
+     *
+     * @param string $answer Answer value
+     * @return bool
+     */
+    public function blyAnswerGiven($answer)
+    {
+        return (bool)$this->cookie->read("game.blyanswers.$answer");
+    }
 }

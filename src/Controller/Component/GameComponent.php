@@ -31,6 +31,7 @@ class GameComponent extends Component
         $this->Cookie->delete('player');
         $this->Cookie->delete('time');
         $this->Cookie->delete('quests');
+        $this->Cookie->delete('game');
     }
 
     /**
