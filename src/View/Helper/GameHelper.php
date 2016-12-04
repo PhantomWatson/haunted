@@ -226,4 +226,14 @@ class GameHelper extends Helper
         $quests = $this->cookie->read('quests');
         return strpos($quests, $quest) !== false;
     }
+
+    /**
+     * Changes the player's GPA
+     *
+     * @param int $value GPA
+     */
+    public function changeGpa($value)
+    {
+        $this->cookie->write('player.gpa', $value);
+    }
 }
