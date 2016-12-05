@@ -283,4 +283,15 @@ class GameHelper extends Helper
         }
         return $name;
     }
+
+    /**
+     * Sets the player's name
+     *
+     * @param string $name Name
+     * @return void
+     */
+    public function changeName($name)
+    {
+        $this->cookie->write('player.name', $name);
+    }
 }
