@@ -37,7 +37,7 @@ class RoomsController extends AppController
         // Default to a random generic room if a specific room template isn't available
         $dir = new Folder(APP . 'Template' . DS . 'Rooms');
         if (! $dir->find("$room.ctp")) {
-            $room = 'generic' . $floor . '_' . rand(1, 5);
+            $room = 'generic' . $floor . '_' . rand(1, 4);
         }
 
         $this->set('move', $move);
