@@ -258,4 +258,29 @@ class GameHelper extends Helper
     {
         return (bool)$this->cookie->read("game.blyanswers.$answer");
     }
+
+    /**
+     * Changes all of the vowels in $name
+     *
+     * @param string $name Name
+     * @return mixed
+     */
+    public function scrambleVowels($name)
+    {
+        $vowels = ['a', 'e', 'i', 'o', 'u'];
+        foreach ($vowels as $vowel) {
+            $alternates = array_filter($vowels, function ($var) use ($vowel) {
+                return $var != $vowel;
+            });
+
+            // Lowercase
+            $replacement = $alternates[array_rand($alternates)];
+            $name = str_replace($vowel, $replacement, $name);
+
+            // Uppercase
+            $replacement = strtoupper($alternates[array_rand($alternates)]);
+            $name = str_replace(strtoupper($vowel), $replacement, $name);
+        }
+        return $name;
+    }
 }
