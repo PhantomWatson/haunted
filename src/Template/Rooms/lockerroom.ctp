@@ -1,5 +1,5 @@
 <?php
-    $lrSide = $_GET['lr'];
+    $lrSide = $this->request->query('lr');
     $matchingSex = ("$lrSide$sex" == 'gf' || "$lrSide$sex" == 'bm');
 ?>
 <?php if (! $move && $matchingSex): ?>

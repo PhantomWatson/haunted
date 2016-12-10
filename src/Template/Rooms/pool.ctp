@@ -1,6 +1,4 @@
-<?php
-    $answer = isset($_POST['answer']) ? $_POST['answer'] : null;
-?>
+<?php $answer = $this->request->data('answer'); ?>
 <?php if ($this->Game->questCompleted("h")): ?>
     <?php $this->Game->spendTime(); ?>
     <p>

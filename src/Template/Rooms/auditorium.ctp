@@ -15,7 +15,11 @@
     <?= $this->Game->formSubmit('Tell him') ?>
     <?= $this->Game->formEnd() ?>
 <?php elseif ($move == 'tell_abe'): ?>
-    <?php if (stristr($_GET['head_is'], 'greenhouse') || stristr($_GET['head_is'], 'green house')): ?>
+    <?php
+        $answer = $this->request->data('head_is');
+        $correct = stristr($answer, 'greenhouse') || stristr($answer, 'green house');
+    ?>
+    <?php if ($correct): ?>
         <?php $this->Game->completeQuest('7'); ?>
         <?php $this->Game->addPasses(4); ?>
         <p>
