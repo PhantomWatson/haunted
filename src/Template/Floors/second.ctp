@@ -66,10 +66,10 @@
     $map->addTarget('188,100,223,138', 'room460', 'Room 460 - Richardson');
 
     // Quest-conditional targets
-    if (! strstr($quests, "3") ) {
+    if (! $this->Game->questCompleted('3')) {
         $map->addTarget('143,210,143,180,107,180,108,189,127,189,128,210', 'room432', 'Room 432 - A/V Control Room');
     }
-    if (! strstr($quests, "j") || ! strstr($quests, "k") ) {
+    if (! $this->Game->questCompleted('j') || ! $this->Game->questCompleted('k')) {
         $map->addTarget('144,256,188,291', 'room401', 'Room 401 - Bartling');
     }
     

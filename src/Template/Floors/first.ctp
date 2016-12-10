@@ -52,32 +52,32 @@
     $map->addTarget('653,148,657,260,583,261,582,233,567,233,566,165,590,165,590,148', 'auditorium', 'Auditorium');
 
     // Quest-conditional targets
-    if (! strstr($quests, 'i')) {
+    if (! $this->Game->questCompleted('i')) {
         $map->addTarget('566,234,575,246', 'phoneroom', 'Phone Room');
     }
-    if (! strstr($quests, "2")) {
+    if (! $this->Game->questCompleted('2')) {
         $map->addTarget('369,149,408,172', 'room236', 'Room 236 - Amman');
     }
-    if (! strstr($quests, "o")) {
+    if (! $this->Game->questCompleted('o')) {
         $map->addTarget('408,138,434,171', 'room232', 'Room 232 - Wolter');
     }
-    if (! strstr($quests, "m")) {
+    if (! $this->Game->questCompleted('m')) {
         $map->addTarget('432,125,459,170', 'room230', 'Room 230 - Conaway');
     }
-    if (! strstr($quests, "6")) {
+    if (! $this->Game->questCompleted('6')) {
         $map->addTarget('479,76,612,138', 'cafeteria', 'Cafeteria');
     }
-    if (! strstr($quests, "a") && strstr($quests, "6")) {
+    if (! $this->Game->questCompleted('a') && $this->Game->questCompleted('6')) {
         $map->addTarget('478,40,512,75', 'cafeteria', 'Room 320 - Computer Lab', 'comp_lab');
     }
-    if (! strstr($quests, "0") && strstr($quests, "6")) {
+    if (! $this->Game->questCompleted('0') && $this->Game->questCompleted('6')) {
         $map->addTarget('510,38,608,77', 'cafeteria', 'Cafeteria Kitchen', 'kitchen');
     }
-    if(! strstr($quests, "9")) {
+    if(! $this->Game->questCompleted('9')) {
         $map->addTarget('557,277,609,322', 'room304', 'Room 304');
         $map->addTarget('630,276,668,320', 'room308', 'Room 308 - Band Room');
     }
-    if(! strstr($quests, "g")) {
+    if(! $this->Game->questCompleted('g')) {
         $map->addTarget('542,138,553,151', 'room318b', 'Room 318b - Vending Machine Room');
     }
 
