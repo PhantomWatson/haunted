@@ -38,7 +38,6 @@
     $map->addTarget('371,101,404,139', 'room440', 'Room 440 - Fairley');
     $map->addTarget('297,103,341,140', 'room472', 'Room 472 - Shaw');
     $map->addTarget('253,103,296,140', 'room471', 'Room 471 - Hritz');
-    $map->addTarget('252,70,341,103', 'langoffice', 'Language Arts / Foreign Languages Office');
     $map->addTarget('313,43,341,55', 'room449', 'Room 449');
     $map->addTarget('298,70,298,62,312,62,311,55,340,55,340,68', 'room450', 'Room 450');
     $map->addTarget('79,255,123,298', 'room402', 'Room 402 - Von Dielingen');
@@ -71,6 +70,9 @@
     }
     if (! $this->Game->questCompleted('j') || ! $this->Game->questCompleted('k')) {
         $map->addTarget('144,256,188,291', 'room401', 'Room 401 - Bartling');
+    }
+    if (! $this->Game->questCompleted('p')) {
+        $map->addTarget('252,70,341,103', 'langoffice', 'Language Arts / Foreign Languages Office');
     }
     
     // Stairs down
