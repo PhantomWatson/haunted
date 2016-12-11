@@ -3,24 +3,29 @@
         You walk into the cold, dark gymnasium and gasp in horror at the army of zombies shambling about in basketball
         shorts and jerseys.
     </p>
-    <p>
-        <?php if ($gpa == 4): ?>
-            <?php $this->Game->spendTime(); ?>
+    <?php if ($gpa == 4): ?>
+        <?php $this->Game->spendTime(); ?>
+        <p>
             The zombies shout, <em>"NERD!!!"</em> and shove you back out into the hallway.
-            <?= $this->Game->hallwayLink(null, 1) ?>
-        <?php elseif ($gpa == 5): ?>
-            <?php $this->Game->spendTime(2); ?>
+        </p>
+        <?= $this->Game->hallwayLink(null, 1) ?>
+    <?php elseif ($gpa == 5): ?>
+        <?php $this->Game->spendTime(2); ?>
+        <p>
             The zombies shout, <em>"NERD!!!"</em> and shove you into a locker, where you spend the next period.
-        <?php elseif ($gpa <= 3): ?>
+        </p>
+        <?= $this->Game->hallwayLink(null, 1) ?>
+    <?php elseif ($gpa <= 3): ?>
+        <p>
             The zombies, though frightening, don't pay much attention to you.
-            <?php if (! $this->Game->questCompleted("b") ): ?>
-                <?= $this->Game->link('Play basketball with them', ['move' => 'play']) ?>
-            <?php endif; ?>
-            <?= $this->Game->link('Investigate boys locker room', ['room' => 'lockerroom', '?' => ['lr' => 'b']]) ?>
-            <?= $this->Game->link('Investigate girls locker room', ['room' => 'lockerroom', '?' => ['lr' => 'g']]) ?>
-            <?= $this->Game->hallwayLink(null, 1) ?>
+        </p>
+        <?php if (! $this->Game->questCompleted("b") ): ?>
+            <?= $this->Game->link('Play basketball with them', ['move' => 'play']) ?>
         <?php endif; ?>
-    </p>
+        <?= $this->Game->link('Investigate boys locker room', ['room' => 'lockerroom', '?' => ['lr' => 'b']]) ?>
+        <?= $this->Game->link('Investigate girls locker room', ['room' => 'lockerroom', '?' => ['lr' => 'g']]) ?>
+        <?= $this->Game->hallwayLink(null, 1) ?>
+    <?php endif; ?>
 <?php elseif ($move == "play"): ?>
     <?php $this->Game->completeQuest('b'); ?>
 	<p>
