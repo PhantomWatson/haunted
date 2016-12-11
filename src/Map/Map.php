@@ -55,14 +55,21 @@ class Map
             $area .= 'shape="' . $shape . '" ';
             $area .= 'coords="' . $target->coords . '" ';
             if ($target->shortName) {
-                $url = [
-                    'controller' => 'Rooms',
-                    'action' => 'room',
-                    'floor' => $this->floor,
-                    'room' => $target->shortName
-                ];
-                if ($target->move) {
-                    $url['move'] = $target->move;
+                if (in_array($target->shortName, ['firstFloor', 'secondFloor'])) {
+                    $url = [
+                        'controller' => 'Floors',
+                        'action' => str_replace('Floor', '', $target->shortName)
+                    ];
+                } else {
+                    $url = [
+                        'controller' => 'Rooms',
+                        'action' => 'room',
+                        'floor' => $this->floor,
+                        'room' => $target->shortName
+                    ];
+                    if ($target->move) {
+                        $url['move'] = $target->move;
+                    }
                 }
                 $area .= 'href="' . Router::url($url) . '" ';
             } else {
