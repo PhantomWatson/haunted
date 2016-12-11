@@ -30,7 +30,7 @@ class RoomsController extends AppController
         }
 
         // Convert e.g. 'room123' to '123'
-        if (substr('room', 0, 4) == 'room') {
+        if (substr($room, 0, 4) == 'room') {
             $room = substr($room, 4);
         }
 
