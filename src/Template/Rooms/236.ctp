@@ -1,4 +1,4 @@
-<?php if ($move != 'fight' && ! $ammans_desk): ?>
+<?php if (! $move): ?>
     <p>
         Mrs. Amman's chemistry room reeks of various noxious chemicals. You see in the corner, a mess of beakers, test
         tubes, and Bunsen burners, in the middle of which is a giant bubbling vat of chemicals. Out of the vat is
