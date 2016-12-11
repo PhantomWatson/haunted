@@ -3,7 +3,7 @@
     $gpaMore = ($gpa == 4) ? '4.0' : ($gpa + 0.9);
 ?>
 
-<?php if (! $move && ! $vincent && ! $wait && ! $leave): ?>
+<?php if (! $move): ?>
     <p>
         The library looks relatively normal, except for it being slightly darker than usual and occupied with an ogre, three homunculi, and a gnome with severe acne.
     </p>
