@@ -46,7 +46,7 @@
 	<p>
 		The first four teachers you see happen to be Honors English teachers. Hearing of your exploits,
 		<strong>they reward you with one pass from each of them</strong> for vanquishing their mortal enemy,
-		Steve Geraci, and proclaim you to be <?= $this->Game->getTitle('d') ?>.
+		Steve Geraci, and proclaim you to be <?= $this->Game->getTitle('d') ?> <?= $name ?>.
 	</p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "dontbrag"): ?>

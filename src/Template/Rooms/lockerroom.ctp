@@ -43,7 +43,7 @@
         <strong>Losing three periods,</strong> you
         finally pry your way out of the locker and into the hallway. But there, you find that the girls that beat you up
         have spread word all over the school about how you tried to enter No Man's Land. You will from now on be
-        referred to as "<?= $this->Game->getTitle('c') ?>".
+        referred to as <?= $this->Game->getTitle('c') ?> <?= $name ?>.
     </p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($sex == "f" && ! $matchingSex): ?>
