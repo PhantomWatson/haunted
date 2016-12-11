@@ -85,7 +85,7 @@
         '283,331,299,364'
     ];
     foreach ($stairCoords as $coords) {
-        $map->addTarget($coords, 'secondFloor', '(go downstairs)');
+        $map->addTarget($coords, 'firstFloor', '(go downstairs)');
     }
 ?>
 
