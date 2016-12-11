@@ -156,7 +156,7 @@
             escaped haunted Muncie Central High School!
         </strong>
     </p>
-    <?= $this->Html->link(
+    <?= $this->Game->link(
         'Play again',
         [
             'controller' => 'Pages',
