@@ -1,6 +1,6 @@
 <?php
     $newGpa = $gpa + 1;
-    $gpaMore = ($gpa == 4) ? '4.0' : ($gpa + 0.9);
+    $gpaMore = ($gpa == 4) ? '4.0' : ($gpa + 0.5);
 ?>
 
 <?php if (! $move): ?>

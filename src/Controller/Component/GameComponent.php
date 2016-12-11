@@ -65,13 +65,13 @@ class GameComponent extends Component
         $gpa = $this->Cookie->read('player.gpa');
         $displayedGpas = [
             5 => "4.0",
-            4 => "3.9-3.0",
-            3 => "2.9-2.0",
-            2 => "1.9-1.0",
-            1 => "0.9-0.1",
+            4 => "3.5",
+            3 => "2.5",
+            2 => "1.5",
+            1 => "0.5",
             0 => "0.0"
         ];
-        $gpaDisplayed = $gpa ? $displayedGpas[$gpa] : null;
+        $gpaDisplayed = $gpa !== NULL ? $displayedGpas[$gpa] : null;
 
         // Player title
         $sex = $this->Cookie->read('player.sex');
