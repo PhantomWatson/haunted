@@ -92,4 +92,12 @@
 <map name="second-floor">
     <?= $map->getAreaTags() ?>
 </map>
-<img src="/img/MCHS2nd.gif" border="0" width="613" height="396" alt="" usemap="#second-floor" />
+<div id="map-container">
+    <img src="/img/MCHS2nd.gif" border="0" width="613" height="396" alt="" usemap="#second-floor" class="map" />
+</div>
+<div id="map-helper">
+</div>
+
+<?php $this->append('buffered'); ?>
+    floorMap.init();
+<?php $this->end(); ?>

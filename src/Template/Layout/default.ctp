@@ -35,5 +35,11 @@
     <footer>
         <?= $this->element('footer') ?>
     </footer>
+
+    <script>
+        $(document).ready(function () {
+            <?= $this->fetch('buffered') ?>
+        });
+    </script>
 </body>
 </html>

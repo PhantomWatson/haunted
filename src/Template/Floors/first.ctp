@@ -104,31 +104,6 @@
 <div id="map-helper">
 </div>
 
-<script>
-    $('img.map').mapster({
-        fillColor: 'aaffaa',
-        fillOpacity: 0.25,
-        stroke: true,
-        strokeColor: 'aaffaa',
-        strokeOpacity: 1,
-        strokeWidth: 3,
-        onConfigured: function () {
-            $('#map-container > div').css('display', 'inline-block');
-            $('img.map').mapster('resize', '1000', null, 0);
-        },
-        onClick: function () {
-            return true;
-        }
-    });
-    $('map area').hover(function () {
-        var area = $(this);
-        var title = area.attr('title');
-        area.css({
-        //    "background-color": "lime",
-        //    "border": "2px solid red"
-        });
-        $('#map-helper').html(title);
-    }).mouseout(function () {
-        $('#map-helper').html('');
-    });
-</script>
+<?php $this->append('buffered'); ?>
+    floorMap.init();
+<?php $this->end(); ?>
