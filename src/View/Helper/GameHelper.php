@@ -271,21 +271,37 @@ class GameHelper extends Helper
      */
     public function scrambleVowels($name)
     {
-        $vowels = ['a', 'e', 'i', 'o', 'u'];
-        foreach ($vowels as $vowel) {
-            $alternates = array_filter($vowels, function ($var) use ($vowel) {
-                return $var != $vowel;
-            });
 
-            // Lowercase
-            $replacement = $alternates[array_rand($alternates)];
-            $name = str_replace($vowel, $replacement, $name);
-
-            // Uppercase
-            $replacement = strtoupper($alternates[array_rand($alternates)]);
-            $name = str_replace(strtoupper($vowel), $replacement, $name);
+        $name = str_split($name);
+        foreach ($name as &$letter) {
+            $letter = $this->scrambleVowel($letter);
         }
-        return $name;
+        return implode('', $name);
+    }
+
+    /**
+     * Scrambles a single vowel (or returns the consonant given to it)
+     *
+     * @param string $letter Letter
+     * @return string
+     */
+    public function scrambleVowel($letter)
+    {
+        $vowels = ['a', 'e', 'i', 'o', 'u'];
+        if (! in_array(strtolower($letter), $vowels)) {
+            return $letter;
+        }
+        $alternates = array_filter($vowels, function ($var) use ($letter) {
+            return $var != $letter;
+        });
+
+        // Lowercase
+        if ($letter == strtolower($letter)) {
+            return $alternates[array_rand($alternates)];
+        }
+
+        // Uppercase
+        return strtoupper($alternates[array_rand($alternates)]);
     }
 
     /**
