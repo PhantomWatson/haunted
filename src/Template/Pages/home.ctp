@@ -23,37 +23,39 @@
     </li>
 </ul>
 
-<?= $this->Form->create($player) ?>
+<div class="begin">
+    <?= $this->Form->create($player) ?>
 
-<?= $this->Form->input('name', [
-    'required' => true
-]) ?>
+    <?= $this->Form->input('name', [
+        'required' => true
+    ]) ?>
 
-<?= $this->Form->input('sex', [
-    'empty' => true,
-    'options' => [
-        'm' => 'Male',
-        'f' => 'Female'
-    ],
-    'required' => true
-]) ?>
+    <?= $this->Form->input('sex', [
+        'empty' => true,
+        'options' => [
+            'm' => 'Male',
+            'f' => 'Female'
+        ],
+        'required' => true
+    ]) ?>
 
-<?= $this->Form->input('gpa', [
-    'empty' => true,
-    'options' => [
-        5 => '4.0',
-        4 => '3.9 - 3.0',
-        3 => '2.9 - 2.0',
-        2 => '1.9 - 1.0',
-        1 => '0.9 - 0.1',
-        0 => '0.0'
-    ],
-    'required' => true
-]) ?>
+    <?= $this->Form->input('gpa', [
+        'empty' => true,
+        'options' => [
+            5 => '4.0',
+            4 => '3.9 - 3.0',
+            3 => '2.9 - 2.0',
+            2 => '1.9 - 1.0',
+            1 => '0.9 - 0.1',
+            0 => '0.0'
+        ],
+        'required' => true
+    ]) ?>
 
-<?= $this->Form->button(
-    'Begin',
-    ['class' => 'btn btn-primary']
-) ?>
+    <?= $this->Form->button(
+        'Begin',
+        ['class' => 'btn btn-primary']
+    ) ?>
 
-<?= $this->Form->end() ?>
+    <?= $this->Form->end() ?>
+</div>
