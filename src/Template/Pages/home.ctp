@@ -26,7 +26,10 @@
     This game was originally developed in 2002 for the students of MCHS to play. Because I still dig the concept and
     occasionally hear people saying that it's fun to play, I dusted it off and overhauled it in 2016. I haven't changed
     any of the original content (or updated any of the many outdated references), but I gave the interface a polish.
-    I hope you like it!
+    Note that this game is <strong class="text-danger">not designed for mobile devices</strong> and works best if you have a wide screen
+    and a mouse. Because smartphones didn't exist in our highschool in 2002.
+    <br />
+    <br />Anyway, I hope you like the game!
     <span style="display: block; text-align: right;">
         - <a href="mailto:graham@phantomwatson.com">Graham "Phantom" Watson</a>
     </span>
