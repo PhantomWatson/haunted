@@ -96,7 +96,7 @@ class GameComponent extends Component
                 70 => '#FF5F19',
                 80 => '#FF1919',
                 90 => '#D4003C',
-                100 => '#D451FF'
+                101 => '#D451FF'
             ];
             foreach ($colors as $percent => $color) {
                 if ($timeRemainingPercent < $percent) {
