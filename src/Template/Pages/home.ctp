@@ -8,12 +8,11 @@
     <li>Search through over 120 rooms to find out what's going on and save the school</li>
     <li>Hover your cursor over rooms to see what teachers may inhabit them</li>
     <li>Use the stairs to go between floors. (duh)</li>
-    <li>The red bar in the upper-left tracks how much time you have left.</li>
+    <li>The bar in the header tracks how much time you have left.</li>
     <li>Passes from teachers increase your time.</li>
     <li>Goofing off, getting trapped in places, getting injured, and getting sent to detention waste your time.</li>
     <li>People will treat you differently based on what your GPA is.</li>
     <li>Complete all of the numerous quests around the school and defeat all of the supervillains</li>
-    <li>Become <strong>GRANDMASTER</strong>!</li>
     <li>
         <?= $this->Html->link(
             'Read the FAQ',
@@ -22,6 +21,16 @@
         for more info.
     </li>
 </ul>
+
+<p>
+    This game was originally developed in 2002 for the students of MCHS to play. Because I still dig the concept and
+    occasionally hear people saying that it's fun to play, I dusted it off and overhauled it in 2016. I haven't changed
+    any of the original content (or updated any of the many outdated references), but I gave the interface a polish.
+    I hope you like it!
+    <span style="display: block; text-align: right;">
+        - <a href="mailto:graham@phantomwatson.com">Graham "Phantom" Watson</a>
+    </span>
+</p>
 
 <hr />
 
@@ -66,6 +75,7 @@
 
     <?= $this->Form->input('gpa', [
         'empty' => true,
+        'label' => 'GPA',
         'options' => [
             5 => '4.0',
             4 => '3.9 - 3.0',
