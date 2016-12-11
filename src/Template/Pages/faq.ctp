@@ -11,7 +11,8 @@
 
 <strong>Is there a cheat mode?</strong><br>
 <blockquote>
-    There are certain teachers that you can scam for passes. And I'm sure that there are some bugs in the game that can be found that give you an infinite number of passes. If you want to turn on debug mode, type in your name as "Mr. Cauliflower".
+    There are certain teachers that you can scam for passes. And I'm sure that there are some bugs in the game that can
+    be found that give you an infinite number of passes.
 </blockquote>
 
 <hr />
