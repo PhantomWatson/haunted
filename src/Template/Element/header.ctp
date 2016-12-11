@@ -16,7 +16,8 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <span class="navbar-text">
-                            <?= $playerTitle.$name ?>
+                            <?= $playerTitle ?>
+                            <?= $name ?>
                         </span>
                     </li>
                     <li>
