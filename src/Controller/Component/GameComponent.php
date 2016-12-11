@@ -85,6 +85,7 @@ class GameComponent extends Component
         $period2 = $this->Cookie->read('time.period2');
         if ($period2) {
             $timeRemainingPercent = ($period1 / $period2) * 100;
+            $timeRemainingPercent = min($timeRemainingPercent, 100);
             $colors = [
                 10 => '#24FF19',
                 20 => '#65FF19',
