@@ -23,8 +23,29 @@
     </li>
 </ul>
 
+<hr />
 
-<div class="begin">
+<?php if ($period1): ?>
+    <section>
+        <h2>
+            Resume Game
+        </h2>
+        <p>
+            It looks like you have a game already in progress.
+        </p>
+        <?= $this->Html->link(
+            'Keep Playing',
+            [
+                'controller' => 'Floors',
+                'action' => 'first'
+            ],
+            ['class' => 'btn btn-lg btn-default']
+        ) ?>
+    </section>
+    <hr />
+<?php endif; ?>
+
+<section class="begin">
     <h2>
         Start a New Game
     </h2>
@@ -58,8 +79,8 @@
 
     <?= $this->Form->button(
         'Begin',
-        ['class' => 'btn btn-primary']
+        ['class' => 'btn btn-default btn-lg']
     ) ?>
 
     <?= $this->Form->end() ?>
-</div>
+</section>
