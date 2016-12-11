@@ -1,4 +1,4 @@
-<?php if ($move == 'grab_pass'): ?>
+<?php if (! $move): ?>
     <p>
         The moment you step into the guidance office, you are disoriented by a whirlwind of flying papers. You're in the
         middle of a spinning tornado of records, passes, and forms! You can't stay a moment longer without being
@@ -6,7 +6,7 @@
     </p>
     <?= $this->Game->link('Try to grab one of the passes on your way out', ['move' => 'grab_pass']) ?>
     <?= $this->Game->hallwayLink('Run out quickly', 1) ?>
-<?php elseif ($grab_pass): ?>
+<?php elseif ($move == 'grab_pass'): ?>
     <?php
         $originalName = $name;
         $scrambledName = $this->Game->scrambleVowels($name);
