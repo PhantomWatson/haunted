@@ -26,7 +26,7 @@
 	    of his ship. He takes a few minutes to explain to you the benefits of being a pirate on his ship. After
 	    briefing you on the gold-tooth dental plan and reimbursement-for-lost-parrots policy,
 	    <strong>he gives you three passes as a sign-on bonus</strong>.
-	    You are now known as <?= $this->Game->getTitle('6') ?>.
+	    You are now known as <?= $this->Game->getTitle('6') ?> <?= $name ?>.
     </p>
 	<p>
 	    What do you do now that you can safely walk through the cafeteria?
@@ -55,7 +55,7 @@
 	<?php $this->Game->completeQuest('0'); ?>
 	<p>
         You quickly tip over the soup vats so the freshmen can run free, then run from the wrath of the cooks.
-        For your selfless act, you will forever be known as <?= $this->Game->getTitle('0') ?>.
+        For your selfless act, you will forever be known as <?= $this->Game->getTitle('0') ?> <?= $name ?>.
     </p>
 	<?php if (! $this->Game->questCompleted("a")): ?>
 		<?= $this->Game->link('Look in the computer lab', ['move' => 'comp_lab']) ?>
@@ -76,7 +76,7 @@
 	    only with another distracted grunt. You ask if he can give you anything at all that would help. He replies,
 	    "Yes," and the printer next to you immediately spits out a piece of paper with this printed onto it:
     </p>
-    <pre><?= file_get_contents(__FILE__) ?></pre>
+    <pre class="meta"><?= htmlentities(file_get_contents(__FILE__)) ?></pre>
     <p>
         You quickly leave, knowing not why you fear this person so.
     </p>
