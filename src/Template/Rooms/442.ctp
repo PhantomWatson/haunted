@@ -5,7 +5,7 @@
     </p>
     <?= $this->Game->link('Reply "Ja, ich habe dass."', ['move' => 'ja']) ?>
     <?= $this->Game->link('Reply "Nein, ich habe dass nicht."', ['move' => 'nein']) ?>
-    <?= $this->Game->link('Reply "Es ist sch&ouml;nes Wetter. Es ist hei&szlig;. Heute gibt ein Picnic. Ein Picnic und ein Eis."', ['move' => 'wetter']) ?>
+    <?= $this->Game->link('Reply "Es ist sch&ouml;nes Wetter."', ['move' => 'wetter']) ?>
 <?php elseif ($move == "ja"): ?>
     <p>
         She stands there, waiting for you to give her something. Confused, you run back out into the hallway.
