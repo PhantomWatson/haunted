@@ -23,7 +23,11 @@
     </li>
 </ul>
 
+
 <div class="begin">
+    <h2>
+        Start a New Game
+    </h2>
     <?= $this->Form->create($player) ?>
 
     <?= $this->Form->input('name', [
