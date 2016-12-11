@@ -81,7 +81,7 @@ class AppController extends Controller
             $this->Cookie->write('time.period1', $period1);
         }
 
-        if ($this->Game->checkLose()) {
+        if ($this->Game->checkLose() && $this->request->action != 'lose') {
             $this->redirect([
                 'controller' => 'Pages',
                 'action' => 'lose'
