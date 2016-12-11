@@ -29,7 +29,7 @@
                         <span class="navbar-text">
                             Time:
                         </span>
-                        <div class="progress" style="width: 200px;">
+                        <div class="progress">
                             <div
                                 class="progress-bar"
                                 role="progressbar"
@@ -38,7 +38,6 @@
                                 aria-valuemax="100"
                                 style="
                                     background-color: <?= $timeRemaining['color'] ?>;
-                                    min-width: 40px;
                                     width: <?= round($timeRemaining['percent']) ?>%;
                                 "
                             >
