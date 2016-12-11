@@ -149,7 +149,7 @@ class GameHelper extends Helper
             $url['room'] = $this->_View->get('room');
         }
 
-        return '<form method="' . $method . '" action="' . Router::url($url) . '">';
+        return '<form method="' . $method . '" action="' . Router::url($url) . '" class="form-inline">';
     }
 
     /**
@@ -160,7 +160,7 @@ class GameHelper extends Helper
      */
     public function formInput($name, $placeholder)
     {
-        return '<input type="text" name="' . $name . '" placeholder="' . $placeholder . '" />';
+        return '<input type="text" name="' . $name . '" placeholder="' . $placeholder . '" class="form-control" />';
     }
 
     /**
