@@ -30,10 +30,7 @@
         </strong>
     </p>
     <p>
-        You will now and forever be known as
-        <strong>
-            <?= $this->Game->getTitle() ?> <?= $name ?>!
-        </strong>
+        You will now and forever be known as <?= $this->Game->getTitle('2') ?> <?= $name ?>!
     </p>
     <?= $this->Game->link('Search Mrs. Amman\'s desk before you leave', ['move' => 'search']) ?>
     <?= $this->Game->hallwayLink('Flee before any more stray demons notice you', 1) ?>
