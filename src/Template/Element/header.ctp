@@ -25,11 +25,26 @@
                             GPA: <?= $gpaDisplayed ?>
                         </span>
                     </li>
-                    <li>
+                    <li class="time">
                         <span class="navbar-text">
-                            Time left:
-                            <?= round($timeRemaining['percent'], 0) ?>% <?= $timeRemaining['color'] ?>
+                            Time:
                         </span>
+                        <div class="progress" style="width: 200px;">
+                            <div
+                                class="progress-bar"
+                                role="progressbar"
+                                aria-valuenow="<?= round($timeRemaining['percent']) ?>"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="
+                                    background-color: <?= $timeRemaining['color'] ?>;
+                                    min-width: 40px;
+                                    width: <?= round($timeRemaining['percent']) ?>%;
+                                "
+                            >
+                                <?= round($timeRemaining['percent']) ?>%
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
