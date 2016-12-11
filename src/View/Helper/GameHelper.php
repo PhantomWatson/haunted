@@ -103,7 +103,8 @@ class GameHelper extends Helper
         }
         return $this->link(
             $label,
-            $url
+            $url,
+            ['escape' => false]
         );
     }
 
@@ -128,7 +129,10 @@ class GameHelper extends Helper
             $this->Html->link(
                 $label,
                 $url,
-                ['class' => 'btn btn-lg btn-default']
+                [
+                    'class' => 'btn btn-lg btn-default',
+                    'escape' => false
+                ]
             ) .
             '</div>';
     }
