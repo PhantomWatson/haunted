@@ -11,8 +11,14 @@ body {
             text-align: center;
         }
     }
+    > div.container {
+        > p {
+            background-color: @gray-darker;
+            border-radius: 10px;
+            padding: 10px;
+        }
+    }
 }
-
 header {
     font-size: 14px;
 
@@ -21,7 +27,9 @@ header {
         width: 100%;
     }
 }
-
 footer {
     font-size: 14px;
+}
+pre.meta {
+    font-size: 60%;
 }
