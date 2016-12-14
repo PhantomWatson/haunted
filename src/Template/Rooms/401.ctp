@@ -1,12 +1,12 @@
 <?php if (! $move): ?>
     <p>
-        Mr. Bartling is in the back of the room. You ask him if he would be kind enough to have mercy on your and
+        Mr. Bartling is in the back of the room. You ask him if he would be kind enough to have mercy on you and
 	    give you some passes so that you can have more time to try to save the school.
     </p>
     <p>
         <?php if ($gpa == 5): ?>
-            "But," Mr. Bartling says, "I'd expect one of you 4.0 geeks to be good at this. I'll give you one pass for
-            answering either of the questions."
+            "But," Mr. Bartling says, "I'd expect one of you 4.0 geeks to be good at this. I'll only give you one pass
+            for answering either of the questions."
         <?php elseif ($gpa < 5 && $gpa > 1): ?>
             "I'll give you two passes for answering the calculus question and one for the algebra question,"
             Mr. Bartling says.
@@ -65,16 +65,15 @@
             f '(0) = 3
             <br />
             <strong>find f(1)</strong>
-            <br />
-            <?= $this->Game->formStart('post') ?>
-            <?= $this->Game->formInput('calc_answer') ?>
-            <?= $this->Game->formSubmit('Answer') ?>
-            <?= $this->Game->formEnd() ?>
         </p>
+        <?= $this->Game->formStart('post', ['move' => 'calculus']) ?>
+        <?= $this->Game->formInput('calc_answer') ?>
+        <?= $this->Game->formSubmit('Answer') ?>
+        <?= $this->Game->formEnd() ?>
     <?php endif; ?>
 <?php elseif ($move == "algebra"): ?>
     <?php if ($this->request->data('alg_answer') !== null): ?>
-        <?php if ($alg_answer == 28): ?>
+        <?php if ($this->request->data('alg_answer') == 28): ?>
             <?php $this->Game->completeQuest('j'); ?>
             <p>
                 <?php if ($gpa == 5): ?>
@@ -126,7 +125,7 @@
                 </td>
              </tr>
         </table>
-        <?= $this->Game->formStart('post') ?>
+        <?= $this->Game->formStart('post', ['move' => 'algebra']) ?>
         <?= $this->Game->formInput('alg_answer') ?>
         <?= $this->Game->formSubmit('Answer') ?>
         <?= $this->Game->formEnd() ?>
