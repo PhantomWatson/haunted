@@ -6,9 +6,9 @@
     </p>
 	<p>
         <strong>Do you join the ranks?</strong>
-        <?= $this->Game->link('Yes', ['move' => 'yes']) ?>
-        <?= $this->Game->link('No', ['move' => 'no']) ?>
     </p>
+    <?= $this->Game->link('Yes', ['move' => 'yes']) ?>
+    <?= $this->Game->link('No', ['move' => 'no']) ?>
 <?php elseif ($move == "yes"): ?>
     <?php $this->Game->spendTime(2); ?>
 	<p>
