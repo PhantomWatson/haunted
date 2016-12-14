@@ -144,7 +144,7 @@ class GameHelper extends Helper
      * @param array $url URL array for router
      * @return string
      */
-    public function formStart($method, $url)
+    public function formStart($method, $url = [])
     {
         if (! isset($url['floor'])) {
             $url['floor'] = $this->_View->get('floor');
@@ -162,7 +162,7 @@ class GameHelper extends Helper
      * @param
      * @return string
      */
-    public function formInput($name, $placeholder)
+    public function formInput($name, $placeholder = '')
     {
         return '<input type="text" name="' . $name . '" placeholder="' . $placeholder . '" class="form-control" />';
     }
