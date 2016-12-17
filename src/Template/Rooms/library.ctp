@@ -5,7 +5,8 @@
 
 <?php if (! $move): ?>
     <p>
-        The library looks relatively normal, except for it being slightly darker than usual and occupied with an ogre, three homunculi, and a gnome with severe acne.
+        The library looks relatively normal, except for it being slightly darker than usual and occupied with an ogre,
+        three homunculi, and a gnome with severe acne.
     </p>
 	<?php if (! $this->Game->questCompleted('8')): ?>
 		<p>
