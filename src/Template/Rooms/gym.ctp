@@ -6,13 +6,15 @@
     <?php if ($gpa == 4): ?>
         <?php $this->Game->spendTime(); ?>
         <p>
-            The zombies shout, <em>"NERD!!!"</em> and shove you back out into the hallway.
+            The zombies shout, <em>"NERD!!!"</em> and shove you back out into the hallway. Zombies can <em>smell</em>
+            high GPAs, it turns out.
         </p>
         <?= $this->Game->hallwayLink(null, 1) ?>
     <?php elseif ($gpa == 5): ?>
         <?php $this->Game->spendTime(2); ?>
         <p>
             The zombies shout, <em>"NERD!!!"</em> and shove you into a locker, where you spend the next period.
+            Zombies can <em>smell</em> high GPAs, it turns out.
         </p>
         <?= $this->Game->hallwayLink(null, 1) ?>
     <?php elseif ($gpa <= 3): ?>
