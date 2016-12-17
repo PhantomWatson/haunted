@@ -1,7 +1,12 @@
 <p>
-    In the Student Center, you see that the skylights are broken open and various winged monsters are flying and
-    crawling up onto the roof. All of Muncie will be invaded by these creatures if you don't stop them at their source!
-    <strong>Find out where they are being created.</strong>
+    <?php if ($this->Game->questCompleted('2')): ?>
+        The Student Center is empty and peaceful now that you've defeated Joe Fuschetto and stopped the army of
+        monsters at their source.
+    <?php else: ?>
+        In the Student Center, you see that the skylights are broken open and various winged monsters are flying and
+        crawling up onto the roof. All of Muncie will be invaded by these creatures if you don't stop them at their
+        source! <strong>Find out where they are being created.</strong>
+    <?php endif; ?>
 </p>
 
 <?php if (! $this->Game->questCompleted("7")): ?>
