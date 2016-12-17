@@ -18,7 +18,6 @@
     <?= $this->Game->link('Editing', ['move' => '3']) ?>
     <?= $this->Game->link('Revising', ['move' => '4']) ?>
 <?php elseif ($move == "1"): ?>
-    <?php $this->Game->clearRoom(); ?>
 	<p>
 	    "Good answer!" she says, "You get some candy." You're disappointed. It's not even the candy that you like. 
 	    You ask for two passes instead (one, then a second in case you lose the first). "Oh, where do you need passes 
@@ -35,11 +34,14 @@
     </p>
     <?= $this->Game->hallwayLink(null, 1) ?>
 <?php elseif ($move == "pass"): ?>
+    <?php
+        $this->Game->addPasses(1);
+        $this->Game->clearRoom();
+    ?>
     <p>
         Mrs. Madsen takes out a pencil and writes you two passes. Once you leave her room, you erase
         "<?= $this->request->data('destination') ?>" and make them both general passes.
     </p>
-    <?php $this->Game->addPasses(1); ?>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "no"): ?>
     <p>
