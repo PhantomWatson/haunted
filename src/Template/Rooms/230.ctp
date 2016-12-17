@@ -16,7 +16,10 @@
 	<?= $this->Game->link('Is a kind of blemish', ['move' => 4]) ?>
 	<?= $this->Game->link('Will get you in to most national Shriner conventions', ['move' => 5]) ?>
 <?php elseif ($move == 3): ?>
-	<?php $this->Game->completeQuest('m'); ?>
+	<?php
+        $this->Game->completeQuest('m');
+        $this->Game->clearRoom();
+    ?>
 	<p>
 		Mr. Conaway blurts out a congratulatory message in Squiddese and hands you a pass.
 	</p>

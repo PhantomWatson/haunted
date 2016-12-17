@@ -1,3 +1,4 @@
+<?php $this->Game->clearRoom(); ?>
 <?php if ($sex == "m"): ?>
     <p>
         You hear a girl scream. Two winged demons are circling around her head, throwing books and papers at her. She

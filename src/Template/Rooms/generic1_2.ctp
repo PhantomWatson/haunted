@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     You open the door and peer inside this classroom. You see a strange, unsteady column of chairs, tables, and books in
     the middle of the room, leading up to a single point on the ceiling where two scaly mole-like creatures are clawing

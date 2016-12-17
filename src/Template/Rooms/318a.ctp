@@ -1,3 +1,4 @@
+<?php $this->Game->clearRoom(); ?>
 <p>
     In here, you see a group of zombie student council members discussing business. On the subject of homecoming
     floats, they can't seem to decide whether they should be fueled by the brains of humans or the souls of the

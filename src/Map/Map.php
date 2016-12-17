@@ -81,4 +81,18 @@ class Map
         }
         return implode("\n", $retval);
     }
+
+    /**
+     * Removes any targets that are in the array of cleared rooms
+     *
+     * @param array $clearedRooms Array of room identifiers
+     */
+    public function removeClearedRooms($clearedRooms)
+    {
+        foreach ($this->targets as $i => $target) {
+            if (in_array($target->shortName, $clearedRooms)) {
+                unset($this->targets[$i]);
+            }
+        }
+    }
 }

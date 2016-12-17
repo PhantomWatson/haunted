@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     This small office area appears deserted. Near the middle of the room, a table has been set with a pie on it. A
     little less than three and a half slices are left. Seeing no one else around, you are about to help yourself to some

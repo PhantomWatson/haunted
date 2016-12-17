@@ -1,6 +1,9 @@
 <?php $answer = $this->request->data('answer'); ?>
 <?php if ($this->Game->questCompleted("h")): ?>
-    <?php $this->Game->spendTime(); ?>
+    <?php
+        $this->Game->spendTime();
+        $this->Game->clearRoom();
+    ?>
     <p>
         The pool is empty and dark, the old man is left. On the diving board is a note from him that reads, "Gone
         Schemin'".

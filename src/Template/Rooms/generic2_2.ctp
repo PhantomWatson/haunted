@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     You see bits of purple fungus on the carpet. You also see a spot in the carpet a few feet in front of you moving as
     if there is something underneath it, trying to claw its way up from underneath. As you stand there, you witness

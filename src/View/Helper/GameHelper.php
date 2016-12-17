@@ -96,7 +96,9 @@ class GameHelper extends Helper
         }
         $url = [
             'controller' => 'Floors',
-            'action' => $action
+            'action' => $action,
+            'floor' => false,
+            'room' => false
         ];
         if ($spendTime) {
             $url['?'] = ['ts' => $spendTime];
@@ -122,6 +124,11 @@ class GameHelper extends Helper
         }
         if (! isset($url['room'])) {
             $url['room'] = $this->_View->get('room');
+        }
+
+        // Don't show link if this room has been cleared
+        if ($this->roomIsCleared($url['room'])) {
+            return '';
         }
 
         return
@@ -313,5 +320,41 @@ class GameHelper extends Helper
     public function changeName($name)
     {
         $this->cookie->write('player.name', $name);
+    }
+
+    /**
+     * Marks a room as having been "cleared", making it henceforth inaccessible
+     *
+     * @return void
+     */
+    public function clearRoom()
+    {
+        $room = $this->_View->get('room');
+        if (! $room) {
+            throw new InternalErrorException('Error clearing room. Room unknown.');
+        }
+        $this->cookie->write("cleared-rooms.$room", true);
+    }
+
+    /**
+     * Returns an array of cleared room identifiers
+     *
+     * @return array
+     */
+    public function getClearedRooms()
+    {
+        $clearedRooms = $this->cookie->read('cleared-rooms');
+        return is_array($clearedRooms) ? array_keys($clearedRooms) : [];
+    }
+
+    /**
+     * Returns true if a room has been cleared
+     *
+     * @param string $room Room identifier
+     * @return bool
+     */
+    public function roomIsCleared($room)
+    {
+        return (bool)$this->cookie->read("cleared-rooms.$room");
     }
 }

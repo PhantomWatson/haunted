@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     You see bits of purple fungus on the carpet. The television, suspended from the ceiling, is on and displaying a
     strange spiral pattern while playing incoherent backwards-speech. Several students are gathered under this

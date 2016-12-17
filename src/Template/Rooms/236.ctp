@@ -35,6 +35,7 @@
     <?= $this->Game->link('Search Mrs. Amman\'s desk before you leave', ['move' => 'search']) ?>
     <?= $this->Game->hallwayLink('Flee before any more stray demons notice you', 1) ?>
 <?php elseif ($move == 'search'): ?>
+    <?php $this->Game->clearRoom(); ?>
     <p>
         You greedily rummage through her desk and find <strong>ten passes</strong>. If it were any other day, you would
         do the honest thing and leave them there. But considering the state of the school and how this is a computer

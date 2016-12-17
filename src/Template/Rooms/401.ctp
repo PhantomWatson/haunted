@@ -29,7 +29,12 @@
 <?php elseif ($move == "calculus"): ?>
     <?php if ($this->request->data('calc_answer') !== null): ?>
         <?php if ($this->request->data('calc_answer') == 5): ?>
-            <?php $this->Game->completeQuest('k'); ?>
+            <?php
+                $this->Game->completeQuest('k');
+                if ($this->Game->questIsCompleted('j')) {
+                    $this->Game->clearRoom();
+                }
+            ?>
             <p>
                 <?php if ($gpa == 5): ?>
                     "Good job," Mr. Bartling says, "You get <strong>one pass</strong>."
@@ -74,7 +79,12 @@
 <?php elseif ($move == "algebra"): ?>
     <?php if ($this->request->data('alg_answer') !== null): ?>
         <?php if ($this->request->data('alg_answer') == 28): ?>
-            <?php $this->Game->completeQuest('j'); ?>
+            <?php
+                $this->Game->completeQuest('j');
+                if ($this->Game->questIsCompleted('k')) {
+                    $this->Game->clearRoom();
+                }
+            ?>
             <p>
                 <?php if ($gpa == 5): ?>
                     "Good job," Mr. Bartling says, "You get <strong>one pass</strong>."

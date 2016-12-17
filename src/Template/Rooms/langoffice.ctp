@@ -17,8 +17,11 @@
     <?= $this->Game->link('Back away and go out into the hallway', ['move' => 'run']) ?>
     <?= $this->Game->link('Kick the stranger in the privates and run away', ['move' => 'nutshot']) ?>
 <?php elseif ($move == "listen"): ?>
-    <?php $this->Game->completeQuest('p'); ?>
-	<?php $this->Game->spendTime(3); ?>
+    <?php
+        $this->Game->completeQuest('p');
+	    $this->Game->spendTime(3);
+        $this->Game->clearRoom();
+    ?>
 	<p>
         The stranger chuckles under his breath. As he gazes into your eyes seductively, he commands you to walk through
         the halls in circles, chanting "Darth Andronicus is the coolest!" until tomorrow. Hypnotized, you follow his
@@ -30,7 +33,10 @@
     </p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "run"): ?>
-    <?php $this->Game->spendTime(); ?>
+    <?php
+        $this->Game->spendTime();
+        $this->Game->clearRoom();
+    ?>
     <p>
         As you run away from the stranger, he suddenly turns into a very angry Darth Andronicus, who blasts Force
         lightning at you and tries to levitate furniture to block your path. Once safely in the hallway, you hear him
@@ -38,7 +44,10 @@
     </p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "nutshot"): ?>
-    <?php $this->Game->spendTime(); ?>
+    <?php
+        $this->Game->spendTime();
+        $this->Game->clearRoom();
+    ?>
     <p>
         You give Darth Andronicus a shot to the pills, bringing him quickly to his knees. He whimpers in a falsetto
         voice, "How dare you?!" As you walk out of the office, you see him trying to use his Force powers while very

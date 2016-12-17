@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <?php if ($sex == "f"): ?>
     <p>
         As you walk into the restroom the first thing you notice that all the tiles have changed to a disturbing green

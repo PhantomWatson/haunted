@@ -87,6 +87,9 @@
     foreach ($stairCoords as $coords) {
         $map->addTarget($coords, 'firstFloor', '(go downstairs)');
     }
+
+    $clearedRooms = $this->Game->getClearedRooms();
+    $map->removeClearedRooms($clearedRooms);
 ?>
 
 <map name="second-floor">

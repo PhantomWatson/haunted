@@ -1,3 +1,7 @@
+<?php
+    $this->Game->completeQuest('i');
+    $this->Game->clearRoom();
+?>
 <p>
     You walk into a little booth with a rotary phone and try to dial your house. In the middle of dialing the number,
     you hear a voice on the phone:
@@ -12,6 +16,5 @@
     "Alright," you say.<br />
     "Sorry about that," Mr. Murray says, "So the two-liter is free if I get two large thin-crusts?"<br />
 </p>
-<?php $this->Game->completeQuest('i'); ?>
 <?= $this->Game->link('Investigate the student center', ['room' => 'studentcenter']) ?>
 <?= $this->Game->hallwayLink(null, 1) ?>

@@ -18,6 +18,7 @@
     <?= $this->Game->link('Editing', ['move' => '3']) ?>
     <?= $this->Game->link('Revising', ['move' => '4']) ?>
 <?php elseif ($move == "1"): ?>
+    <?php $this->Game->clearRoom(); ?>
 	<p>
 	    "Good answer!" she says, "You get some candy." You're disappointed. It's not even the candy that you like. 
 	    You ask for two passes instead (one, then a second in case you lose the first). "Oh, where do you need passes 

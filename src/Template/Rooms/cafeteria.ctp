@@ -19,8 +19,10 @@
     </p>
 	<?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "join"): ?>
-    <?php $this->Game->completeQuest('6'); ?>
-    <?php $this->Game->addPasses(2); ?>
+    <?php
+        $this->Game->completeQuest('6');
+        $this->Game->addPasses(2);
+    ?>
 	<p>
 	    He thinks about it for a moment, then agrees to appoint you Cabin <?= ($sex == "m") ? 'Girl' : 'Boy' ?>
 	    of his ship. He takes a few minutes to explain to you the benefits of being a pirate on his ship. After

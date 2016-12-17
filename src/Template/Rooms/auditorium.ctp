@@ -1,10 +1,11 @@
 <?php if (! $move): ?>
     <?php if ($this->Game->questCompleted("7")): ?>
+        <?php $this->Game->clearRoom(); ?>
         <p>
             You see the floating apparition of Abraham Lincoln, no longer headless, breakdancing on stage.
         </p>
         <?= $this->Game->link('Investigate the student center', ['room' => 'studentcenter']) ?>
-        <?= $this->Game->hallwayLink(null, 1) ?>
+        <?= $this->Game->hallwayLink() ?>
     <?php else: ?>
         <p>
             You walk into the auditorium and are shocked to see the floating specter of a headless Abraham Lincoln,

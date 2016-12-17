@@ -1,3 +1,4 @@
+<?php $this->Game->clearRoom(); ?>
 <p>
 	You walk into Mrs. Springman's room and immediately start falling through an endless sea of text. It looks like
     there's no bottom to this abyss as you fall past hundreds of banal, uninteresting characters, all seeking to

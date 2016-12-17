@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     You detect the faint odor of chemicals, but you can't identify them. The room has evidence of all sorts of monsters
     running around in it. There are grubby smudges on the chalkboard made by three-fingered, clawed hands. Tiny bare

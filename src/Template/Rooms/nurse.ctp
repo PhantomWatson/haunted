@@ -15,7 +15,10 @@
     <?= $this->Game->link('One', ['move' => '1']) ?>
     <?= $this->Game->link('Cannot determine with information given', ['move' => 'na']) ?>
 <?php elseif ($move == "12"): ?>
-    <?php $this->Game->addPasses(2); ?>
+    <?php
+        $this->Game->addPasses(2);
+        $this->Game->clearRoom();
+    ?>
     <p>
         Mrs. Amman enthusiastically mumbles under her bandages and hands you <strong>two passes.</strong>
     </p>

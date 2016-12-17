@@ -1,5 +1,6 @@
 <?php
     $this->Game->spendTime();
+    $this->Game->clearRoom();
     $races = [
         'Elven',
         'Orcish',

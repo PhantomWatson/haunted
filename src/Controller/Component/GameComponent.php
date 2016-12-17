@@ -23,7 +23,7 @@ class GameComponent extends Component
         $this->clearGameData();
         $this->savePlayer($player);
         $this->Cookie->write('time.period1', 1);
-        $this->Cookie->write('time.period2', 13);
+        $this->Cookie->write('time.period2', 1399);
     }
 
     public function clearGameData()
@@ -32,6 +32,7 @@ class GameComponent extends Component
         $this->Cookie->delete('time');
         $this->Cookie->delete('quests');
         $this->Cookie->delete('game');
+        $this->Cookie->delete('cleared-rooms');
     }
 
     /**
@@ -159,5 +160,16 @@ class GameComponent extends Component
         $playersTable = TableRegistry::get('Players');
         $player = $this->Cookie->read('player');
         return $player ? $playersTable->newEntity($player) : null;
+    }
+
+    /**
+     * Returns true if a room has been cleared
+     *
+     * @param string $room Room identifier
+     * @return bool
+     */
+    public function roomIsCleared($room)
+    {
+        return (bool)$this->Cookie->read("cleared-rooms.$room");
     }
 }

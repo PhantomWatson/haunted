@@ -4,7 +4,15 @@
     room have taken on a menacing, predatory disposition, warped by whatever malevolent forces have subverted the rest
     of the school.
 </p>
-<?php if (! $this->Game->questCompleted('7')): ?>
+<?php if ($this->Game->questCompleted('7')): ?>
+    <?php
+        $this->Game->addPasses();
+        $this->Game->clearRoom();
+    ?>
+    <p>
+        Abraham Lincoln seems to have <strong>dropped a couple passes</strong> when he came here to retrieve his head.
+    </p>
+<?php else: ?>
     <p>
         Looking around, you notice the head of Abraham Lincoln on the ground, wedged between a fanged orchid and a
         cactus that seems to be inching toward you. You make a mental note that if anyone wonders where the former

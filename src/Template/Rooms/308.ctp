@@ -16,7 +16,10 @@
     <?= $this->Game->link('Take a timpani and lunge the flaming drum at the demons.', ['move' => 'save2']) ?>
     <?= $this->Game->link('Grab the Merletto and show the demons to their imminent destruction!!!', ['move' => 'save3']) ?>
 <?php elseif ($move == 'save1'): ?>
-	<?php $this->Game->completeQuest('9'); ?>
+	<?php
+        $this->Game->completeQuest('9');
+        $this->Game->clearRoom();
+    ?>
 	<p>
         The demons are horrified into a helpless stupor by for feeble attempts at playing an instrument at them.
         While they are in their daze, you push them into the pit and free their captives.
