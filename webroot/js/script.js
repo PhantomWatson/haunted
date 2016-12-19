@@ -9,7 +9,7 @@ var floorMap = {
             strokeWidth: 3,
             onConfigured: function () {
                 $('#map-container > div').css('display', 'inline-block');
-                $('img.map').mapster('resize', '1000', null, 0);
+                floorMap.resize();
             },
             onClick: function () {
                 return true;
@@ -22,5 +22,16 @@ var floorMap = {
         }).mouseout(function () {
             $('#map-helper').html('');
         });
+
+        $(window).on('resize', function(){
+            floorMap.resize();
+        });
+    },
+
+    resize: function () {
+        var windowWidth = $('#map-container').width();
+        var maxWidth = 1000;
+        var width = windowWidth; //Math.max(windowWidth, maxWidth);
+        $('img.map').mapster('resize', width, null, 0);
     }
 };
