@@ -30,9 +30,9 @@
 	<?php $this->Game->completeQuest('3'); ?>
 	<p>
 		Stevo develops scary muscles from out of nowhere. His terrifying mass and awesome strength seem to be
-		draining his intellect. <strong>"Stevo smash!"</strong> Even though he looks prepared to pummel you, he seems to have
-		forgotten his evil scheme. While he beats you senseless, he inadvertently  uses your skull to trip the master
-		switch and deactivate his diabolical machine. The fungus shamefully oozes away to find kinship among the
+		draining his intellect. <strong>"Stevo smash!"</strong> Even though he looks prepared to pummel you, he seems
+        to have forgotten his evil scheme. While he beats you senseless, he inadvertently  uses your skull to trip the
+        master switch and deactivate his diabolical machine. The fungus shamefully oozes away to find kinship among the
 		older, wiser locker room mold. You manage to escape, having saved the school.
 	</p>
 	<p>
@@ -41,16 +41,20 @@
     <?= $this->Game->link('Run around and brag to everyone you see?', ['move' => 'brag']) ?>
     <?= $this->Game->link('Keep it to yourself', ['move' => 'dontbrag']) ?>
 <?php elseif ($move == "brag"): ?>
-    <?php $this->Game->completeQuest('d'); ?>
-    <?php $this->Game->addPasses(3); ?>
+    <?php
+        $this->Game->completeQuest('d');
+        $this->Game->clearRoom();
+        $this->Game->addPasses(3);
+    ?>
 	<p>
 		The first four teachers you see happen to be Honors English teachers. Hearing of your exploits,
 		<strong>they reward you with one pass from each of them</strong> for vanquishing their mortal enemy,
-		Steve Geraci, and proclaim you to be <?= $this->Game->getTitle('d') ?>.
+		Steve Geraci, and proclaim you to be <?= $this->Game->getTitle('d') ?> <?= $name ?>.
 	</p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "dontbrag"): ?>
-	<p>
+	<?php $this->Game->clearRoom(); ?>
+    <p>
 		You enjoy a quiet triumph and spend the rest of the hour in quiet reflection of your selfless deed.
 	</p>
     <?= $this->Game->hallwayLink(null, 1) ?>
