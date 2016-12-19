@@ -31,7 +31,7 @@ var floorMap = {
     resize: function () {
         var windowWidth = $('#map-container').width();
         var maxWidth = 1000;
-        var width = windowWidth; //Math.max(windowWidth, maxWidth);
+        var width = Math.min(windowWidth, maxWidth);
         $('img.map').mapster('resize', width, null, 0);
     }
 };
