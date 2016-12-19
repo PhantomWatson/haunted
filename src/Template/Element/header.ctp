@@ -16,25 +16,33 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <span class="navbar-text">
-                            <?= $playerTitle.$name ?>
+                            <strong>
+                                <?= $playerTitle ?>
+                                <?= $name ?>
+                            </strong>
                         </span>
                     </li>
                     <li>
                         <span class="navbar-text">
-                            GPA: <?= $gpaDisplayed ?>
+                            GPA:
+                            <span class="badge">
+                                <?= $gpaDisplayed ?>
+                            </span>
                         </span>
                     </li>
-                    <li>
+                    <li class="time">
                         <span class="navbar-text">
-                            Time left:
-                            <?= round($timeRemaining['percent'], 0) ?>% <?= $timeRemaining['color'] ?>
+                            Time spent:
+                            <span class="badge">
+                                <?= round($timeRemaining['percent']) ?>%
+                            </span>
                         </span>
                     </li>
                 </ul>
             </div>
         <?php else: ?>
             <div class="navbar-brand">
-                Escape from Haunted Muncie Central High School
+                Escape from Haunted MCHS
             </div>
         <?php endif; ?>
     </div>

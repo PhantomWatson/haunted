@@ -7,7 +7,7 @@
         fears are confirmed when you see a lone janitorial broom sticking out of the top of the pile. You reflect
         peacefully for a moment in remembrance of your fallen dirt removal engineer who died gallantly in the line
         of duty. You are about to go back out into the hallway, but thinking twice, you double back and carve a
-        warning in the stall to keep this from happening again. Thinking once more� you carve "$name was here"
+        warning in the stall to keep this from happening again. Thinking once more, you carve "<?= $name ?> was here"
         into the stall.
     </p>
     <p>

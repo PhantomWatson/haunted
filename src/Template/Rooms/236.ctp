@@ -1,4 +1,4 @@
-<?php if ($move != 'fight' && ! $ammans_desk): ?>
+<?php if (! $move): ?>
     <p>
         Mrs. Amman's chemistry room reeks of various noxious chemicals. You see in the corner, a mess of beakers, test
         tubes, and Bunsen burners, in the middle of which is a giant bubbling vat of chemicals. Out of the vat is
@@ -30,14 +30,12 @@
         </strong>
     </p>
     <p>
-        You will now and forever be known as
-        <strong>
-            <?= $this->Game->getTitle() ?> <?= $name ?>!
-        </strong>
+        You will now and forever be known as <?= $this->Game->getTitle('2') ?> <?= $name ?>!
     </p>
     <?= $this->Game->link('Search Mrs. Amman\'s desk before you leave', ['move' => 'search']) ?>
     <?= $this->Game->hallwayLink('Flee before any more stray demons notice you', 1) ?>
 <?php elseif ($move == 'search'): ?>
+    <?php $this->Game->clearRoom(); ?>
     <p>
         You greedily rummage through her desk and find <strong>ten passes</strong>. If it were any other day, you would
         do the honest thing and leave them there. But considering the state of the school and how this is a computer

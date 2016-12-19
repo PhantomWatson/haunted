@@ -22,7 +22,8 @@ class RoomsController extends AppController
         $room = isset($args[1]) ? $args[1] : null;
         $move = isset($args[2]) ? $args[2] : null;
 
-        if (! $room) {
+        // Redirect to the hallway if a cleared room or no room is unspecified
+        if (! $room || $this->Game->roomIsCleared($room)) {
             return $this->redirect([
                 'controller' => 'Floors',
                 'action' => ($floor == 2 ? 'second' : 'first')
@@ -30,7 +31,7 @@ class RoomsController extends AppController
         }
 
         // Convert e.g. 'room123' to '123'
-        if (substr('room', 0, 4) == 'room') {
+        if (substr($room, 0, 4) == 'room') {
             $room = substr($room, 4);
         }
 

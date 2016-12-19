@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     You creep into the room. It seems empty, but you hear a small bell ringing behind a table. You peer around it and
     see a zombie cat grooming itself. A tag on its collar reads "If found, please return to Erwin Schr&ouml;dinger"

@@ -3,7 +3,7 @@
         The television studio seems to be in the middle of filming. Lights are on and a camera is pointed at a giant
         slug in a cage, doing very little. You look up and see two students in the booth operating the controls.
     </p>
-    <?= $this->Game->link('Pet the giant slug', ['action' => 'pet']) ?>
+    <?= $this->Game->link('Pet the giant slug', ['move' => 'pet']) ?>
     <?= $this->Game->link('Go up into the booth', ['room' => 'room433a']) ?>
     <?= $this->Game->link('Go through the back office', ['room' => 'room434']) ?>
     <?= $this->Game->link('Go into the editing room', ['room' => 'room430']) ?>

@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     As you step into the classroom, it seems empty. You quickly realize the opposite when a trashcan is shoved over your
     head and you are grabbed by several students. You can't see who they are, but you can look down and see their

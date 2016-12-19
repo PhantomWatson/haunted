@@ -36,6 +36,7 @@
         <?php endif; ?>
     <?php endforeach; ?>
     <?php if (! $answerAvailable): ?>
+        <?php $this->Game->clearRoom(); ?>
         <p>
             You whine that she has given you a trick question. Growing cross, Ms. Bly says, "Oh, what a lovely
             Christmas we'll <em>have</em>, of course." You tell her that that wasn't one of the choices and she

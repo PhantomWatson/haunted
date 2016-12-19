@@ -38,7 +38,6 @@
     $map->addTarget('371,101,404,139', 'room440', 'Room 440 - Fairley');
     $map->addTarget('297,103,341,140', 'room472', 'Room 472 - Shaw');
     $map->addTarget('253,103,296,140', 'room471', 'Room 471 - Hritz');
-    $map->addTarget('252,70,341,103', 'langoffice', 'Language Arts / Foreign Languages Office');
     $map->addTarget('313,43,341,55', 'room449', 'Room 449');
     $map->addTarget('298,70,298,62,312,62,311,55,340,55,340,68', 'room450', 'Room 450');
     $map->addTarget('79,255,123,298', 'room402', 'Room 402 - Von Dielingen');
@@ -66,11 +65,14 @@
     $map->addTarget('188,100,223,138', 'room460', 'Room 460 - Richardson');
 
     // Quest-conditional targets
-    if (! strstr($quests, "3") ) {
+    if (! $this->Game->questCompleted('3')) {
         $map->addTarget('143,210,143,180,107,180,108,189,127,189,128,210', 'room432', 'Room 432 - A/V Control Room');
     }
-    if (! strstr($quests, "j") || ! strstr($quests, "k") ) {
+    if (! $this->Game->questCompleted('j') || ! $this->Game->questCompleted('k')) {
         $map->addTarget('144,256,188,291', 'room401', 'Room 401 - Bartling');
+    }
+    if (! $this->Game->questCompleted('p')) {
+        $map->addTarget('252,70,341,103', 'langoffice', 'Language Arts / Foreign Languages Office');
     }
     
     // Stairs down
@@ -83,11 +85,22 @@
         '283,331,299,364'
     ];
     foreach ($stairCoords as $coords) {
-        $map->addTarget($coords, 'secondFloor', '(go downstairs)');
+        $map->addTarget($coords, 'firstFloor', '(go downstairs)');
     }
+
+    $clearedRooms = $this->Game->getClearedRooms();
+    $map->removeClearedRooms($clearedRooms);
 ?>
 
 <map name="second-floor">
     <?= $map->getAreaTags() ?>
 </map>
-<img src="/img/MCHS2nd.gif" border="0" width="613" height="396" alt="" usemap="#second-floor" />
+<div id="map-container">
+    <img src="/img/MCHS2nd.gif" border="0" width="613" height="396" alt="" usemap="#second-floor" class="map" />
+</div>
+<div id="map-helper">
+</div>
+
+<?php $this->append('buffered'); ?>
+    floorMap.init();
+<?php $this->end(); ?>

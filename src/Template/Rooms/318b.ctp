@@ -23,8 +23,11 @@
     <?= $this->Game->link('Give in', ['move' => 'drink']) ?>
     <?= $this->Game->link('Refuse to drink it', ['move' => 'nodrink']) ?>
 <?php elseif ($move == "drink"): ?>
-	<?php $this->Game->completeQuest('g'); ?>
-    <?php $this->Game->doublePasses(); ?>
+	<?php
+        $this->Game->completeQuest('g');
+        $this->Game->clearRoom();
+        $this->Game->doublePasses();
+    ?>
 	<p>
 	    As you take in the delicious tonic, seemingly squeezed from the fruit of life itself, your body undertakes an
         amazing change. You feel like you can move faster and see more than you could before.

@@ -1,4 +1,7 @@
-<?php $this->Game->spendTime(); ?>
+<?php
+    $this->Game->spendTime();
+    $this->Game->clearRoom();
+?>
 <p>
     A hideous creature grabs you and throws you into a chair the moment you walk into the room. It seems as if all of
     the missing English teachers on the second floor have fused into an Evil English Teacher Golem! You sit in the

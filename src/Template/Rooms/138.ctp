@@ -6,18 +6,24 @@
     </p>
 	<p>
         <strong>Do you join the ranks?</strong>
-        <?= $this->Game->link('Yes', ['move' => 'yes']) ?>
-        <?= $this->Game->link('No', ['move' => 'no']) ?>
     </p>
+    <?= $this->Game->link('Yes', ['move' => 'yes']) ?>
+    <?= $this->Game->link('No', ['move' => 'no']) ?>
 <?php elseif ($move == "yes"): ?>
-    <?php $this->Game->spendTime(2); ?>
+    <?php
+        $this->Game->spendTime(2);
+        $this->Game->clearRoom();
+    ?>
 	<p>
         You fall into the ranks, but you learn the meaning of that fancy foriegn word "bayonette" the hard way.
         <strong>You spend the next hour nursing your wounds.</strong>
     </p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "no"): ?>
-    <?php $this->Game->spendTime(); ?>
+    <?php
+        $this->Game->spendTime();
+        $this->Game->clearRoom();
+    ?>
 	<p>
         You try to slip out the door from whence you came, but the sergeant notices you and screams "Drop and give me
         100!" Instead of going to fight evil, the JROTC soldiers just stand and taunt you while you try to finish

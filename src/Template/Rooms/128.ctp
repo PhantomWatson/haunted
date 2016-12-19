@@ -9,7 +9,10 @@
     <?= $this->Game->link('Yes', ['move' => 'sit']) ?>
     <?= $this->Game->link('No', ['move' => 'leave']) ?>
 <?php elseif ($move == "sit"): ?>
-    <?php $this->Game->spendTime(2); ?>
+    <?php
+        $this->Game->spendTime(2);
+        $this->Game->clearRoom();
+    ?>
     <p>
         You sit down in a freezing chair and gaze up at the projected stars, then notice that you can't move your arms or
         legs. You're frozen in place, just like the other students! Good going. After
@@ -21,8 +24,8 @@
         <p>
             He demands one of the passes that you've collected before he lets you go and you grudgingly agree to the
             trade.
-            <?= $this->Game->hallwayLink() ?>
         </p>
+        <?= $this->Game->hallwayLink() ?>
     <?php else: ?>
         <?php $this->Game->spendTime(); ?>
         <p>

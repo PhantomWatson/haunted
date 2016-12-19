@@ -151,16 +151,25 @@
         back to get a running start and sail out of the building and into the tree.
     </p>
     <p>
-        Some cuts, some bruises, and a broken rib later, you find that you are safely back at home, having
-        <strong>
-            escaped haunted Muncie Central High School!
-        </strong>
+        Some cuts, some bruises, and a broken rib later, you find yourself safely back home. The next day, the front
+        page of the newspaper reads...
+
     </p>
-    <?= $this->Html->link(
+
+    <div id="win">
+        Haunted Muncie Central High School Saved By <?= $this->Game->getTitle() ?> <?= $name ?>!
+    </div>
+
+    <?= $this->Game->link(
         'Play again',
         [
             'controller' => 'Pages',
             'action' => 'restart'
         ]
     ) ?>
+
+    <p style="font-size: 80%; margin-top: 200px;">
+        Later that night, it finally dawns on you that it wasn't really "haunted" since there was only...
+        like, maybe <em>one</em> ghost. And then a million random other kinds of monsters. But whatever.
+    </p>
 <?php endif; ?>

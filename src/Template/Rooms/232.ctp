@@ -21,7 +21,10 @@
     </p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == 1): ?>
-    <?php $this->Game->completeQuest('o'); ?>
+    <?php
+        $this->Game->completeQuest('o');
+        $this->Game->clearRoom();
+    ?>
 	<p>
         "You know your physics well," he says. "<strong>Here's a pass.</strong> Now go bug Mr. Murray or whoever so I
         can be alone to enjoy my purple."

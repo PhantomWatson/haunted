@@ -27,7 +27,10 @@
 	</p>
     <?= $this->Game->hallwayLink(null, 1) ?>
 <?php elseif ($move == "fight"): ?>
-	<?php $this->Game->completeQuest('3'); ?>
+	<?php
+        $this->Game->completeQuest('3');
+        $this->Game->clearRoom();
+    ?>
 	<p>
 		Stevo develops scary muscles from out of nowhere. His terrifying mass and awesome strength seem to be
 		draining his intellect. <strong>"Stevo smash!"</strong> Even though he looks prepared to pummel you, he seems

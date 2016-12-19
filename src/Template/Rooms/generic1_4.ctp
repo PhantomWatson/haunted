@@ -1,30 +1,29 @@
 <?php
     $this->Game->spendTime();
+    $this->Game->clearRoom();
     $races = [
         'Elven',
         'Orcish',
         'Dwarvish',
         'Vampire',
         'Hobbit',
-        'Lycanthrope',
+        'Werewolf',
         'Gnomish',
         'Human',
         'Troll',
-        'Midget',
         'Giant',
         'Undead',
-        'Saiyajin',
-        'Namekseijin',
         'Pusher Robot',
         'Shover Robot',
         '5-Year Old',
         'Smurf',
-        'Plaid',
         'Leprechaun',
-        'Norn',
-        'Ettin',
-        'Grendel',
-        'Narcoleptic'
+        'Narcoleptic',
+        '8-bit',
+        'Demonic',
+        'Ghostly',
+        'Animated Wooden',
+        'Mummy'
     ];
     $alignments = ['Lawful', 'Neutral', 'Chaotic'];
     $roles = [
@@ -81,7 +80,6 @@
         'a crossbow',
         'a pirate cannon',
         'a set of brass knuckles',
-        'Tapion\'s sword',
         'a black pistol with the phrase "Hellsing Family" engraved on it',
         'a futuristic pistol called The Spaminator',
         'a shard of kryptonite',
@@ -89,13 +87,11 @@
         'a whoopee cushion',
         'a sock full of quarters',
         'an expired carton of milk',
-        'a radioactive Ho - Ho',
-        'a Shaft of Belated Quiessence',
+        'a radioactive Toblerone',
         'a wooden stake',
         'a rusty spoon',
         'a Whomping Stick',
         'the color plaid',
-        'the wit of Tom Servo',
         'an edible wig',
         'a football helmet full of tofu'
     ];

@@ -1,3 +1,4 @@
+<?php $this->Game->clearRoom(); ?>
 <p>
     Dozens of Journalism-1 students are chained to desks in the journalism room and each is furiously scribbling away at
     reports and articles. Their teacher appears to be absent, but at her desk you see whips, chains, thumbscrews,

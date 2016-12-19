@@ -1,20 +1,78 @@
 @import "./cake.css";
-@import "../../vendor/twbs/bootstrap/less/bootstrap.less";
+@import "variables.less";
+@import "bootstrap.less";
 
 body {
     padding: 70px 0;
 
-    > div.room {
-        .btn-container {
-            padding: 5px 0;
-            text-align: center;
+    .btn-container {
+        padding: 5px 0;
+        text-align: center;
+
+        .btn {
+            white-space: normal;
+        }
+    }
+    > div.container {
+        > p {
+            background-color: @gray-darker;
+            border-radius: 10px;
+            padding: 10px;
         }
     }
 }
-
 header {
+    font-size: 14px;
+
     .navbar-brand {
         text-align: center;
         width: 100%;
     }
+    li.time {
+        .navbar-text {
+            margin-right: 2px;
+        }
+        .progress {
+            height: 22px;
+            margin-top: 10.5px;
+            margin-bottom: 0;
+            width: 150px;
+        }
+        .progress-bar {
+            font-size: 14px;
+            min-width: 40px;
+        }
+    }
+}
+footer {
+    font-size: 14px;
+}
+pre.meta {
+    font-size: 60%;
+}
+.begin {
+    form {
+        text-align: left;
+    }
+}
+form {
+    text-align: center;
+}
+h2.game-over {
+    text-align: center;
+}
+#map-container {
+    text-align: center;
+
+    > div {
+        display: inline-block;
+    }
+}
+#map-helper {
+    font-size: 200%;
+    text-align: center;
+}
+#win {
+    font-size: 200%;
+    text-align: center;
 }

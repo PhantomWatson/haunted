@@ -51,6 +51,9 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'home']);
 
+    $routes->connect('/lose', ['controller' => 'Pages', 'action' => 'lose']);
+    $routes->connect('/restart', ['controller' => 'Pages', 'action' => 'restart']);
+
     $routes->connect(
         '/:floor/:room/:move',
         ['controller' => 'Rooms', 'action' => 'room'],

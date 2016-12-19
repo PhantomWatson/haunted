@@ -1,3 +1,4 @@
+<?php $this->Game->clearRoom(); ?>
 <p>
     You see in the back of the computer lab that Mark LaSpina and Jason Fey are busy being 
     the Laziest Men on Mars. Two humanoid robots approach you from opposite sides and greet you.

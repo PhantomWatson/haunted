@@ -8,7 +8,10 @@
     <?= $this->Game->link('Stay and fight for the glory of Rome', ['move' => 'fight']) ?>
     <?= $this->Game->link('Flee', ['move' => 'flee']) ?>
 <?php elseif ($move == 'fight'): ?>
-    <?php $this->Game->completeQuest('5'); ?>
+    <?php
+        $this->Game->completeQuest('5');
+        $this->Game->clearRoom();
+    ?>
     <p>
         You ride on horseback at the side of Mr. Meade. Armed with nothing but a keychain and a Bic Pen, you and the
         Latin students manage to subdue the zombies!

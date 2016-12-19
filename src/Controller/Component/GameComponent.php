@@ -32,6 +32,7 @@ class GameComponent extends Component
         $this->Cookie->delete('time');
         $this->Cookie->delete('quests');
         $this->Cookie->delete('game');
+        $this->Cookie->delete('cleared-rooms');
     }
 
     /**
@@ -65,13 +66,13 @@ class GameComponent extends Component
         $gpa = $this->Cookie->read('player.gpa');
         $displayedGpas = [
             5 => "4.0",
-            4 => "3.9-3.0",
-            3 => "2.9-2.0",
-            2 => "1.9-1.0",
-            1 => "0.9-0.1",
+            4 => "3.5",
+            3 => "2.5",
+            2 => "1.5",
+            1 => "0.5",
             0 => "0.0"
         ];
-        $gpaDisplayed = $gpa ? $displayedGpas[$gpa] : null;
+        $gpaDisplayed = $gpa !== NULL ? $displayedGpas[$gpa] : null;
 
         // Player title
         $sex = $this->Cookie->read('player.sex');
@@ -85,6 +86,7 @@ class GameComponent extends Component
         $period2 = $this->Cookie->read('time.period2');
         if ($period2) {
             $timeRemainingPercent = ($period1 / $period2) * 100;
+            $timeRemainingPercent = min($timeRemainingPercent, 100);
             $colors = [
                 10 => '#24FF19',
                 20 => '#65FF19',
@@ -95,7 +97,7 @@ class GameComponent extends Component
                 70 => '#FF5F19',
                 80 => '#FF1919',
                 90 => '#D4003C',
-                100 => '#D451FF'
+                101 => '#D451FF'
             ];
             foreach ($colors as $percent => $color) {
                 if ($timeRemainingPercent < $percent) {
@@ -158,5 +160,16 @@ class GameComponent extends Component
         $playersTable = TableRegistry::get('Players');
         $player = $this->Cookie->read('player');
         return $player ? $playersTable->newEntity($player) : null;
+    }
+
+    /**
+     * Returns true if a room has been cleared
+     *
+     * @param string $room Room identifier
+     * @return bool
+     */
+    public function roomIsCleared($room)
+    {
+        return (bool)$this->Cookie->read("cleared-rooms.$room");
     }
 }

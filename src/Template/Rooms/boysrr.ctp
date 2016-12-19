@@ -1,3 +1,4 @@
+<?php $this->Game->clearRoom(); ?>
 <?php if ($sex == "m"): ?>
     <p>
         As you walk into the restroom the first thing you notice is that all the tiles have changed to a disturbing

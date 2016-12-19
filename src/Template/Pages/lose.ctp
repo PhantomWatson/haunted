@@ -1,21 +1,14 @@
-<table width="100%" height="100%">
-    <tr>
-        <td align="center" valign="middle">
-            <span style="color: black; font-size: 28pt; font-weight: bold;">
-                GAME OVER
-            </span>
-            <br />
-            <span style="font-size: 46pt; color: black; font-style: italic;">
-                YOU LOST!!!
-            </span>
-            <br />
-            <?= $this->Html->link(
-                'Try Again',
-                [
-                    'controller' => 'Pages',
-                    'action' => 'restart'
-                ]
-            ) ?>
-        </td>
-    </tr>
-</table>
+<h2 class="game-over">
+    Game Over
+</h2>
+<p>
+    Oh no, <strong>you ran out of time</strong>. Muncie Central High School was <em>not</em> saved from the various
+    horrors infesting it, and the resulting death and destruction is blamed squarely on you by the local newsmedia.
+</p>
+<?= $this->Game->link(
+    'Try Again',
+    [
+        'controller' => 'Pages',
+        'action' => 'restart'
+    ]
+) ?>

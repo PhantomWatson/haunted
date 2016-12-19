@@ -23,7 +23,7 @@
 	    You ask for two passes instead (one, then a second in case you lose the first). "Oh, where do you need passes 
 	    to?"
     </p>
-	<?= $this->Game->formStart('get', ['move' => 'pass']) ?>
+	<?= $this->Game->formStart('post', ['move' => 'pass']) ?>
     <?= $this->Game->formInput('destination', 'Enter a destination') ?>
     <?= $this->Game->formSubmit('Get passes') ?>
     <?= $this->Game->formEnd() ?>
@@ -34,11 +34,14 @@
     </p>
     <?= $this->Game->hallwayLink(null, 1) ?>
 <?php elseif ($move == "pass"): ?>
+    <?php
+        $this->Game->addPasses(1);
+        $this->Game->clearRoom();
+    ?>
     <p>
         Mrs. Madsen takes out a pencil and writes you two passes. Once you leave her room, you erase
-        "<?= $_GET['destination'] ?>" and make them both general passes.
+        "<?= $this->request->data('destination') ?>" and make them both general passes.
     </p>
-    <?php $this->Game->addPasses(1); ?>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "no"): ?>
     <p>

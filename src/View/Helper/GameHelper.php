@@ -96,14 +96,17 @@ class GameHelper extends Helper
         }
         $url = [
             'controller' => 'Floors',
-            'action' => $action
+            'action' => $action,
+            'floor' => false,
+            'room' => false
         ];
         if ($spendTime) {
             $url['?'] = ['ts' => $spendTime];
         }
         return $this->link(
             $label,
-            $url
+            $url,
+            ['escape' => false]
         );
     }
 
@@ -123,12 +126,20 @@ class GameHelper extends Helper
             $url['room'] = $this->_View->get('room');
         }
 
+        // Don't show link if this room has been cleared
+        if ($this->roomIsCleared($url['room'])) {
+            return '';
+        }
+
         return
             '<div class="btn-container">' .
             $this->Html->link(
                 $label,
                 $url,
-                ['class' => 'btn btn-lg btn-default']
+                [
+                    'class' => 'btn btn-lg btn-default',
+                    'escape' => false
+                ]
             ) .
             '</div>';
     }
@@ -140,7 +151,7 @@ class GameHelper extends Helper
      * @param array $url URL array for router
      * @return string
      */
-    public function formStart($method, $url)
+    public function formStart($method, $url = [])
     {
         if (! isset($url['floor'])) {
             $url['floor'] = $this->_View->get('floor');
@@ -149,7 +160,7 @@ class GameHelper extends Helper
             $url['room'] = $this->_View->get('room');
         }
 
-        return '<form method="' . $method . '" action="' . Router::url($url) . '">';
+        return '<form method="' . $method . '" action="' . Router::url($url) . '" class="form-inline">';
     }
 
     /**
@@ -158,9 +169,9 @@ class GameHelper extends Helper
      * @param
      * @return string
      */
-    public function formInput($name, $placeholder)
+    public function formInput($name, $placeholder = '')
     {
-        return '<input type="text" name="' . $name . '" placeholder="' . $placeholder . '" />';
+        return '<input type="text" name="' . $name . '" placeholder="' . $placeholder . '" class="form-control" />';
     }
 
     /**
@@ -267,21 +278,37 @@ class GameHelper extends Helper
      */
     public function scrambleVowels($name)
     {
-        $vowels = ['a', 'e', 'i', 'o', 'u'];
-        foreach ($vowels as $vowel) {
-            $alternates = array_filter($vowels, function ($var) use ($vowel) {
-                return $var != $vowel;
-            });
 
-            // Lowercase
-            $replacement = $alternates[array_rand($alternates)];
-            $name = str_replace($vowel, $replacement, $name);
-
-            // Uppercase
-            $replacement = strtoupper($alternates[array_rand($alternates)]);
-            $name = str_replace(strtoupper($vowel), $replacement, $name);
+        $name = str_split($name);
+        foreach ($name as &$letter) {
+            $letter = $this->scrambleVowel($letter);
         }
-        return $name;
+        return implode('', $name);
+    }
+
+    /**
+     * Scrambles a single vowel (or returns the consonant given to it)
+     *
+     * @param string $letter Letter
+     * @return string
+     */
+    public function scrambleVowel($letter)
+    {
+        $vowels = ['a', 'e', 'i', 'o', 'u'];
+        if (! in_array(strtolower($letter), $vowels)) {
+            return $letter;
+        }
+        $alternates = array_filter($vowels, function ($var) use ($letter) {
+            return $var != $letter;
+        });
+
+        // Lowercase
+        if ($letter == strtolower($letter)) {
+            return $alternates[array_rand($alternates)];
+        }
+
+        // Uppercase
+        return strtoupper($alternates[array_rand($alternates)]);
     }
 
     /**
@@ -293,5 +320,41 @@ class GameHelper extends Helper
     public function changeName($name)
     {
         $this->cookie->write('player.name', $name);
+    }
+
+    /**
+     * Marks a room as having been "cleared", making it henceforth inaccessible
+     *
+     * @return void
+     */
+    public function clearRoom()
+    {
+        $room = $this->_View->get('room');
+        if (! $room) {
+            throw new InternalErrorException('Error clearing room. Room unknown.');
+        }
+        $this->cookie->write("cleared-rooms.$room", true);
+    }
+
+    /**
+     * Returns an array of cleared room identifiers
+     *
+     * @return array
+     */
+    public function getClearedRooms()
+    {
+        $clearedRooms = $this->cookie->read('cleared-rooms');
+        return is_array($clearedRooms) ? array_keys($clearedRooms) : [];
+    }
+
+    /**
+     * Returns true if a room has been cleared
+     *
+     * @param string $room Room identifier
+     * @return bool
+     */
+    public function roomIsCleared($room)
+    {
+        return (bool)$this->cookie->read("cleared-rooms.$room");
     }
 }
