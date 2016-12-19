@@ -16,34 +16,27 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <span class="navbar-text">
-                            <?= $playerTitle ?>
-                            <?= $name ?>
+                            <strong>
+                                <?= $playerTitle ?>
+                                <?= $name ?>
+                            </strong>
                         </span>
                     </li>
                     <li>
                         <span class="navbar-text">
-                            GPA: <?= $gpaDisplayed ?>
+                            GPA:
+                            <span class="badge">
+                                <?= $gpaDisplayed ?>
+                            </span>
                         </span>
                     </li>
                     <li class="time">
                         <span class="navbar-text">
-                            Time:
-                        </span>
-                        <div class="progress">
-                            <div
-                                class="progress-bar"
-                                role="progressbar"
-                                aria-valuenow="<?= round($timeRemaining['percent']) ?>"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="
-                                    background-color: <?= $timeRemaining['color'] ?>;
-                                    width: <?= round($timeRemaining['percent']) ?>%;
-                                "
-                            >
+                            Time spent:
+                            <span class="badge">
                                 <?= round($timeRemaining['percent']) ?>%
-                            </div>
-                        </div>
+                            </span>
+                        </span>
                     </li>
                 </ul>
             </div>
