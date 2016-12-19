@@ -32,7 +32,7 @@
     <div class="<?= $class ?>">
         <?= $this->fetch('content') ?>
     </div>
-    <footer>
+    <footer class="hidden-xs">
         <?= $this->element('footer') ?>
     </footer>
 
