@@ -23,7 +23,7 @@ class GameComponent extends Component
         $this->clearGameData();
         $this->savePlayer($player);
         $this->Cookie->write('time.period1', 1);
-        $this->Cookie->write('time.period2', 1399);
+        $this->Cookie->write('time.period2', 13);
     }
 
     public function clearGameData()
