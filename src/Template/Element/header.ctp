@@ -42,7 +42,7 @@
             </div>
         <?php else: ?>
             <div class="navbar-brand">
-                Escape from Haunted Muncie Central High School
+                Escape from Haunted MCHS
             </div>
         <?php endif; ?>
     </div>
