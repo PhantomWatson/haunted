@@ -9,7 +9,7 @@
 
             <p class="navbar-text navbar-right">
                 Originally developed in 2002ish by
-                <a href="http://phantomwatson.com" class="navbar-link">
+                <a href="https://phantomwatson.com" class="navbar-link">
                     Phantom Watson
                 </a>
             </p>
