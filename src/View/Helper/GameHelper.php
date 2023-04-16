@@ -16,7 +16,7 @@ class GameHelper extends Helper
      *
      * @param array $config Configuration
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->cookie = $this->_View->get('cookie');
         parent::initialize($config);

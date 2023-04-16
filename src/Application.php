@@ -34,7 +34,7 @@ class Application extends BaseApplication
      * @param \Cake\Http\MiddlewareQueue $middleware The middleware queue to setup.
      * @return \Cake\Http\MiddlewareQueue The updated middleware.
      */
-    public function middleware($middleware)
+    public function middleware($middleware): \Cake\Http\MiddlewareQueue
     {
         $middleware
             // Catch any exceptions in the lower layers,

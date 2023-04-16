@@ -52,12 +52,10 @@ require __DIR__ . '/paths.php';
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 use Cake\Cache\Cache;
-use Cake\Console\ConsoleErrorHandler;
 use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Core\Plugin;
-use Cake\Database\Type;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\ErrorHandler;
 use Cake\Log\Log;
@@ -120,7 +118,7 @@ ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
  */
 $isCli = PHP_SAPI === 'cli';
 if ($isCli) {
-    (new ConsoleErrorHandler(Configure::read('Error')))->register();
+    (new \Cake\Error\ConsoleErrorHandler(Configure::read('Error')))->register();
 } else {
     (new ErrorHandler(Configure::read('Error')))->register();
 }
@@ -187,11 +185,11 @@ Request::addDetector('tablet', function ($request) {
  * locale specific date formats. For details see
  * @link http://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
  */
-Type::build('time')
+\Cake\Database\TypeFactory::build('time')
     ->useImmutable();
-Type::build('date')
+\Cake\Database\TypeFactory::build('date')
     ->useImmutable();
-Type::build('datetime')
+\Cake\Database\TypeFactory::build('datetime')
     ->useImmutable();
 
 /*

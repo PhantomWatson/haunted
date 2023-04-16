@@ -13,7 +13,7 @@ class GameComponent extends Component
      *
      * @param array $config Configuration
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
 
     }
