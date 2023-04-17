@@ -41,5 +41,6 @@ class AppView extends View
         $this->loadHelper('Form', [
             'templates' => 'bootstrap_form',
         ]);
+        $this->loadHelper('Game');
     }
 }

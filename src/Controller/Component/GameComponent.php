@@ -2,12 +2,12 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
+use Cake\Http\Cookie\Cookie;
 use Cake\ORM\TableRegistry;
+use DateTime;
 
 class GameComponent extends Component
 {
-    public $components = ['Cookie'];
-
     /**
      * Initialize method
      *
@@ -22,17 +22,17 @@ class GameComponent extends Component
     {
         $this->clearGameData();
         $this->savePlayer($player);
-        $this->Cookie->write('time.period1', 1);
-        $this->Cookie->write('time.period2', 13);
+        $this->write('time.period1', 1);
+        $this->write('time.period2', 13);
     }
 
     public function clearGameData()
     {
-        $this->Cookie->delete('player');
-        $this->Cookie->delete('time');
-        $this->Cookie->delete('quests');
-        $this->Cookie->delete('game');
-        $this->Cookie->delete('cleared-rooms');
+        $this->delete('player');
+        $this->delete('time');
+        $this->delete('quests');
+        $this->delete('game');
+        $this->delete('cleared-rooms');
     }
 
     /**
@@ -42,7 +42,7 @@ class GameComponent extends Component
      */
     public function savePlayer($player)
     {
-        $this->Cookie->write('player', $player->toArray());
+        $this->write('player', $player->toArray());
     }
 
     /**
@@ -52,8 +52,8 @@ class GameComponent extends Component
      */
     public function checkLose()
     {
-        $period1 = $this->Cookie->read('time.period1');
-        $period2 = $this->Cookie->read('time.period2');
+        $period1 = $this->read('time.period1');
+        $period2 = $this->read('time.period2');
         if ($period1 && $period2 && ($period1 / $period2) >= 1) {
             return true;
         }
@@ -63,7 +63,7 @@ class GameComponent extends Component
     public function setLayoutVariables()
     {
         // GPA
-        $gpa = $this->Cookie->read('player.gpa');
+        $gpa = $this->read('player.gpa');
         $displayedGpas = [
             5 => "4.0",
             4 => "3.5",
@@ -75,15 +75,15 @@ class GameComponent extends Component
         $gpaDisplayed = $gpa !== NULL ? $displayedGpas[$gpa] : null;
 
         // Player title
-        $sex = $this->Cookie->read('player.sex');
-        $name = $this->Cookie->read('player.name');
-        $quests = $this->Cookie->read('quests');
+        $sex = $this->read('player.sex');
+        $name = $this->read('player.name');
+        $quests = $this->read('quests');
         $playersTable = TableRegistry::get('Players');
         $title = $playersTable->getTitle($quests, $sex);
 
         // Time remaining
-        $period1 = $this->Cookie->read('time.period1');
-        $period2 = $this->Cookie->read('time.period2');
+        $period1 = $this->read('time.period1');
+        $period2 = $this->read('time.period2');
         if ($period2) {
             $timeRemainingPercent = ($period1 / $period2) * 100;
             $timeRemainingPercent = min($timeRemainingPercent, 100);
@@ -158,7 +158,7 @@ class GameComponent extends Component
     public function getPlayer()
     {
         $playersTable = TableRegistry::get('Players');
-        $player = $this->Cookie->read('player');
+        $player = $this->read('player');
         return $player ? $playersTable->newEntity($player) : null;
     }
 
@@ -170,6 +170,26 @@ class GameComponent extends Component
      */
     public function roomIsCleared($room)
     {
-        return (bool)$this->Cookie->read("cleared-rooms.$room");
+        return (bool)$this->read("cleared-rooms.$room");
+    }
+
+    private function write($var, $val)
+    {
+        $cookie = (new Cookie($var))
+            ->withValue($val)
+            ->withExpiry(new DateTime('+1 year'))
+            ->withSecure(false);
+        $this->getController()->setResponse($this->getController()->response->withCookie($cookie));
+    }
+
+    private function delete($key)
+    {
+        $cookie = new Cookie($key);
+        $this->getController()->setResponse($this->getController()->getResponse()->withExpiredCookie($cookie));
+    }
+
+    private function read($key)
+    {
+        return $this->getController()->getRequest()->getCookie($key);
     }
 }

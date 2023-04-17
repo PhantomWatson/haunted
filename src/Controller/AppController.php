@@ -1,29 +1,15 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link      http://cakephp.org CakePHP(tm) Project
- * @since     0.2.9
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- */
 namespace App\Controller;
 
+use App\Controller\Component\GameComponent;
 use Cake\Controller\Controller;
-use Cake\Event\Event;
+use Cake\Http\Cookie\Cookie;
+use DateTime;
 
 /**
  * Application Controller
  *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
+ * @property GameComponent $Game
  */
 class AppController extends Controller
 {
@@ -36,6 +22,7 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
+     * @throws \Exception
      */
     public function initialize(): void
     {
@@ -43,10 +30,6 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Cookie', [
-            'expiry' => '1 year',
-            'encryption' => false
-        ]);
         $this->loadComponent('Game');
     }
 
@@ -55,19 +38,17 @@ class AppController extends Controller
      *
      * @param \Cake\Event\Event $event The beforeRender event.
      * @return \Cake\Network\Response|null|void
+     * @throws \Exception
      */
     public function beforeRender(\Cake\Event\EventInterface $event)
     {
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
+        if (!$this->viewBuilder()->getVar('_serialize') &&
+            in_array($this->response->getType(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
 
-        $this->loadComponent('Game');
         $this->Game->setLayoutVariables();
-        $this->set('cookie', $this->Cookie);
-        $this->viewBuilder()->helpers(['Game']);
 
         return parent::beforeRender($event);
     }
@@ -76,12 +57,18 @@ class AppController extends Controller
     {
         $timeSpent = $this->request->query('ts');
         if ($timeSpent) {
-            $period1 = $this->Cookie->read('time.period1');
+            $period1 = $this->request->getCookie('time.period1', 0);
             $period1 += $timeSpent;
-            $this->Cookie->write('time.period1', $period1);
+
+            $cookie = (new Cookie('time.period1'))
+                ->withValue($period1)
+                ->withExpiry(new DateTime('+1 year'))
+                ->withSecure(false)
+            ;
+            $this->setResponse($this->response->withCookie($cookie));
         }
 
-        if ($this->Game->checkLose() && ! in_array($this->request->action, ['lose', 'restart', 'home'])) {
+        if ($this->Game->checkLose() && ! in_array($this->request->getParam('action'), ['lose', 'restart', 'home'])) {
             $this->redirect([
                 'controller' => 'Pages',
                 'action' => 'lose'

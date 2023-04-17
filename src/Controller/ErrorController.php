@@ -14,12 +14,15 @@
  */
 namespace App\Controller;
 
+use App\Controller\Component\GameComponent;
 use Cake\Event\Event;
 
 /**
  * Error Handling Controller
  *
  * Controller used by ExceptionRenderer to render error responses.
+ *
+ * @property GameComponent $Game
  */
 class ErrorController extends AppController
 {
@@ -27,10 +30,12 @@ class ErrorController extends AppController
      * Initialization hook method.
      *
      * @return void
+     * @throws \Exception
      */
     public function initialize(): void
     {
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Game');
     }
 
     /**
@@ -53,7 +58,7 @@ class ErrorController extends AppController
     {
         parent::beforeRender($event);
 
-        $this->viewBuilder()->templatePath('Error');
+        $this->viewBuilder()->setTemplatePath('Error');
     }
 
     /**

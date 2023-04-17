@@ -16,7 +16,7 @@ class PlayersTable extends Table
      */
     public function initialize(array $config): void
     {
-        $this->displayField('name');
+        $this->setDisplayField('name');
     }
 
     /**
