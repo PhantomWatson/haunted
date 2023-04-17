@@ -3,6 +3,7 @@ namespace App\Controller\Component;
 
 use App\Model\Entity\Player;
 use Cake\Controller\Component;
+use Cake\Datasource\EntityInterface;
 use Cake\Http\Cookie\Cookie;
 use Cake\ORM\TableRegistry;
 use DateTime;
@@ -165,13 +166,13 @@ class GameComponent extends Component
     /**
      * Returns a Player entity or null if none has been saved
      *
-     * @return null|Player
+     * @return EntityInterface|Player|null
      */
     public function getPlayer()
     {
         $playersTable = TableRegistry::get('Players');
         $player = $this->read('player');
-        return $player ? $playersTable->newEntity(json_decode($player)) : null;
+        return $player ? $playersTable->newEntity((array) json_decode($player)) : null;
     }
 
     /**
