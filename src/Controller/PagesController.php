@@ -33,7 +33,7 @@ class PagesController extends AppController
         $this->loadModel('Players');
         if ($this->request->is('post')) {
             $player = $this->Players->newEntity($this->getRequest()->getData());
-            if ($player->errors()) {
+            if ($player->getErrors()) {
                 $this->Flash->error('Please correct the indicated errors');
             } else {
                 $this->Game->startGame($player);
