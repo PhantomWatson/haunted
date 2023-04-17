@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +30,7 @@
     <?= $this->Flash->render() ?>
     <?php
         $class = 'container clearfix';
-        if ($this->request->controller == 'Rooms') {
+        if ($this->getRequest()->getParam('controller') == 'Rooms') {
             $class .= ' room';
         }
     ?>
