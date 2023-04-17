@@ -133,7 +133,7 @@ class GameComponent extends Component
         $room = isset($this->request->params['pass'][1]) ? $this->request->params['pass'][1] : null;
 
         $this->_registry->getController()->set([
-            'debugMode' => ($name == 'Mr. Cauliflower' || strstr($quests, 'z')),
+            'debugMode' => ($name == 'Mr. Cauliflower' || ($quests && strstr($quests, 'z'))),
             'floor' => $floor,
             'gpa' => $gpa,
             'gpaDisplayed' => $gpaDisplayed,

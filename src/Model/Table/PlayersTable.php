@@ -44,14 +44,14 @@ class PlayersTable extends Table
     {
         $titleComponents = [];
         foreach (['c', '7', '0', '6'] as $quest) {
-            if (strstr($quests, $quest) ) {
+            if ($quests && strstr($quests, $quest) ) {
                 $titleComponents[] = $this->getTitleComponent($quest);
             }
         }
-        if (strstr($quests, '2') || strstr($quests, 'd') ) {
+        if ($quests && strstr($quests, '2') || strstr($quests, 'd') ) {
             $titleComponents[] = $this->getTitleComponent('2');
         }
-        if (strstr($quests, '5')) {
+        if ($quests && strstr($quests, '5')) {
             $titleComponents[] = $this->getTitleComponent('5', $sex);
         }
 
