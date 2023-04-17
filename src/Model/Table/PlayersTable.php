@@ -42,16 +42,19 @@ class PlayersTable extends Table
      */
     public function getTitle($quests, $sex)
     {
+        if (!$quests) {
+            return '';
+        }
         $titleComponents = [];
         foreach (['c', '7', '0', '6'] as $quest) {
-            if ($quests && strstr($quests, $quest) ) {
+            if (strstr($quests, $quest) ) {
                 $titleComponents[] = $this->getTitleComponent($quest);
             }
         }
-        if ($quests && strstr($quests, '2') || strstr($quests, 'd') ) {
+        if (strstr($quests, '2') || strstr($quests, 'd')) {
             $titleComponents[] = $this->getTitleComponent('2');
         }
-        if ($quests && strstr($quests, '5')) {
+        if (strstr($quests, '5')) {
             $titleComponents[] = $this->getTitleComponent('5', $sex);
         }
 
