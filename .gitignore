@@ -1,6 +1,6 @@
 # CakePHP
 /vendor/*
-/config/app.php
+/config/app_local.php
 /tmp/*
 /logs/*
 
