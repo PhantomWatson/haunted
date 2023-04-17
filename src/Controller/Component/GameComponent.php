@@ -6,6 +6,7 @@ use Cake\Controller\Component;
 use Cake\Http\Cookie\Cookie;
 use Cake\ORM\TableRegistry;
 use DateTime;
+use function PHPUnit\Framework\stringContains;
 
 class GameComponent extends Component
 {
@@ -187,7 +188,7 @@ class GameComponent extends Component
     private function write($var, $val)
     {
         $cookie = (new Cookie($var))
-            ->withValue($val)
+            ->withValue((string)$val)
             ->withExpiry(new DateTime('+1 year'))
             ->withSecure(false);
         $this->getController()->setResponse($this->getController()->getResponse()->withCookie($cookie));
@@ -201,6 +202,12 @@ class GameComponent extends Component
 
     private function read($key)
     {
-        return $this->getController()->getRequest()->getCookie($key);
+        $value = $this->getController()->getRequest()->getCookie($key);
+
+        if (str_contains($key, 'time.')) {
+            return (int) $value;
+        }
+
+        return $value;
     }
 }
