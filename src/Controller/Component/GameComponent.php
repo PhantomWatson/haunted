@@ -190,7 +190,7 @@ class GameComponent extends Component
             ->withValue($val)
             ->withExpiry(new DateTime('+1 year'))
             ->withSecure(false);
-        $this->getController()->setResponse($this->getController()->response->withCookie($cookie));
+        $this->getController()->setResponse($this->getController()->getResponse()->withCookie($cookie));
     }
 
     private function delete($key)
