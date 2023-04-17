@@ -55,7 +55,7 @@ class AppController extends Controller
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        $timeSpent = $this->request->query('ts');
+        $timeSpent = $this->request->getQuery('ts');
         if ($timeSpent) {
             $period1 = $this->request->getCookie('time.period1', 0);
             $period1 += $timeSpent;

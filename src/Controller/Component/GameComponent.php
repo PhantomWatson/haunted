@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Component;
 
+use App\Model\Entity\Player;
 use Cake\Controller\Component;
 use Cake\Http\Cookie\Cookie;
 use Cake\ORM\TableRegistry;
@@ -111,15 +112,15 @@ class GameComponent extends Component
         }
 
         // Floor
-        if ($this->request->controller == 'Floors') {
-            if ($this->request->action == 'first') {
+        if ($this->controllerIs('Floors')) {
+            if ($this->actionIs('first')) {
                 $floor = 1;
-            } elseif ($this->request->action == 'second') {
+            } elseif ($this->actionIs('second')) {
                 $floor = 2;
             } else {
                 $floor = 99;
             }
-        } elseif ($this->request->controller == 'Rooms') {
+        } elseif ($this->controllerIs('Rooms')) {
             if (isset($this->request->params['pass'][0])) {
                 $floor = $this->request->params['pass'][0];
             } else {
@@ -148,6 +149,16 @@ class GameComponent extends Component
                 'percent' => $timeRemainingPercent
             ]
         ]);
+    }
+
+    private function controllerIs($val): bool
+    {
+        return $this->getController()->getRequest()->getParam('controller') == $val;
+    }
+
+    private function actionIs($val): bool
+    {
+        return $this->getController()->getRequest()->getParam('action') == $val;
     }
 
     /**
