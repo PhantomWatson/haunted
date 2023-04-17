@@ -171,7 +171,7 @@ class GameComponent extends Component
     {
         $playersTable = TableRegistry::get('Players');
         $player = $this->read('player');
-        return $player ? $playersTable->newEntity($player) : null;
+        return $player ? $playersTable->newEntity(['name' => $player]) : null;
     }
 
     /**
