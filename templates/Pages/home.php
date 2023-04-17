@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+
 <p>
     You are trapped in a haunted Muncie Central High School. The doors and windows are all sealed shut and unbreakable
     and the teachers and classrooms have all undergone monsterous changes. You must save the school and find a way out
@@ -62,11 +68,11 @@
     </h2>
     <?= $this->Form->create($player) ?>
 
-    <?= $this->Form->input('name', [
+    <?= $this->Form->control('name', [
         'required' => true
     ]) ?>
 
-    <?= $this->Form->input('sex', [
+    <?= $this->Form->control('sex', [
         'empty' => true,
         'options' => [
             'm' => 'Male',
@@ -75,7 +81,7 @@
         'required' => true
     ]) ?>
 
-    <?= $this->Form->input('gpa', [
+    <?= $this->Form->control('gpa', [
         'empty' => true,
         'label' => 'GPA',
         'options' => [
