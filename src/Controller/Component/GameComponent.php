@@ -44,7 +44,7 @@ class GameComponent extends Component
      */
     public function savePlayer($player)
     {
-        $this->write('player', $player->toArray());
+        $this->write('player', json_encode($player->toArray()));
     }
 
     /**
@@ -171,7 +171,7 @@ class GameComponent extends Component
     {
         $playersTable = TableRegistry::get('Players');
         $player = $this->read('player');
-        return $player ? $playersTable->newEntity(['name' => $player]) : null;
+        return $player ? $playersTable->newEntity(json_decode($player)) : null;
     }
 
     /**
