@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <?php if (! $move): ?>
     <p>
         Mr. Bartling is in the back of the room. You ask him if he would be kind enough to have mercy on you and
@@ -27,8 +32,8 @@
     <?php endif; ?>
     <?= $this->Game->hallwayLink('Decline his offer and retreat into the hallway', 1) ?>
 <?php elseif ($move == "calculus"): ?>
-    <?php if ($this->request->data('calc_answer') !== null): ?>
-        <?php if ($this->request->data('calc_answer') == 5): ?>
+    <?php if ($this->getRequest()->getData('calc_answer') !== null): ?>
+        <?php if ($this->getRequest()->getData('calc_answer') == 5): ?>
             <?php
                 $this->Game->completeQuest('k');
                 if ($this->Game->questIsCompleted('j')) {
@@ -77,8 +82,8 @@
         <?= $this->Game->formEnd() ?>
     <?php endif; ?>
 <?php elseif ($move == "algebra"): ?>
-    <?php if ($this->request->data('alg_answer') !== null): ?>
-        <?php if ($this->request->data('alg_answer') == 28): ?>
+    <?php if ($this->getRequest()->getData('alg_answer') !== null): ?>
+        <?php if ($this->getRequest()->getData('alg_answer') == 28): ?>
             <?php
                 $this->Game->completeQuest('j');
                 if ($this->Game->questIsCompleted('k')) {

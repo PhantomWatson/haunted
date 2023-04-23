@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <?php if (! $move): ?>
     <?php if ($this->Game->questCompleted("7")): ?>
         <?php $this->Game->clearRoom(); ?>
@@ -25,7 +30,7 @@
     <?= $this->Game->formEnd() ?>
 <?php elseif ($move == 'tell_abe'): ?>
     <?php
-        $answer = $this->request->data('head_is');
+        $answer = $this->getRequest()->getData('head_is');
         $correct = stristr($answer, 'greenhouse') || stristr($answer, 'green house');
     ?>
     <?php if ($correct): ?>

@@ -1,4 +1,9 @@
-<?php $answer = $this->request->data('answer'); ?>
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+<?php $answer = $this->getRequest()->getData('answer'); ?>
 <?php if ($this->Game->questCompleted("h")): ?>
     <?php
         $this->Game->spendTime();

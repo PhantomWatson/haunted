@@ -1,6 +1,11 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <?php if (! $move): ?>
     <p>
-        Mrs. Madsen is in her room. She doesn't know what's going on with the school and she doesn't know how to get 
+        Mrs. Madsen is in her room. She doesn't know what's going on with the school and she doesn't know how to get
         out, but she knows that she has a new question for her classes that she's itching to have you try.
     </p>
     <p>
@@ -10,7 +15,7 @@
 	<?= $this->Game->link('No', ['move' => 'no']) ?>
 <?php elseif ($move == "yes"): ?>
     <p>
-        She slowly reads from a sheet of paper, <strong>"Which of the following is not a fundamental component of 
+        She slowly reads from a sheet of paper, <strong>"Which of the following is not a fundamental component of
         the writing process?"</strong>
     </p>
     <?= $this->Game->link('Researching', ['move' => '1']) ?>
@@ -19,8 +24,8 @@
     <?= $this->Game->link('Revising', ['move' => '4']) ?>
 <?php elseif ($move == "1"): ?>
 	<p>
-	    "Good answer!" she says, "You get some candy." You're disappointed. It's not even the candy that you like. 
-	    You ask for two passes instead (one, then a second in case you lose the first). "Oh, where do you need passes 
+	    "Good answer!" she says, "You get some candy." You're disappointed. It's not even the candy that you like.
+	    You ask for two passes instead (one, then a second in case you lose the first). "Oh, where do you need passes
 	    to?"
     </p>
 	<?= $this->Game->formStart('post', ['move' => 'pass']) ?>
@@ -40,7 +45,7 @@
     ?>
     <p>
         Mrs. Madsen takes out a pencil and writes you two passes. Once you leave her room, you erase
-        "<?= $this->request->data('destination') ?>" and make them both general passes.
+        "<?= $this->getRequest()->getData('destination') ?>" and make them both general passes.
     </p>
     <?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "no"): ?>
