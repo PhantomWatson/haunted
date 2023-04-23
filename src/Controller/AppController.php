@@ -90,7 +90,7 @@ class AppController extends Controller
         $cookieWriteQueue = $this->getRequest()->getSession()->read('cookieWriteQueue');
         if ($cookieWriteQueue) {
             foreach ($cookieWriteQueue as $key => $val) {
-                $this->setCookie($key, (string)$val);
+                $this->setCookie($key, $val);
             }
         }
     }
