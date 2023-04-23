@@ -42,7 +42,7 @@ class GameHelper extends Helper
         // Write cookie data to the session.
         // It will be moved into actual cookie data in \App\Controller\AppController::afterFilter()
         $session = $this->getView()->getRequest()->getSession();
-        $session->write('cookieWriteQueue.' . $key, $val);
+        $session->write('cookieWriteQueue.' . $key, (string) $val);
     }
 
     /**
