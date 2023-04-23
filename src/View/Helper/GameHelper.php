@@ -336,8 +336,7 @@ class GameHelper extends Helper
 
     private function getViewVar($var)
     {
-        $vars = $this->getView()->getVars();
-        return $vars[$var];
+        return $this->getView()->get($var);
     }
 
     /**
