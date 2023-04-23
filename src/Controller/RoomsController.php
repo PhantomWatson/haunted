@@ -36,8 +36,8 @@ class RoomsController extends AppController
         }
 
         // Default to a random generic room if a specific room template isn't available
-        $dir = new Folder(APP . 'Template' . DS . 'Rooms');
-        if (! $dir->find("$room.ctp")) {
+        $roomExists = file_exists(ROOT . DS . 'templates' . DS . 'Rooms' . DS . "$room.php");
+        if (!$roomExists) {
             $i = rand(1, 4);
             // 1_4 and 2_4 are the same
             if ($floor == 2 && $i == 4) {
