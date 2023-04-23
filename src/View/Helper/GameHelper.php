@@ -9,7 +9,6 @@ use Cake\View\Helper;
 class GameHelper extends Helper
 {
     public $helpers = ['Html'];
-    public $cookie;
 
     /**
      * Initialize function
@@ -18,7 +17,6 @@ class GameHelper extends Helper
      */
     public function initialize(array $config): void
     {
-        $this->cookie = $this->_View->get('cookie');
         parent::initialize($config);
     }
 
@@ -31,7 +29,7 @@ class GameHelper extends Helper
     {
         $period1 = $this->read('time.period1');
         $period1 += $periods;
-        $this->cookie->write('time.period1', $period1);
+        $this->write('time.period1', $period1);
     }
 
     private function read($key)
@@ -54,9 +52,9 @@ class GameHelper extends Helper
      */
     public function addPasses($count = 1)
     {
-        $period2 = $this->cookie->read('time.period2');
+        $period2 = $this->read('time.period2');
         $period2 += $count;
-        $this->cookie->write('time.period2', $period2);
+        $this->write('time.period2', $period2);
     }
 
     /**
@@ -66,9 +64,9 @@ class GameHelper extends Helper
      */
     public function doublePasses()
     {
-        $period2 = $this->cookie->read('time.period2');
+        $period2 = $this->read('time.period2');
         $period2 *= 2;
-        $this->cookie->write('time.period2', $period2);
+        $this->write('time.period2', $period2);
     }
 
     /**
@@ -78,9 +76,9 @@ class GameHelper extends Helper
      */
     public function removePasses($count = 1)
     {
-        $period2 = $this->cookie->read('time.period2');
+        $period2 = $this->read('time.period2');
         $period2 -= $count;
-        $this->cookie->write('time.period2', $period2);
+        $this->write('time.period2', $period2);
     }
 
     /**
@@ -215,9 +213,9 @@ class GameHelper extends Helper
      */
     public function completeQuest($quest)
     {
-        $quests = $this->cookie->read('quests');
+        $quests = $this->read('quests');
         $quests .= $quest;
-        $this->cookie->write('quests', $quests);
+        $this->write('quests', $quests);
     }
 
     /**
@@ -228,9 +226,9 @@ class GameHelper extends Helper
      */
     public function getTitle($questJustCompleted = null)
     {
-        $quests = $this->cookie->read('quests');
+        $quests = $this->read('quests');
         $playersTable = TableRegistry::get('Players');
-        $sex = $this->cookie->read('player.sex');
+        $sex = $this->read('player.sex');
         $title = $playersTable->getTitle($quests, $sex);
         if ($questJustCompleted) {
             $titleComponent = $playersTable->getTitleComponent($questJustCompleted, $sex);
@@ -248,7 +246,7 @@ class GameHelper extends Helper
     public function questCompleted($quest)
     {
 
-        $quests = $this->cookie->read('quests');
+        $quests = $this->read('quests');
         return strpos($quests, $quest) !== false;
     }
 
@@ -259,7 +257,7 @@ class GameHelper extends Helper
      */
     public function changeGpa($value)
     {
-        $this->cookie->write('player.gpa', $value);
+        $this->write('player.gpa', $value);
     }
 
     /**
@@ -270,7 +268,7 @@ class GameHelper extends Helper
      */
     public function setBlyAnswer($answer)
     {
-        $this->cookie->write("game.blyanswers.$answer", true);
+        $this->write("game.blyanswers.$answer", true);
     }
 
     /**
@@ -281,7 +279,7 @@ class GameHelper extends Helper
      */
     public function blyAnswerGiven($answer)
     {
-        return (bool)$this->cookie->read("game.blyanswers.$answer");
+        return (bool)$this->read("game.blyanswers.$answer");
     }
 
     /**
@@ -333,7 +331,7 @@ class GameHelper extends Helper
      */
     public function changeName($name)
     {
-        $this->cookie->write('player.name', $name);
+        $this->write('player.name', $name);
     }
 
     /**
@@ -347,7 +345,7 @@ class GameHelper extends Helper
         if (! $room) {
             throw new InternalErrorException('Error clearing room. Room unknown.');
         }
-        $this->cookie->write("cleared-rooms.$room", true);
+        $this->write("cleared-rooms.$room", true);
     }
 
     /**
@@ -357,7 +355,7 @@ class GameHelper extends Helper
      */
     public function getClearedRooms()
     {
-        $clearedRooms = $this->cookie->read('cleared-rooms');
+        $clearedRooms = $this->read('cleared-rooms');
         return is_array($clearedRooms) ? array_keys($clearedRooms) : [];
     }
 
@@ -369,6 +367,6 @@ class GameHelper extends Helper
      */
     public function roomIsCleared($room)
     {
-        return (bool)$this->cookie->read("cleared-rooms.$room");
+        return (bool)$this->read("cleared-rooms.$room");
     }
 }
