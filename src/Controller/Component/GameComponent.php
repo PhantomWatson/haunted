@@ -7,7 +7,6 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\Cookie\Cookie;
 use Cake\ORM\TableRegistry;
 use DateTime;
-use function PHPUnit\Framework\stringContains;
 
 class GameComponent extends Component
 {
@@ -134,7 +133,7 @@ class GameComponent extends Component
 
         $room = isset($this->request->params['pass'][1]) ? $this->request->params['pass'][1] : null;
 
-        $this->_registry->getController()->set([
+        $this->getController()->set([
             'debugMode' => ($name == 'Mr. Cauliflower' || ($quests && strstr($quests, 'z'))),
             'floor' => $floor,
             'gpa' => $gpa,
