@@ -247,7 +247,7 @@ class GameHelper extends Helper
     {
 
         $quests = $this->read('quests');
-        return strpos($quests, $quest) !== false;
+        return $quests && strpos($quests, $quest) !== false;
     }
 
     /**
