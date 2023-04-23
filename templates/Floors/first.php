@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var \App\View\AppView $this
+ */
     use App\Map\Map;
     $map = new Map(1);
     $map->addTarget('567,247,582,260', 'girlsrr', 'Girl\'s Restroom');
