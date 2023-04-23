@@ -90,7 +90,7 @@ class GameHelper extends Helper
      */
     public function hallwayLink($label = null, $spendTime = 0)
     {
-        $floor = $this->_View->get('floor');
+        $floor = $this->getViewVar('floor');
         if (! $floor) {
             throw new InternalErrorException('Floor unknown');
         }
@@ -131,10 +131,10 @@ class GameHelper extends Helper
     public function link($label, $url)
     {
         if (! isset($url['floor'])) {
-            $url['floor'] = $this->_View->get('floor');
+            $url['floor'] = $this->getViewVar('floor');
         }
         if (! isset($url['room'])) {
-            $url['room'] = $this->_View->get('room');
+            $url['room'] = $this->getViewVar('room');
         }
 
         // Don't show link if this room has been cleared
@@ -165,10 +165,10 @@ class GameHelper extends Helper
     public function formStart($method, $url = [])
     {
         if (! isset($url['floor'])) {
-            $url['floor'] = $this->_View->get('floor');
+            $url['floor'] = $this->getViewVar('floor');
         }
         if (! isset($url['room'])) {
-            $url['room'] = $this->_View->get('room');
+            $url['room'] = $this->getViewVar('room');
         }
 
         return '<form method="' . $method . '" action="' . Router::url($url) . '" class="form-inline">';
@@ -334,6 +334,12 @@ class GameHelper extends Helper
         $this->write('player.name', $name);
     }
 
+    private function getViewVar($var)
+    {
+        $vars = $this->getView()->getVars();
+        return $vars[$var];
+    }
+
     /**
      * Marks a room as having been "cleared", making it henceforth inaccessible
      *
@@ -341,7 +347,7 @@ class GameHelper extends Helper
      */
     public function clearRoom()
     {
-        $room = $this->_View->get('room');
+        $room = $this->getViewVar('room');
         if (! $room) {
             throw new InternalErrorException('Error clearing room. Room unknown.');
         }
