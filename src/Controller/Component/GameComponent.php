@@ -204,6 +204,12 @@ class GameComponent extends Component
             return (int) $value;
         }
 
+        if (str_contains($key, 'player.')) {
+            $player = $this->getPlayer();
+            $key = str_replace('player.', '', $key);
+            return $player ? $player[$key] : null;
+        }
+
         return $value;
     }
 }
