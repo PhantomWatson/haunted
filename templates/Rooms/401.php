@@ -36,7 +36,7 @@
         <?php if ($this->getRequest()->getData('calc_answer') == 5): ?>
             <?php
                 $this->Game->completeQuest('k');
-                if ($this->Game->questIsCompleted('j')) {
+                if ($this->Game->questCompleted('j')) {
                     $this->Game->clearRoom();
                 }
             ?>
@@ -86,7 +86,7 @@
         <?php if ($this->getRequest()->getData('alg_answer') == 28): ?>
             <?php
                 $this->Game->completeQuest('j');
-                if ($this->Game->questIsCompleted('k')) {
+                if ($this->Game->questCompleted('k')) {
                     $this->Game->clearRoom();
                 }
             ?>
