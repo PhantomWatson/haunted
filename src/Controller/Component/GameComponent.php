@@ -122,16 +122,12 @@ class GameComponent extends Component
                 $floor = 99;
             }
         } elseif ($this->controllerIs('Rooms')) {
-            if (isset($this->request->params['pass'][0])) {
-                $floor = $this->request->params['pass'][0];
-            } else {
-                $floor = 88;
-            }
+            $floor = $this->getController()->getRequest()->getParam('floor') ?? 88;
         } else {
             $floor = 77;
         }
 
-        $room = isset($this->request->params['pass'][1]) ? $this->request->params['pass'][1] : null;
+        $room = $this->getController()->getRequest()->getParam('room');
 
         $this->getController()->set([
             'debugMode' => ($name == 'Mr. Cauliflower' || ($quests && strstr($quests, 'z'))),
