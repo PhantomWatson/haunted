@@ -13,14 +13,11 @@
  */
 namespace App\View;
 
+use App\View\Helper\GameHelper;
 use Cake\View\View;
 
 /**
- * Application View
- *
- * Your application’s default view class
- *
- * @link http://book.cakephp.org/3.0/en/views.html#the-app-view
+ * @property GameHelper $Game
  */
 class AppView extends View
 {

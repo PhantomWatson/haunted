@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\Component\GameComponent;
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 use Cake\Http\Cookie\Cookie;
 use DateTime;
 
@@ -60,12 +61,7 @@ class AppController extends Controller
             $period1 = $this->request->getCookie('time.period1', 0);
             $period1 += $timeSpent;
 
-            $cookie = (new Cookie('time.period1'))
-                ->withValue($period1)
-                ->withExpiry(new DateTime('+1 year'))
-                ->withSecure(false)
-            ;
-            $this->setResponse($this->response->withCookie($cookie));
+            $this->setCookie('time.period1', $period1);
         }
 
         if ($this->Game->checkLose() && ! in_array($this->request->getParam('action'), ['lose', 'restart', 'home'])) {
@@ -76,5 +72,26 @@ class AppController extends Controller
         }
 
         return parent::beforeFilter($event);
+    }
+
+    private function setCookie($key, $val)
+    {
+        $cookie = (new Cookie($key))
+            ->withValue($val)
+            ->withExpiry(new DateTime('+1 year'))
+            ->withSecure(false)
+        ;
+        $this->setResponse($this->response->withCookie($cookie));
+    }
+
+    public function afterFilter(EventInterface $event)
+    {
+        // Move cookieWriteQueue into cookie data
+        $cookieWriteQueue = $this->getRequest()->getSession()->read('cookieWriteQueue');
+        if ($cookieWriteQueue) {
+            foreach ($cookieWriteQueue as $key => $val) {
+                $this->setCookie($key, $val);
+            }
+        }
     }
 }

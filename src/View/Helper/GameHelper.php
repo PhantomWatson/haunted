@@ -29,9 +29,22 @@ class GameHelper extends Helper
      */
     public function spendTime($periods = 1)
     {
-        $period1 = $this->cookie->read('time.period1');
+        $period1 = $this->read('time.period1');
         $period1 += $periods;
         $this->cookie->write('time.period1', $period1);
+    }
+
+    private function read($key)
+    {
+        return $this->getView()->getRequest()->getCookie($key);
+    }
+
+    private function write($key, $val)
+    {
+        // Write cookie data to the session.
+        // It will be moved into actual cookie data in \App\Controller\AppController::afterFilter()
+        $session = $this->getView()->getRequest()->getSession();
+        $session->write('cookieWriteQueue.' . $key, $val);
     }
 
     /**
@@ -234,6 +247,7 @@ class GameHelper extends Helper
      */
     public function questCompleted($quest)
     {
+
         $quests = $this->cookie->read('quests');
         return strpos($quests, $quest) !== false;
     }
