@@ -2,7 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\Player;
-use Cake\Network\Exception\InternalErrorException;
+use Cake\Http\Exception\InternalErrorException;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
