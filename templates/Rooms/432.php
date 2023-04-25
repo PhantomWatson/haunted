@@ -29,7 +29,6 @@
 <?php elseif ($move == "fight"): ?>
 	<?php
         $this->Game->completeQuest('3');
-        $this->Game->clearRoom();
     ?>
 	<p>
 		Stevo develops scary muscles from out of nowhere. His terrifying mass and awesome strength seem to be
