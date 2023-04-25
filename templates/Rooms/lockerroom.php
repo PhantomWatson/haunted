@@ -1,5 +1,8 @@
 <?php
-    $lrSide = $this->request->query('lr');
+/**
+ * @var \App\View\AppView $this
+ */
+    $lrSide = $this->getRequest()->getQuery('lr');
     $matchingSex = ("$lrSide$sex" == 'gf' || "$lrSide$sex" == 'bm');
 ?>
 <?php if (! $move && $matchingSex): ?>
