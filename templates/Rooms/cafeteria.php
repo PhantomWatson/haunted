@@ -1,4 +1,6 @@
-<?php if (! $move ): ?>
+<?php use App\Controller\Component\GameComponent;
+
+if (! $move ): ?>
     <p>
         Entering the cafeteria, you immediately notice a giant pirate ship being sailed across the enormous room,
         scattering tables and chairs in its wake. You look up to the front of the ship and see a crazed James Updike
@@ -54,10 +56,10 @@
 	<?= $this->Game->link('Look in the computer lab', ['move' => 'comp_lab']) ?>
 	<?= $this->Game->hallwayLink() ?>
 <?php elseif ($move == "for_nothing"): ?>
-	<?php $this->Game->completeQuest('0'); ?>
+	<?php $this->Game->completeQuest(GameComponent::QUEST_SAVIOR); ?>
 	<p>
         You quickly tip over the soup vats so the freshmen can run free, then run from the wrath of the cooks.
-        For your selfless act, you will forever be known as <?= $this->Game->getTitle('0') ?> <?= $name ?>.
+        For your selfless act, you will forever be known as <?= $this->Game->getTitle(GameComponent::QUEST_SAVIOR) ?> <?= $name ?>.
     </p>
 	<?php if (! $this->Game->questCompleted("a")): ?>
 		<?= $this->Game->link('Look in the computer lab', ['move' => 'comp_lab']) ?>

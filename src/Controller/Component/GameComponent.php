@@ -20,6 +20,8 @@ class GameComponent extends Component
     const NAME = 'name';
     const BLY_ANSWERS = 'blyanswers';
 
+    const QUEST_SAVIOR = 's';
+
     /**
      * Initialize method
      *

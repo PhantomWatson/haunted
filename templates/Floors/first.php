@@ -2,7 +2,9 @@
 /**
  * @var \App\View\AppView $this
  */
-    use App\Map\Map;
+
+use App\Controller\Component\GameComponent;
+use App\Map\Map;
     $map = new Map(1);
     $map->addTarget('567,247,582,260', 'girlsrr', 'Girl\'s Restroom');
     $map->addTarget('0,153,63,252', 'pool', 'Swimming Pool');
@@ -73,7 +75,7 @@
     if (! $this->Game->questCompleted('a') && $this->Game->questCompleted('6')) {
         $map->addTarget('478,40,512,75', 'cafeteria', 'Room 320 - Computer Lab', 'comp_lab');
     }
-    if (! $this->Game->questCompleted('0') && $this->Game->questCompleted('6')) {
+    if (! $this->Game->questCompleted(GameComponent::QUEST_SAVIOR) && $this->Game->questCompleted('6')) {
         $map->addTarget('510,38,608,77', 'cafeteria', 'Cafeteria Kitchen', 'kitchen');
     }
     if(! $this->Game->questCompleted('9')) {

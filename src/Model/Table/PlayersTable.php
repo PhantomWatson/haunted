@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Controller\Component\GameComponent;
 use App\Model\Entity\Player;
 use Cake\Http\Exception\InternalErrorException;
 use Cake\ORM\Table;
@@ -46,7 +47,7 @@ class PlayersTable extends Table
             return '';
         }
         $titleComponents = [];
-        foreach (['c', '7', '0', '6'] as $quest) {
+        foreach (['c', '7', GameComponent::QUEST_SAVIOR, '6'] as $quest) {
             if (strstr($quests, $quest) ) {
                 $titleComponents[] = $this->getTitleComponent($quest);
             }
@@ -82,7 +83,7 @@ class PlayersTable extends Table
                 return 'Heroic';
             case '7':
                 return 'Patriot';
-            case '0':
+            case GameComponent::QUEST_SAVIOR:
                 return 'Savior';
             case '6':
                 return 'Pirate';
