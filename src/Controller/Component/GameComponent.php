@@ -70,8 +70,8 @@ class GameComponent extends Component
         $time = $this->read(self::TIME);
 
         return [
-            self::PERIOD1 => (int) $time[self::PERIOD1],
-            self::PERIOD2 => (int) $time[self::PERIOD2]
+            self::PERIOD1 => $time ? (int) $time[self::PERIOD1] : 0,
+            self::PERIOD2 => $time ? (int) $time[self::PERIOD2] : 0,
         ];
     }
 
