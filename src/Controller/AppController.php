@@ -77,7 +77,7 @@ class AppController extends Controller
     private function setCookie($key, $val)
     {
         $cookie = (new Cookie($key))
-            ->withValue($val)
+            ->withValue((string) $val)
             ->withExpiry(new DateTime('+1 year'))
             ->withSecure(false)
         ;
@@ -92,7 +92,7 @@ class AppController extends Controller
         $cookieWriteQueue = $session->read('cookieWriteQueue');
         if ($cookieWriteQueue) {
             foreach ($cookieWriteQueue as $key => $val) {
-                $this->setCookie($key, (string)$val);
+                $this->setCookie($key, $val);
             }
         }
         $session->delete('cookieWriteQueue');
