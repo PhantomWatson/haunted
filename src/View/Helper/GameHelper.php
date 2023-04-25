@@ -234,7 +234,7 @@ class GameHelper extends Helper
      */
     public function getTitle($questJustCompleted = null)
     {
-        $quests = $this->read(GameComponent::QUESTS);
+        $quests = $this->read(GameComponent::QUESTS) . $questJustCompleted;
         $playersTable = TableRegistry::get('Players');
         $player = $this->read(GameComponent::PLAYER);
         $sex = $player[GameComponent::SEX];
