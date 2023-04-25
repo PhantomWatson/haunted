@@ -79,7 +79,7 @@ class GameComponent extends Component
     {
         // GPA
         $player = $this->read(self::PLAYER);
-        $gpa = $player[self::GPA];
+        $gpa = $player[self::GPA] ?? null;
         $displayedGpas = [
             5 => '4.0',
             4 => '3.5',
@@ -88,19 +88,19 @@ class GameComponent extends Component
             1 => '0.5',
             0 => '0.0'
         ];
-        $gpaDisplayed = $gpa !== NULL ? $displayedGpas[$gpa] : null;
+        $gpaDisplayed = $displayedGpas[$gpa] ?? null;
 
         // Player title
-        $sex = $player[self::SEX];
-        $name = $player[self::NAME];
+        $sex = $player[self::SEX] ?? null;
+        $name = $player[self::NAME] ?? null;
         $quests = $this->read(self::QUESTS);
         $playersTable = TableRegistry::get('Players');
         $title = $playersTable->getTitle($quests, $sex);
 
         // Time remaining
         $time = $this->getTime();
-        $period1 = $time[self::PERIOD1];
-        $period2 = $time[self::PERIOD2];
+        $period1 = $time[self::PERIOD1] ?? 0;
+        $period2 = $time[self::PERIOD2] ?? 0;
         if ($period2) {
             $timeRemainingPercent = ($period1 / $period2) * 100;
             $timeRemainingPercent = min($timeRemainingPercent, 100);
