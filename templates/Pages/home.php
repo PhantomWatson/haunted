@@ -29,12 +29,11 @@
 </ul>
 
 <p>
-    This game was originally developed in 2002 for the students of MCHS to play. Because I still dig the concept and
-    occasionally hear people saying that it's fun to play, I dusted it off and overhauled it in 2016. I haven't changed
-    any of the original content (or updated any of the many outdated references), but I gave the interface a polish.
-    Note that this game works best with <strong>a wide screen and a mouse</strong>.
+    This game was originally developed in 2002 for the students of MCHS to play, re-released in 2023 for my graduating
+    class's 20th reunion. I haven't changed any of the original content (or updated any of the many outdated references),
+    but I gave the interface a polish. Note that this game works best with <strong>a wide screen and a mouse</strong>.
     <br />
-    <br />Anyway, I hope you like the game!
+    <br />Anyway, I hope you like the game! Feedback is always appreciated.
     <span style="display: block; text-align: right;">
         - <a href="mailto:graham@phantomwatson.com">Graham "Phantom" Watson</a>
     </span>
