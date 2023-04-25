@@ -27,9 +27,9 @@ class GameHelper extends Helper
      */
     public function spendTime($periods = 1)
     {
-        $period1 = $this->read('time.period1');
+        $period1 = $this->read('time_period1');
         $period1 += $periods;
-        $this->write('time.period1', $period1);
+        $this->write('time_period1', $period1);
     }
 
     private function read($key)
@@ -52,9 +52,9 @@ class GameHelper extends Helper
      */
     public function addPasses($count = 1)
     {
-        $period2 = $this->read('time.period2');
+        $period2 = $this->read('time_period2');
         $period2 += $count;
-        $this->write('time.period2', $period2);
+        $this->write('time_period2', $period2);
     }
 
     /**
@@ -64,9 +64,9 @@ class GameHelper extends Helper
      */
     public function doublePasses()
     {
-        $period2 = $this->read('time.period2');
+        $period2 = $this->read('time_period2');
         $period2 *= 2;
-        $this->write('time.period2', $period2);
+        $this->write('time_period2', $period2);
     }
 
     /**
@@ -76,9 +76,9 @@ class GameHelper extends Helper
      */
     public function removePasses($count = 1)
     {
-        $period2 = $this->read('time.period2');
+        $period2 = $this->read('time_period2');
         $period2 -= $count;
-        $this->write('time.period2', $period2);
+        $this->write('time_period2', $period2);
     }
 
     /**
@@ -228,7 +228,7 @@ class GameHelper extends Helper
     {
         $quests = $this->read('quests');
         $playersTable = TableRegistry::get('Players');
-        $sex = $this->read('player.sex');
+        $sex = $this->read('player_sex');
         $title = $playersTable->getTitle($quests, $sex);
         if ($questJustCompleted) {
             $titleComponent = $playersTable->getTitleComponent($questJustCompleted, $sex);
@@ -257,7 +257,7 @@ class GameHelper extends Helper
      */
     public function changeGpa($value)
     {
-        $this->write('player.gpa', $value);
+        $this->write('player_gpa', $value);
     }
 
     /**
@@ -331,7 +331,7 @@ class GameHelper extends Helper
      */
     public function changeName($name)
     {
-        $this->write('player.name', $name);
+        $this->write('player_name', $name);
     }
 
     private function getViewVar($var)
@@ -350,7 +350,7 @@ class GameHelper extends Helper
         if (! $room) {
             throw new InternalErrorException('Error clearing room. Room unknown.');
         }
-        $this->write("cleared-rooms.$room", true);
+        $this->write("cleared-rooms_$room", true);
     }
 
     /**
@@ -372,6 +372,6 @@ class GameHelper extends Helper
      */
     public function roomIsCleared($room)
     {
-        return (bool)$this->read("cleared-rooms.$room");
+        return (bool)$this->read("cleared-rooms_$room");
     }
 }

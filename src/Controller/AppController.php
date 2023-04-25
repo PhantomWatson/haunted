@@ -58,10 +58,10 @@ class AppController extends Controller
     {
         $timeSpent = $this->request->getQuery('ts');
         if ($timeSpent) {
-            $period1 = $this->request->getCookie('time.period1', 0);
+            $period1 = $this->request->getCookie('time_period1', 0);
             $period1 += $timeSpent;
 
-            $this->setCookie('time.period1', $period1);
+            $this->setCookie('time_period1', $period1);
         }
 
         if ($this->Game->checkLose() && ! in_array($this->request->getParam('action'), ['lose', 'restart', 'home'])) {
