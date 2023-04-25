@@ -182,7 +182,7 @@ class GameComponent extends Component
     {
         $playersTable = TableRegistry::get('Players');
         $player = $this->read(self::PLAYER);
-        return $player ? $playersTable->newEntity((array) json_decode($player)) : null;
+        return $player ? $playersTable->newEntity($player) : null;
     }
 
     /**
@@ -214,6 +214,7 @@ class GameComponent extends Component
 
     private function read($key)
     {
-        return json_decode($this->getController()->getRequest()->getCookie($key));
+        $val = $this->getController()->getRequest()->getCookie($key);
+        return $val ? json_decode($val) : $val;
     }
 }
