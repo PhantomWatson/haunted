@@ -215,6 +215,6 @@ class GameComponent extends Component
     private function read($key)
     {
         $val = $this->getController()->getRequest()->getCookie($key);
-        return $val ? json_decode($val) : $val;
+        return $val ? (array) json_decode($val) : $val;
     }
 }

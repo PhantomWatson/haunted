@@ -37,7 +37,7 @@ class GameHelper extends Helper
     private function read($key)
     {
         $val = $this->getView()->getRequest()->getCookie($key);
-        return $val ? json_decode($val) : $val;
+        return $val ? (array) json_decode($val) : $val;
     }
 
     private function write($key, $val)
