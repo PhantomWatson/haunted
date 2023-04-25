@@ -4,9 +4,7 @@ namespace App\Controller\Component;
 use App\Model\Entity\Player;
 use Cake\Controller\Component;
 use Cake\Datasource\EntityInterface;
-use Cake\Http\Cookie\Cookie;
 use Cake\ORM\TableRegistry;
-use DateTime;
 
 class GameComponent extends Component
 {
@@ -44,11 +42,7 @@ class GameComponent extends Component
 
     public function clearGameData()
     {
-        $this->delete(self::PLAYER);
-        $this->delete(self::TIME);
-        $this->delete(self::QUESTS);
-        $this->delete(self::GAME);
-        $this->delete(self::CLEARED_ROOMS);
+        $this->getSession()->clear();
     }
 
     /**
@@ -197,44 +191,23 @@ class GameComponent extends Component
         return $clearedRooms ? array_key_exists($room, $clearedRooms) : false;
     }
 
-    public function write($var, $val)
+    private function getSession()
     {
-        $cookie = (new Cookie($var))
-            ->withValue(json_encode($val))
-            ->withExpiry(new DateTime('+1 year'))
-            ->withSecure(false);
-        $this->getController()->setResponse($this->getController()->getResponse()->withCookie($cookie));
+        return $this->getController()->getRequest()->getSession();
+    }
+
+    public function write($key, $val)
+    {
+        $this->getSession()->write($key, $val);
     }
 
     private function delete($key)
     {
-        $cookie = new Cookie($key);
-        $this->getController()->setResponse($this->getController()->getResponse()->withExpiredCookie($cookie));
+        $this->getSession()->delete($key);
     }
 
     public function read($key)
     {
-        $val = $this->getController()->getRequest()->getCookie($key);
-        return $this->getProcessedCookieVal($val);
-    }
-
-    /**
-     * Returns null, a scalar value, or an array, as appropriate
-     *
-     * @param mixed $val
-     * @return array|mixed|null
-     */
-    public static function getProcessedCookieVal($val)
-    {
-        if (!$val) {
-            return null;
-        }
-
-        $val = json_decode($val);
-        if (is_object($val)) {
-            return (array) $val;
-        }
-
-        return $val;
+        return $this->getSession()->read($key);
     }
 }

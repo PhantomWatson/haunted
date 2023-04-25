@@ -12,7 +12,6 @@ use Cake\Event\EventInterface;
  */
 class AppController extends Controller
 {
-    const COOKIE_WRITE_QUEUE = 'cookieWriteQueue';
     /**
      * Initialization hook method.
      *
@@ -77,19 +76,5 @@ class AppController extends Controller
 
         $time[GameComponent::PERIOD1] = $period1;
         $this->Game->write(GameComponent::TIME, $time);
-    }
-
-    public function afterFilter(EventInterface $event)
-    {
-        $session = $this->getRequest()->getSession();
-
-        // Move cookieWriteQueue into cookie data
-        $cookieWriteQueue = $session->read(self::COOKIE_WRITE_QUEUE);
-        if ($cookieWriteQueue) {
-            foreach ($cookieWriteQueue as $key => $val) {
-                $this->Game->write($key, $val);
-            }
-        }
-        $session->delete(self::COOKIE_WRITE_QUEUE);
     }
 }

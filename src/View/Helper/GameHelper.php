@@ -4,6 +4,7 @@ namespace App\View\Helper;
 use App\Controller\AppController;
 use App\Controller\Component\GameComponent;
 use Cake\Http\Exception\InternalErrorException;
+use Cake\Http\Session;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\View\Helper;
@@ -34,20 +35,22 @@ class GameHelper extends Helper
         $this->write(GameComponent::TIME, $time);
     }
 
+    /**
+     * @return \Cake\Http\Session
+     */
+    private function getSession(): Session
+    {
+        return $this->getView()->getRequest()->getSession();
+    }
+
     private function read($key)
     {
-        $val = $this->getView()->getRequest()->getCookie($key);
-        return GameComponent::getProcessedCookieVal($val);
+        return $this->getSession()->read($key);
     }
 
     private function write($key, $val)
     {
-        // Write cookie data to the session.
-        // It will be moved into actual cookie data in \App\Controller\AppController::afterFilter()
-        $session = $this->getView()->getRequest()->getSession();
-        $cookieWriteQueue = $session->read(AppController::COOKIE_WRITE_QUEUE);
-        $cookieWriteQueue[$key] = $val;
-        $session->write(AppController::COOKIE_WRITE_QUEUE, $cookieWriteQueue);
+        $this->getSession()->write($key, $val);
     }
 
     /**
