@@ -4,8 +4,6 @@ namespace App\Controller;
 use App\Controller\Component\GameComponent;
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
-use Cake\Http\Cookie\Cookie;
-use DateTime;
 
 /**
  * Application Controller
@@ -73,22 +71,12 @@ class AppController extends Controller
 
     private function spendTime($timeSpent)
     {
-        $time = $this->request->getCookie(GameComponent::TIME);
-        $period1 = $time ? $time[GameComponent::PERIOD1] : 0;
+        $time = $this->Game->read(GameComponent::TIME);
+        $period1 = $time[GameComponent::PERIOD1] ?? 0;
         $period1 += $timeSpent;
 
         $time[GameComponent::PERIOD1] = $period1;
-        $this->setCookie(GameComponent::TIME, $time);
-    }
-
-    private function setCookie($key, $val)
-    {
-        $cookie = (new Cookie($key))
-            ->withValue(json_encode($val))
-            ->withExpiry(new DateTime('+1 year'))
-            ->withSecure(false)
-        ;
-        $this->setResponse($this->response->withCookie($cookie));
+        $this->Game->write(GameComponent::TIME, $time);
     }
 
     public function afterFilter(EventInterface $event)
@@ -99,7 +87,7 @@ class AppController extends Controller
         $cookieWriteQueue = $session->read(self::COOKIE_WRITE_QUEUE);
         if ($cookieWriteQueue) {
             foreach ($cookieWriteQueue as $key => $val) {
-                $this->setCookie($key, $val);
+                $this->Game->write($key, $val);
             }
         }
         $session->delete(self::COOKIE_WRITE_QUEUE);

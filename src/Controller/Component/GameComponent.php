@@ -197,7 +197,7 @@ class GameComponent extends Component
         return $clearedRooms ? array_key_exists($room, $clearedRooms) : false;
     }
 
-    private function write($var, $val)
+    public function write($var, $val)
     {
         $cookie = (new Cookie($var))
             ->withValue(json_encode($val))
@@ -212,7 +212,7 @@ class GameComponent extends Component
         $this->getController()->setResponse($this->getController()->getResponse()->withExpiredCookie($cookie));
     }
 
-    private function read($key)
+    public function read($key)
     {
         $val = $this->getController()->getRequest()->getCookie($key);
         return $val ? (array) json_decode($val) : $val;
