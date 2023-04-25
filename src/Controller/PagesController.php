@@ -104,6 +104,7 @@ class PagesController extends AppController
     public function restart()
     {
         $this->Game->clearGameData();
+        $this->getRequest()->getSession()->clear();
         return $this->redirect([
             'action' => 'home'
         ]);
