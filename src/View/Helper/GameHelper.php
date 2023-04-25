@@ -9,6 +9,9 @@ use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\View\Helper;
 
+/**
+ * @property Helper\HtmlHelper $Html
+ */
 class GameHelper extends Helper
 {
     public $helpers = ['Html'];
@@ -124,8 +127,7 @@ class GameHelper extends Helper
         }
         return $this->link(
             $label,
-            $url,
-            ['escape' => false]
+            $url
         );
     }
 
@@ -145,8 +147,8 @@ class GameHelper extends Helper
             $url['room'] = $this->getViewVar('room');
         }
 
-        // Don't show link if this room has been cleared
-        if ($this->roomIsCleared($url['room'])) {
+        // Don't show link if this room has been cleared and this isn't a special "move" button
+        if (!isset($url['move']) && $this->roomIsCleared($url['room'])) {
             return '';
         }
 
