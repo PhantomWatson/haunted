@@ -292,8 +292,7 @@ class GameHelper extends Helper
      */
     public function blyAnswerGiven($answer)
     {
-        $game = $this->read(GameComponent::GAME);
-        return $game ? array_key_exists(GameComponent::BLY_ANSWERS . $answer, $game) : false;
+        return $this->read("game.blyanswers.$answer");
     }
 
     /**
