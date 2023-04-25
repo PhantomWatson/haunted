@@ -14,7 +14,7 @@
         Schemin'".
     </p>
     <?= $this->Game->hallwayLink() ?>
-<?php elseif (stristr($answer, 'tongue')): ?>
+<?php elseif (stristr($answer ?? '', 'tongue')): ?>
     <?php $this->Game->completeQuest('h'); ?>
     <p>
         His jaw drops. "Wha?!" The old man glares at you for a moment from underneath his hood, then says, "You

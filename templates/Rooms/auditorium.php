@@ -31,7 +31,7 @@
 <?php elseif ($move == 'tell_abe'): ?>
     <?php
         $answer = $this->getRequest()->getData('head_is');
-        $correct = stristr($answer, 'greenhouse') || stristr($answer, 'green house');
+        $correct = stristr($answer ?? '', 'greenhouse') || stristr($answer ?? '', 'green house');
     ?>
     <?php if ($correct): ?>
         <?php $this->Game->completeQuest('7'); ?>
