@@ -86,12 +86,15 @@ class AppController extends Controller
 
     public function afterFilter(EventInterface $event)
     {
+        $session = $this->getRequest()->getSession();
+
         // Move cookieWriteQueue into cookie data
-        $cookieWriteQueue = $this->getRequest()->getSession()->read('cookieWriteQueue');
+        $cookieWriteQueue = $session->read('cookieWriteQueue');
         if ($cookieWriteQueue) {
             foreach ($cookieWriteQueue as $key => $val) {
                 $this->setCookie($key, $val);
             }
         }
+        $session->delete('cookieWriteQueue');
     }
 }
