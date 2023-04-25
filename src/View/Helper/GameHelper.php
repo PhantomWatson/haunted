@@ -47,7 +47,7 @@ class GameHelper extends Helper
         $session = $this->getView()->getRequest()->getSession();
         $cookieWriteQueue = $session->read(AppController::COOKIE_WRITE_QUEUE);
         $cookieWriteQueue[$key] = $val;
-        $session->write(AppController::COOKIE_WRITE_QUEUE, $val);
+        $session->write(AppController::COOKIE_WRITE_QUEUE, $cookieWriteQueue);
     }
 
     /**
