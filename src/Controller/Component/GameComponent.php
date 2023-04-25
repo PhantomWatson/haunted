@@ -215,6 +215,26 @@ class GameComponent extends Component
     public function read($key)
     {
         $val = $this->getController()->getRequest()->getCookie($key);
-        return $val ? (array) json_decode($val) : $val;
+        return $this->getProcessedCookieVal($val);
+    }
+
+    /**
+     * Returns null, a scalar value, or an array, as appropriate
+     *
+     * @param mixed $val
+     * @return array|mixed|null
+     */
+    public static function getProcessedCookieVal($val)
+    {
+        if (!$val) {
+            return null;
+        }
+
+        $val = json_decode($val);
+        if (is_object($val)) {
+            return (array) $val;
+        }
+
+        return $val;
     }
 }
