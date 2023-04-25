@@ -239,7 +239,7 @@ class GameHelper extends Helper
         $player = $this->read(GameComponent::PLAYER);
         $sex = $player[GameComponent::SEX];
         $title = $playersTable->getTitle($quests, $sex);
-        if ($questJustCompleted) {
+        if ($questJustCompleted !== null) {
             $titleComponent = $playersTable->getTitleComponent($questJustCompleted, $sex);
             $title = str_replace($titleComponent, '<strong>' . $titleComponent . '</strong>', $title);
         }
