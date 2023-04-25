@@ -51,7 +51,7 @@
     $map->addTarget('79,217,113,235', 'girlsrr', 'Girl\'s Restroom');
     $map->addTarget('78,182,114,217', 'room433b', 'Room 433b - Studio');
     $map->addTarget('145,180,172,236', 'room431', 'Room 431 - A/V');
-    $map->addTarget('113,209,144,236', 'room430', 'Room 430 - Editing or something\n\n...I think');
+    $map->addTarget('113,209,144,236', 'room430', 'Room 430 - Editing or something... I think');
     $map->addTarget('114,189,128,210', 'room433a', 'Room 433a - Studio Booth');
     $map->addTarget('154,161,172,181', 'room436', 'Room 436 - Mr. Reason\'s Office');
     $map->addTarget('131,160,155,182', 'room435', 'Room 435 - Secretary\'s Office');
@@ -74,7 +74,7 @@
     if (! $this->Game->questCompleted('p')) {
         $map->addTarget('252,70,341,103', 'langoffice', 'Language Arts / Foreign Languages Office');
     }
-    
+
     // Stairs down
     $stairCoords = [
         '508,139,534,160',
