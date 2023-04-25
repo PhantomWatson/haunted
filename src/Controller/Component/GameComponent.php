@@ -10,6 +10,18 @@ use DateTime;
 
 class GameComponent extends Component
 {
+    const PERIOD1 = 'period1';
+    const PERIOD2 = 'period2';
+    const PLAYER = 'player';
+    const TIME = 'time';
+    const QUESTS = 'quests';
+    const GAME = 'game';
+    const CLEARED_ROOMS = 'cleared-rooms';
+    const GPA = 'gpa';
+    const SEX = 'sex';
+    const NAME = 'name';
+    const BLY_ANSWERS = 'blyanswers';
+
     /**
      * Initialize method
      *
@@ -23,28 +35,20 @@ class GameComponent extends Component
     public function startGame($player)
     {
         $this->clearGameData();
-        $this->savePlayer($player);
-        $this->write('time_period1', 1);
-        $this->write('time_period2', 13);
+        $this->write(self::PLAYER, $player->toArray());
+        $this->write(self::TIME, [
+            self::PERIOD1 => 1,
+            self::PERIOD2 => 13,
+        ]);
     }
 
     public function clearGameData()
     {
-        $this->delete('player');
-        $this->delete('time');
-        $this->delete('quests');
-        $this->delete('game');
-        $this->delete('cleared-rooms');
-    }
-
-    /**
-     * Saves player data
-     *
-     * @param Player $player
-     */
-    public function savePlayer($player)
-    {
-        $this->write('player', json_encode($player->toArray()));
+        $this->delete(self::PLAYER);
+        $this->delete(self::TIME);
+        $this->delete(self::QUESTS);
+        $this->delete(self::GAME);
+        $this->delete(self::CLEARED_ROOMS);
     }
 
     /**
@@ -54,38 +58,49 @@ class GameComponent extends Component
      */
     public function checkLose()
     {
-        $period1 = $this->read('time_period1');
-        $period2 = $this->read('time_period2');
-        if ($period1 && $period2 && ($period1 / $period2) >= 1) {
+        $time = $this->getTime();
+        if ($time[self::PERIOD1] && $time[self::PERIOD2] && ($time[self::PERIOD1] / $time[self::PERIOD2]) >= 1) {
             return true;
         }
         return false;
     }
 
+    private function getTime()
+    {
+        $time = $this->read(self::TIME);
+
+        return [
+            self::PERIOD1 => (int) $time[self::PERIOD1],
+            self::PERIOD2 => (int) $time[self::PERIOD2]
+        ];
+    }
+
     public function setLayoutVariables()
     {
         // GPA
-        $gpa = $this->read('player_gpa');
+        $player = $this->read(self::PLAYER);
+        $gpa = $player[self::GPA];
         $displayedGpas = [
-            5 => "4.0",
-            4 => "3.5",
-            3 => "2.5",
-            2 => "1.5",
-            1 => "0.5",
-            0 => "0.0"
+            5 => '4.0',
+            4 => '3.5',
+            3 => '2.5',
+            2 => '1.5',
+            1 => '0.5',
+            0 => '0.0'
         ];
         $gpaDisplayed = $gpa !== NULL ? $displayedGpas[$gpa] : null;
 
         // Player title
-        $sex = $this->read('player_sex');
-        $name = $this->read('player_name');
-        $quests = $this->read('quests');
+        $sex = $player[self::SEX];
+        $name = $player[self::NAME];
+        $quests = $this->read(self::QUESTS);
         $playersTable = TableRegistry::get('Players');
         $title = $playersTable->getTitle($quests, $sex);
 
         // Time remaining
-        $period1 = $this->read('time_period1');
-        $period2 = $this->read('time_period2');
+        $time = $this->getTime();
+        $period1 = $time[self::PERIOD1];
+        $period2 = $time[self::PERIOD2];
         if ($period2) {
             $timeRemainingPercent = ($period1 / $period2) * 100;
             $timeRemainingPercent = min($timeRemainingPercent, 100);
@@ -166,7 +181,7 @@ class GameComponent extends Component
     public function getPlayer()
     {
         $playersTable = TableRegistry::get('Players');
-        $player = $this->read('player');
+        $player = $this->read(self::PLAYER);
         return $player ? $playersTable->newEntity((array) json_decode($player)) : null;
     }
 
@@ -178,13 +193,14 @@ class GameComponent extends Component
      */
     public function roomIsCleared($room)
     {
-        return (bool)$this->read("cleared-rooms_$room");
+        $clearedRooms = $this->read(self::CLEARED_ROOMS);
+        return $clearedRooms ? array_key_exists($room, $clearedRooms) : false;
     }
 
     private function write($var, $val)
     {
         $cookie = (new Cookie($var))
-            ->withValue((string)$val)
+            ->withValue(json_encode($val))
             ->withExpiry(new DateTime('+1 year'))
             ->withSecure(false);
         $this->getController()->setResponse($this->getController()->getResponse()->withCookie($cookie));
@@ -198,18 +214,6 @@ class GameComponent extends Component
 
     private function read($key)
     {
-        $value = $this->getController()->getRequest()->getCookie($key);
-
-        if (str_contains($key, 'time_')) {
-            return (int) $value;
-        }
-
-        if (str_contains($key, 'player_')) {
-            $player = $this->getPlayer();
-            $key = str_replace('player_', '', $key);
-            return $player ? $player[$key] : null;
-        }
-
-        return $value;
+        return json_decode($this->getController()->getRequest()->getCookie($key));
     }
 }

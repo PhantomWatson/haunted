@@ -14,7 +14,7 @@ use DateTime;
  */
 class AppController extends Controller
 {
-
+    const COOKIE_WRITE_QUEUE = 'cookieWriteQueue';
     /**
      * Initialization hook method.
      *
@@ -58,10 +58,7 @@ class AppController extends Controller
     {
         $timeSpent = $this->request->getQuery('ts');
         if ($timeSpent) {
-            $period1 = $this->request->getCookie('time_period1', 0);
-            $period1 += $timeSpent;
-
-            $this->setCookie('time_period1', $period1);
+            $this->spendTime($timeSpent);
         }
 
         if ($this->Game->checkLose() && ! in_array($this->request->getParam('action'), ['lose', 'restart', 'home'])) {
@@ -74,10 +71,20 @@ class AppController extends Controller
         return parent::beforeFilter($event);
     }
 
+    private function spendTime($timeSpent)
+    {
+        $time = $this->request->getCookie(GameComponent::TIME);
+        $period1 = $time ? $time[GameComponent::PERIOD1] : 0;
+        $period1 += $timeSpent;
+
+        $time[GameComponent::PERIOD1] = $period1;
+        $this->setCookie(GameComponent::TIME, $time);
+    }
+
     private function setCookie($key, $val)
     {
         $cookie = (new Cookie($key))
-            ->withValue((string) $val)
+            ->withValue(json_encode($val))
             ->withExpiry(new DateTime('+1 year'))
             ->withSecure(false)
         ;
@@ -89,12 +96,12 @@ class AppController extends Controller
         $session = $this->getRequest()->getSession();
 
         // Move cookieWriteQueue into cookie data
-        $cookieWriteQueue = $session->read('cookieWriteQueue');
+        $cookieWriteQueue = $session->read(self::COOKIE_WRITE_QUEUE);
         if ($cookieWriteQueue) {
             foreach ($cookieWriteQueue as $key => $val) {
                 $this->setCookie($key, $val);
             }
         }
-        $session->delete('cookieWriteQueue');
+        $session->delete(self::COOKIE_WRITE_QUEUE);
     }
 }

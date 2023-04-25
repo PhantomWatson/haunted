@@ -1,6 +1,8 @@
 <?php
 namespace App\View\Helper;
 
+use App\Controller\AppController;
+use App\Controller\Component\GameComponent;
 use Cake\Http\Exception\InternalErrorException;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
@@ -27,14 +29,14 @@ class GameHelper extends Helper
      */
     public function spendTime($periods = 1)
     {
-        $period1 = $this->read('time_period1');
-        $period1 += $periods;
-        $this->write('time_period1', $period1);
+        $time = $this->read(GameComponent::TIME);
+        $time[GameComponent::PERIOD1] += $periods;
+        $this->write(GameComponent::TIME, $time);
     }
 
     private function read($key)
     {
-        return $this->getView()->getRequest()->getCookie($key);
+        return json_decode($this->getView()->getRequest()->getCookie($key));
     }
 
     private function write($key, $val)
@@ -42,7 +44,9 @@ class GameHelper extends Helper
         // Write cookie data to the session.
         // It will be moved into actual cookie data in \App\Controller\AppController::afterFilter()
         $session = $this->getView()->getRequest()->getSession();
-        $session->write('cookieWriteQueue.' . $key, (string) $val);
+        $cookieWriteQueue = $session->read(AppController::COOKIE_WRITE_QUEUE);
+        $cookieWriteQueue[$key] = $val;
+        $session->write(AppController::COOKIE_WRITE_QUEUE, $val);
     }
 
     /**
@@ -52,9 +56,9 @@ class GameHelper extends Helper
      */
     public function addPasses($count = 1)
     {
-        $period2 = $this->read('time_period2');
-        $period2 += $count;
-        $this->write('time_period2', $period2);
+        $time = $this->read(GameComponent::TIME);
+        $time[GameComponent::PERIOD2] += $count;
+        $this->write(GameComponent::TIME, $time);
     }
 
     /**
@@ -64,9 +68,9 @@ class GameHelper extends Helper
      */
     public function doublePasses()
     {
-        $period2 = $this->read('time_period2');
-        $period2 *= 2;
-        $this->write('time_period2', $period2);
+        $time = $this->read(GameComponent::TIME);
+        $time[GameComponent::PERIOD2] *= 2;
+        $this->write(GameComponent::TIME, $time);
     }
 
     /**
@@ -76,9 +80,9 @@ class GameHelper extends Helper
      */
     public function removePasses($count = 1)
     {
-        $period2 = $this->read('time_period2');
-        $period2 -= $count;
-        $this->write('time_period2', $period2);
+        $time = $this->read(GameComponent::TIME);
+        $time[GameComponent::PERIOD2] -= $count;
+        $this->write(GameComponent::TIME, $time);
     }
 
     /**
@@ -213,9 +217,9 @@ class GameHelper extends Helper
      */
     public function completeQuest($quest)
     {
-        $quests = $this->read('quests');
+        $quests = $this->read(GameComponent::QUESTS);
         $quests .= $quest;
-        $this->write('quests', $quests);
+        $this->write(GameComponent::QUESTS, $quests);
     }
 
     /**
@@ -226,9 +230,10 @@ class GameHelper extends Helper
      */
     public function getTitle($questJustCompleted = null)
     {
-        $quests = $this->read('quests');
+        $quests = $this->read(GameComponent::QUESTS);
         $playersTable = TableRegistry::get('Players');
-        $sex = $this->read('player_sex');
+        $player = $this->read(GameComponent::PLAYER);
+        $sex = $player[GameComponent::SEX];
         $title = $playersTable->getTitle($quests, $sex);
         if ($questJustCompleted) {
             $titleComponent = $playersTable->getTitleComponent($questJustCompleted, $sex);
@@ -246,7 +251,7 @@ class GameHelper extends Helper
     public function questCompleted($quest)
     {
 
-        $quests = $this->read('quests');
+        $quests = $this->read(GameComponent::QUESTS);
         return $quests && strpos($quests, $quest) !== false;
     }
 
@@ -257,7 +262,9 @@ class GameHelper extends Helper
      */
     public function changeGpa($value)
     {
-        $this->write('player_gpa', $value);
+        $player = $this->read(GameComponent::PLAYER);
+        $player[GameComponent::GPA] = $value;
+        $this->write(GameComponent::PLAYER, $player);
     }
 
     /**
@@ -279,7 +286,8 @@ class GameHelper extends Helper
      */
     public function blyAnswerGiven($answer)
     {
-        return (bool)$this->read("game.blyanswers.$answer");
+        $game = $this->read(GameComponent::GAME);
+        return $game ? array_key_exists(GameComponent::BLY_ANSWERS . $answer, $game) : false;
     }
 
     /**
@@ -331,7 +339,9 @@ class GameHelper extends Helper
      */
     public function changeName($name)
     {
-        $this->write('player_name', $name);
+        $player = $this->read(GameComponent::PLAYER);
+        $player[GameComponent::NAME] = $name;
+        $this->write(GameComponent::PLAYER, $player);
     }
 
     private function getViewVar($var)
@@ -350,7 +360,9 @@ class GameHelper extends Helper
         if (! $room) {
             throw new InternalErrorException('Error clearing room. Room unknown.');
         }
-        $this->write("cleared-rooms_$room", true);
+        $clearedRooms = $this->read(GameComponent::CLEARED_ROOMS);
+        $clearedRooms[$room] = true;
+        $this->write(GameComponent::CLEARED_ROOMS, $clearedRooms);
     }
 
     /**
@@ -360,7 +372,7 @@ class GameHelper extends Helper
      */
     public function getClearedRooms()
     {
-        $clearedRooms = $this->read('cleared-rooms');
+        $clearedRooms = $this->read(GameComponent::CLEARED_ROOMS);
         return is_array($clearedRooms) ? array_keys($clearedRooms) : [];
     }
 
@@ -372,6 +384,7 @@ class GameHelper extends Helper
      */
     public function roomIsCleared($room)
     {
-        return (bool)$this->read("cleared-rooms_$room");
+        $clearedRooms = $this->read(GameComponent::CLEARED_ROOMS);
+        return $clearedRooms ? array_key_exists($room, $clearedRooms) : false;
     }
 }
